@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lonelog — Standard Notation for Solo RPG Logging</title>
@@ -8,191 +8,153 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css">
         <style>
-            /* --- Typst palette mapped onto Simple.css variables --- */
+            /* Trade dress — map to Pico v2 variables */
+            :root {
+                --pico-font-family-sans-serif: "Montserrat", sans-serif;
+                --pico-background-color:       #ffffff;
+                --pico-color:                  #000000;
+                --pico-h1-color:               #000000;
+                --pico-h2-color:               #666666;
+                --pico-muted-color:            #666666;
+                --pico-border-color:           #666666;
+                --pico-primary:                #188038;
+                --pico-primary-hover:          #0f5c28;
+                --pico-primary-background:     #188038;
+                --pico-primary-border:         #188038;
+                --pico-primary-hover-background: #0f5c28;
+                --pico-primary-hover-border:   #0f5c28;
+                --pico-primary-inverse:        #ffffff;
+                --pico-code-color:             #188038;
+                --pico-code-background-color:  #efecf4;
+                --pico-card-background-color:  #efecf4;
+                --pico-card-sectionning-background-color: #efecf4;
+            }
+
+            @media (prefers-color-scheme: dark) {
                 :root {
-                    --sans-font:  "Montserrat", sans-serif;
-                    --mono-font:  Consolas, "Courier New", monospace;
-                    --standard-border-radius: 2pt;
+                    --pico-background-color:       #1c1a17;
+                    --pico-color:                  #e8e4dc;
+                    --pico-h1-color:               #e8e4dc;
+                    --pico-h2-color:               #8a8278;
+                    --pico-muted-color:            #8a8278;
+                    --pico-border-color:           #4a463e;
+                    --pico-primary:                #3daa60;
+                    --pico-primary-hover:          #52c977;
+                    --pico-primary-background:     #3daa60;
+                    --pico-primary-border:         #3daa60;
+                    --pico-primary-hover-background: #52c977;
+                    --pico-primary-hover-border:   #52c977;
+                    --pico-primary-inverse:        #0d1208;
+                    --pico-code-color:             #3daa60;
+                    --pico-code-background-color:  #252119;
+                    --pico-card-background-color:  #252119;
+                    --pico-card-sectionning-background-color: #252119;
+                }
+            }
 
-                    --bg:           #ffffff;
-                    --accent-bg:    #efecf4;
-                    --text:         #000000;
-                    --text-light:   #666666;
-                    --border:       #666666;
-                    --accent:       #188038;
-                    --accent-hover: #0f5c28;
-                    --accent-text:  #ffffff;
-                    --code:         #188038;
-                    --preformatted: #585260;
-                }
+            /* Font overrides */
+            body        { font-family: "Lora", serif; }
+            h1, h2, h3  { font-family: "Montserrat", sans-serif; }
+            h1          { font-weight: 900; letter-spacing: -0.02em; }
+            h2          { font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.12em; text-transform: uppercase; }
 
-                @media (prefers-color-scheme: dark) {
-                    :root {
-                        --bg:           #1a1a1a;
-                        --accent-bg:    #262626;
-                        --text:         #e0e0e0;
-                        --text-light:   #888888;
-                        --border:       #555555;
-                        --accent:       #4caf6e;
-                        --accent-hover: #6fd98a;
-                        --accent-text:  #ffffff;
-                        --code:         #6fd98a;
-                        --preformatted: #c8c8c8;
-                    }
-                }
+            /* Header layout */
+            .header-inner {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 2rem;
+            }
 
-                /* Body uses Lora; Simple.css defaults to --sans-font for body */
-                body {
-                    font-family: "Lora", serif;
-                    font-weight: 500;
-                }
+            .header-symbol        { flex-shrink: 0; }
+            .header-symbol img    { width: 220px; max-width: 38vw; opacity: 0.85; display: block; }
 
-                /* --- Header: right-aligned, mirrors the Typst cover page --- */
-                header {
-                    text-align: right;
-                    border-bottom: none;
-                    padding: 4rem 0 2rem;
-                }
+            @media (prefers-color-scheme: dark) {
+                .header-symbol img { filter: invert(1) opacity(0.75); }
+            }
 
-                header img {
-                    width: 55%;
-                    max-width: 260px;
-                    display: inline-block;
-                    margin-bottom: 0.25rem;
-                }
+            .version {
+                display: block;
+                font-family: monospace;
+                font-size: 0.8rem;
+                color: var(--pico-primary);
+                margin-top: 0.25rem;
+            }
 
-                header h1 {
-                    font-family: var(--sans-font);
-                    font-weight: 900;
-                    font-size: 2.5rem;
-                    margin: 0 0 0.35rem;
-                }
+            /* Button rows */
+            .cta-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: var(--pico-spacing);
+            }
 
-                header p {
-                    font-family: var(--sans-font);
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                    color: var(--text-light);
-                    margin: 0;
-                }
+            /* Code showcase: figcaption tab strip above Pico's pre */
+            .code-showcase                  { overflow: hidden; }
+            .code-showcase figcaption       {
+                font-family: monospace;
+                font-size: 0.75rem;
+                color: var(--pico-muted-color);
+                background: var(--pico-background-color);
+                padding: 0.4rem 1rem;
+                border-bottom: 1px solid var(--pico-border-color);
+            }
+            .code-showcase pre              { margin: 0; border-radius: 0; }
 
-                /* --- Section headings --- */
-                h2 {
-                    font-family: var(--sans-font);
-                    font-weight: 700;
-                    font-size: 1.1rem;
-                }
-
-                /* --- CTA buttons --- */
-                .cta-box {
-                    display: flex;
-                    gap: 0.75rem;
-                    flex-wrap: wrap;
-                    margin: 2rem 0 2.5rem;
-                }
-
-                .cta-box a[role="button"] {
-                    font-family: var(--mono-font);
-                    font-size: 0.875rem;
-                    padding: 0.5rem 1.1rem;
-                    border-radius: var(--standard-border-radius);
-                    border: 1.5px solid #000000;
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-
-                /* Primary: black fill */
-                .cta-box a.primary[role="button"] {
-                    background-color: #000000;
-                    color: #ffffff;
-                }
-                .cta-box a.primary[role="button"]:hover {
-                    background-color: #333333;
-                    border-color: #333333;
-                }
-
-                /* Secondary: white fill, black border */
-                .cta-box a[role="button"]:not(.primary) {
-                    background-color: #ffffff;
-                    color: #000000;
-                }
-                .cta-box a[role="button"]:not(.primary):hover {
-                    background-color: #f0f0f0;
-                }
-
-                @media (prefers-color-scheme: dark) {
-                    /* Primary: light fill */
-                    .cta-box a.primary[role="button"] {
-                        background-color: #e0e0e0;
-                        color: #1a1a1a;
-                        border-color: #e0e0e0;
-                    }
-                    .cta-box a.primary[role="button"]:hover {
-                        background-color: #ffffff;
-                        border-color: #ffffff;
-                    }
-
-                    /* Secondary: transparent, light border */
-                    .cta-box a[role="button"]:not(.primary) {
-                        background-color: transparent;
-                        color: #e0e0e0;
-                        border-color: #e0e0e0;
-                    }
-                    .cta-box a[role="button"]:not(.primary):hover {
-                        background-color: #262626;
-                    }
-                }
-
-                /* Footer centered */
-                footer {
-                    text-align: center;
-                }
+            @media (max-width: 520px) {
+                .header-inner               { flex-direction: column-reverse; }
+                .header-symbol img          { width: 100%; max-width: 260px; }
+                .cta-row a                  { width: 100%; text-align: center; }
+            }
         </style>
     </head>
-	<body>
+    <body>
         <header>
-        <img src="banner.png" alt="Lonelog">
-            <h1>Lonelog</h1>
-            <p>A Standard Notation for Solo RPG Session Logging &mdash; v1.5.0</p>
+            <div class="header-inner">
+                <div>
+                    <h1>Lonelog</h1>
+                    <p><strong>A Standard Notation for Solo RPG Session Logging</strong></p>
+                    <small class="version">v1.5.0</small>
+                </div>
+                <div class="header-symbol">
+                    <img src="banner.png" alt="@ ? d: -> => — the five core Lonelog symbols">
+                </div>
+            </div>
         </header>
         <main>
             <p>Lonelog is a lightweight shorthand language designed to separate mechanics from fiction, stay compact at the table, and scale seamlessly from quick one-shots to sprawling campaigns.</p>
-            <div class="cta-box">
-                <a href="lonelog.readthedocs.io" role="button" class="primary">Read the Docs</a>
-                <a href="zeruhur.itch.io/lonelog" role="button">Download on Itch.io</a>
-                <a href="https://github.com/lonelog/lonelog" role="button">GitHub</a>
-            </div>
-            <h2>Community</h2>
-            <div class="cta-box">
-                <a href="https://www.reddit.com/r/lonelog/" role="button">Reddit</a>
-                <a href="https://discord.gg/DBpgvvC2sG" role="button">Discord</a>
+            <div class="cta-row">
+                <a href="https://lonelog.readthedocs.io" role="button">Read the Docs</a>
+                <a href="https://zeruhur.itch.io/lonelog" role="button" class="secondary">Download on Itch.io</a>
+                <a href="https://github.com/lonelog/lonelog" role="button" class="outline contrast">GitHub</a>
             </div>
             <h2>Quick Start Example</h2>
-            <pre>
-                <code>
-### S1 *Dark alley, midnight*
+            <figure class="code-showcase">
+                <figcaption>session-log.md</figcaption>
+                <pre><code>### S1 *Dark alley, midnight*
 @ Sneak past the guard
 d: Stealth 4 vs TN 5 -> Fail
 => I kick a bottle. Guard turns!
 ? Does he see me clearly?
 -> No, but...
-=> He&apos;s suspicious, starts walking toward the noise
-                </code>
-            </pre>
+=> He&apos;s suspicious, starts walking toward the noise</code></pre>
+            </figure>
             <h2>Core Philosophy</h2>
             <ul>
-                <li>
-                    <strong>Format-agnostic:</strong> Works identically in digital Markdown code blocks or analog paper notebooks.</li>
-                <li>
-                    <strong>Toolbox, not a rulebook:</strong> Fully modular. Use the five core symbols or layer in tracking elements (Clocks, Threads, NPC tags) as needed.</li>
-                <li>
-                    <strong>Built for scannability:</strong> Standardised tokens allow external tools, plugins, or human readers to parse session logs at a glance.</li>
+                <li><strong>Format-agnostic:</strong> Works identically in digital Markdown code blocks or analog paper notebooks.</li>
+                <li><strong>Toolbox, not a rulebook:</strong> Fully modular. Use the five core symbols or layer in tracking elements (Clocks, Threads, NPC tags) as needed.</li>
+                <li><strong>Built for scannability:</strong> Standardised tokens allow external tools, plugins, or human readers to parse session logs at a glance.</li>
             </ul>
+            <h2>Community</h2>
+            <div class="cta-row">
+                <a href="https://www.reddit.com/r/lonelog/" role="button" class="outline contrast">Reddit</a>
+                <a href="https://discord.gg/DBpgvvC2sG" role="button" class="outline contrast">Discord</a>
+            </div>
         </main>
         <footer>
             <p>Specification released under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Created by <a href="https://zeruhur.itch.io/">Zeruhur</a>.</p>
         </footer>
-	</body>
+    </body>
 </html>
