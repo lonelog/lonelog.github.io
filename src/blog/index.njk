@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+title: Blog
+---
+<main>
+    <div class="max-w-site mx-auto px-6 py-14">
+        <span class="section-label">Blog</span>
+        <p class="font-display font-bold text-[1.375rem] tracking-tight mb-8">All Posts</p>
+
+        {% if collections.posts and collections.posts.length %}
+        <ul class="divide-y divide-wire border-t border-wire">
+            {% for post in collections.posts %}
+            <li class="py-6">
+                <div class="flex items-center gap-3 mb-1.5">
+                    <time class="font-mono text-xs text-muted" datetime="{{ post.date | dateISO }}">
+                        {{ post.date | dateDisplay }}
+                    </time>
+                    {% if post.data.category %}
+                    <span class="badge badge-{{ post.data.category }}">{{ post.data.category | categoryLabel }}</span>
+                    {% endif %}
+                </div>
+                <p class="font-display font-bold text-[1.125rem] tracking-tight mb-1.5">
+                    <a href="{{ post.url }}" class="hover:text-accent transition-colors">{{ post.data.title }}</a>
+                </p>
+                {% if post.data.description %}
+                <p class="font-serif text-[0.9375rem] text-muted leading-[1.65]">{{ post.data.description }}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="font-serif text-muted">No posts yet — check back soon.</p>
+        {% endif %}
+    </div>
+</main>
