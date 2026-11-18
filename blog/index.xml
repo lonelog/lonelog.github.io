@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Lonelog</title>
+<link>https://lonelog.org/blog/</link>
+<atom:link href="https://lonelog.org/blog/index.xml" rel="self" type="application/rss+xml"/>
+<description>Release notes, tutorials and news about Lonelog.</description>
+<generator>quarto-1.8.26</generator>
+<lastBuildDate>Fri, 13 Nov 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Lonelog v1.7: The Consolidation Release</title>
+  <dc:creator>Roberto Bisceglie</dc:creator>
+  <link>https://lonelog.org/blog/lonelog-1-7/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Every release from v1.0 to v1.6 added something: inline tables, add-ons, tag categories, multiple actors, oracle rolls with <code>d:</code>, Lead/Assist. Each one made sense on its own. None of them went back and checked the examples, the legend or the add-ons that relied on the old way of doing things.</p>
+<p>When I sat down and read the spec start to finish, the drift was obvious. v1.5 told you to write oracle rolls with <code>d:</code>, and nearly every example in the document still used <code>-&gt; Yes, but... (d6=4)</code>. <code>[E:Alert 2/6]</code> and <code>[Clock:Alert 2/6]</code> did the same job. <code>≤</code> meant “failed”, which is false whenever you roll exactly the target. The FitD example called a single 6 a critical. The Fate examples had dice that didn’t add up. The add-on table pointed at files that don’t exist.</p>
+<p>So v1.7 adds almost nothing new. It settles things. Most of what changed is a decision about something that was already ambiguous in real logs.</p>
+<p><strong>No log becomes invalid.</strong> Every form v1.7 retires is <em>deprecated</em>: still readable, still meaning what it meant, just no longer shown in examples. The full list is in the new Appendix E.</p>
+<hr>
+<section id="oracle-answers-three-forms-all-valid" class="level2">
+<h2 class="anchored" data-anchor-id="oracle-answers-three-forms-all-valid">Oracle answers: three forms, all valid</h2>
+<p>v1.5 tried to make <code>d:</code> the one way to record an oracle roll and demoted <code>-&gt;</code> to shorthand. In practice, nobody stopped writing <code>-&gt; No, but... (d6=3)</code>, including me. It’s compact and it keeps the roll. So v1.7 stops fighting it and names three equal forms:</p>
+<pre><code>d: d100=60 vs 35 -&gt; No        full: the roll and the target matter
+-&gt; No, but... (d6=3)          compact: the roll, no target
+-&gt; No, but...                 bare: just the answer</code></pre>
+<p>And likelihood finally has one home: on the question, because it describes what you asked, not the roll.</p>
+<pre><code>? Does the guard notice me? (Unlikely)
+d: d100=60 vs 35 -&gt; No</code></pre>
+<p>For compact logs there are now standard answer codes: <code>Y</code>, <code>N</code>, <code>Ya</code>, <code>Yb</code>, <code>Na</code>, <code>Nb</code>, <code>Yx</code>, <code>Nx</code>.</p>
+</section>
+<section id="d-gives-a-verdict-tbl-gives-content-and-gen-is-gone" class="level2">
+<h2 class="anchored" data-anchor-id="d-gives-a-verdict-tbl-gives-content-and-gen-is-gone"><code>d:</code> gives a verdict, <code>tbl:</code> gives content, and <code>gen:</code> is gone</h2>
+<p>This one took the most thinking. The old rule was: <code>tbl:</code> for one roll on a simple table, <code>gen:</code> for several rolls combined. But that’s a rule about <em>how many dice</em>, and nobody reading a log cares how many dice you rolled. The spec itself filed the same Mythic Event roll under both prefixes.</p>
+<p>What a reader does care about is what kind of thing came back:</p>
+<ul>
+<li><strong><code>d:</code> gives a verdict.</strong> Did it work? Is it so? Success, failure, yes, no.</li>
+<li><strong><code>tbl:</code> gives content.</strong> What is it? Who? What happens? A thing, a name, an event.</li>
+</ul>
+<pre><code>? Does the guard notice me? (Unlikely)
+d: d100=60 vs 35 -&gt; No
+
+? What disrupts the scene?
+tbl: Mythic Event
+  Focus: d100=78 -&gt; NPC Action
+  Meaning: d100=34 -&gt; Betray</code></pre>
+<p><code>gen:</code> is folded into <code>tbl:</code>. Old logs that use it read exactly as before. One nice side effect: a <code>tbl:</code> line <em>without</em> <code>-&gt;</code> is a table definition, and one <em>with</em> <code>-&gt;</code> is a result, so a tool can tell them apart without guessing.</p>
+</section>
+<section id="comparisons-that-are-true" class="level2">
+<h2 class="anchored" data-anchor-id="comparisons-that-are-true">Comparisons that are true</h2>
+<p>Before:</p>
+<pre><code>d: 2≤4 F
+d:4≥5 F</code></pre>
+<p>After:</p>
+<pre><code>d: 2&lt;4 -&gt; F
+d: 4&lt;5 -&gt; F</code></pre>
+<p><code>≥</code> means meets or beats, <code>&lt;</code> means falls short, and <code>vs</code> stays neutral. The comparison has to be a true statement. Outcome abbreviations always go after <code>-&gt;</code>. The <code>d:</code> line also has a standard order now, <code>d: [Label] &lt;dice&gt;[+mod]=&lt;total&gt; [vs &lt;target&gt;] -&gt; &lt;outcome&gt;</code>, matching the Dice Notation Add-on.</p>
+</section>
+<section id="roll-context-moves-in-front-of-the-dice" class="level2">
+<h2 class="anchored" data-anchor-id="roll-context-moves-in-front-of-the-dice">Roll context moves in front of the dice</h2>
+<p>v1.3 put roll context in brackets after the dice. The Dice Notation Add-on put individual die results in brackets in the same spot. Two features, one position, and a reader left to guess whether <code>[4, 4]</code> was a pair of dice or a pair of tags.</p>
+<p>Before:</p>
+<pre><code>d: Investigate 2d6 [Be kind to others, Naive] = 8 -&gt; Mixed</code></pre>
+<p>After:</p>
+<pre><code>d: Investigate +[Be kind to others, Naive] 2d6=8 -&gt; Mixed
+d: Stealth +[cover] -[injured] d6=3 vs TN 4 -&gt; Fail</code></pre>
+<p>Brackets before the dice are context, <code>+</code> for what helps and <code>-</code> for what hinders. Brackets after the dice are results. And <code>against:</code> isn’t needed any more, because <code>-[…]</code> already says it.</p>
+</section>
+<section id="events-are-events-clocks-are-clocks" class="level2">
+<h2 class="anchored" data-anchor-id="events-are-events-clocks-are-clocks">Events are events, clocks are clocks</h2>
+<p><code>[E:Name X/Y]</code> and <code>[Clock:Name X/Y]</code> were the same thing, and the core examples used them interchangeably. Now:</p>
+<ul>
+<li><code>[Clock:Alert 2/6]</code> is the counter.</li>
+<li><code>[E:Bridge Collapse]</code>, with no number, marks something notable that happened.</li>
+</ul>
+<p>That gives <code>E:</code> a job nothing else does: search a campaign for <code>[E:</code> and you get its turning points.</p>
+</section>
+<section id="tags-accumulate" class="level2">
+<h2 class="anchored" data-anchor-id="tags-accumulate">Tags accumulate</h2>
+<p>v1.6 offered four ways to update a tag, and two of them looked identical: was <code>[N:Jonah|captured]</code> a full restatement or an addition? Now there’s one rule. A later tag adds to what’s known. <code>-tag</code> removes, <code>old&gt;new</code> replaces, <code>HP 6</code> sets a number, <code>HP-2</code> adjusts it.</p>
+<pre><code>[N:Jonah|friendly|injured]
+[N:Jonah|captured]              still friendly and injured
+[N:Jonah|-injured]
+[N:Jonah|friendly&gt;hostile]</code></pre>
+<p>Adding things up is right for traits and conditions, but wrong for anything that can only be one thing at a time. A room is unexplored, then cleared; it shouldn’t end up both. So there’s a second rule: <strong>a value written as <code>category:value</code> replaces whatever that category held.</strong></p>
+<pre><code>[N:Guard|status:alert]
+[N:Guard|status:unconscious]    no longer alert
+[PC:Jonah|trait:+reckless]      adds one entry to a list</code></pre>
+<p>Two more rules finish the set. <strong>Counts are values, not part of the name</strong>: <code>[N:Bandits|×6]</code> then <code>[N:Bandits|×4]</code>, so the bandits stay the same element as their numbers drop. And <strong>progress tags advance from the name</strong>: <code>[Clock:Alert+1]</code>, <code>[Timer:Dawn-1]</code>. Every add-on was already writing that last one, so core now says it officially.</p>
+<p>The same review turned up add-on tags whose fields only made sense in a fixed order: <code>[R:ID|status|description|exits]</code>, <code>[Unit:Name|size|stats|position|status]</code>. Skip a field and the rest shift. Now every value says what it is — a labelled number, a count, a category or a plain word — so the order stops mattering: <code>[R:3|status:cleared|library|exits:N R2, W R4]</code>. And tags that used to have no name, like <code>[Wealth:Gold 45]</code>, now name their owner: <code>[Wealth:Kael|Gold 45]</code>.</p>
+<p><code>&gt;</code> is the ASCII form of <code>→</code>, so you don’t need a special character. <code>#</code> references work for every tag type, not just NPCs. And every tag has a name, PCs included: <code>[PC:Alex|HP 6]</code>, never <code>[PC:HP 6]</code>.</p>
+</section>
+<section id="parallel-storylines" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-storylines">Parallel storylines</h2>
+<p>“Thread” meant two things: a <code>[Thread:]</code> story question and a <code>T1-S1</code> parallel line of play. The syntax stays, but the second one is now called a <strong>storyline</strong>. A storyline can declare its point-of-view character on its first scene line, so a bare <code>@</code> inside it means that character:</p>
+<pre><code>T2-S1 *City archives, same time* @(Jordan)
+@ Search for lighthouse records</code></pre>
+<p>When storylines merge, you go back to plain scene numbers with a note. There’s one way to do it now instead of two.</p>
+</section>
+<section id="meta-note-labels-and-retcons" class="level2">
+<h2 class="anchored" data-anchor-id="meta-note-labels-and-retcons">Meta-note labels and retcons</h2>
+<p>Meta notes get a starter set of labels: <code>note:</code>, <code>house:</code>, <code>ruling:</code>, <code>interp:</code>, <code>retcon:</code>, <code>todo:</code>, <code>question:</code>, <code>reflection:</code>, <code>source:</code>, <code>break:</code>. They’re suggestions, not rules; invent your own when they don’t fit. The point is that two players writing about the same thing reach for the same word.</p>
+<p><code>retcon:</code> fills a real gap. Everyone forgets a modifier now and then, and a silent edit makes a shared log untrustworthy. Leave the original line and correct it right after:</p>
+<pre><code>d: Stealth d6=3 vs TN 4 -&gt; Fail
+(retcon: forgot +1 from cover — actually 4 vs TN 4, Success)
+=&gt; I slip past unnoticed.</code></pre>
+<p>No strike-through: Lonelog notation lives in code blocks, where formatting doesn’t render anyway.</p>
+</section>
+<section id="where-symbols-go" class="level2">
+<h2 class="anchored" data-anchor-id="where-symbols-go">Where symbols go</h2>
+<p>The spec never said. Now it does: in the standard form, each element starts a line. In the compact form, elements can share a line as long as each symbol has a space before it. That’s all a tool needs to split <code>S1 @Sneak d:4&lt;5 -&gt;F =&gt; noise</code>, and it’s what people were already writing. One more rule keeps it reliable: <code>-&gt;</code> marks an outcome and nothing else. It isn’t an arrow for prose or tags; a change inside a tag is <code>old&gt;new</code>.</p>
+</section>
+<section id="a-specification-summary-and-a-shorter-front-door" class="level2">
+<h2 class="anchored" data-anchor-id="a-specification-summary-and-a-shorter-front-door">A specification summary, and a shorter front door</h2>
+<p>Lonelog is written as a friendly tutorial, which is right for players. But anyone building a parser had to reverse-engineer the rules from about sixty examples. The new <strong>Appendix D</strong> states them in two pages, with MUST / SHOULD / MAY, for tool builders and add-on authors. The tutorial stays as it is.</p>
+<p>The history of the name and the migration from Solo TTRPG Notation moved to the new <strong>Appendix E</strong>, so a new reader’s first page is the notation itself. Appendix A, the legend, is rebuilt to match the spec again. I fixed the system examples in §9 and cut sections that repeated each other.</p>
+<p>The document still came out longer than v1.6: Appendix D and the deprecated-forms table add more than the cuts remove.</p>
+<hr>
+</section>
+<section id="the-rest-of-the-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="the-rest-of-the-ecosystem">The rest of the ecosystem</h2>
+<p>Every add-on and companion notation now targets v1.7:</p>
+<ul>
+<li><strong>Dice Notation Add-on v1.1.0.</strong> Individual results go in brackets right after the expression, before <code>=</code>. Any expression with a compare point takes a space before its result (<code>5d10&gt;=7 =3</code>). The Savage Worlds example now keeps the higher of trait die and Wild Die. The full roller grammar moves to an appendix, so the add-on starts with what solo play uses. <code>#</code> and <code>[ … ]</code> descriptions aren’t used in Lonelog logs any more, because core already uses both; <code>//</code> and <code>/* */</code> remain.</li>
+<li><strong>Card Notation Add-on v1.1.0.</strong> The biggest change outside core. Most draws give content, so they’re now <code>tbl:</code>. A draw that answers yes or no stays <code>d:</code>. New: deck state with <code>[Deck:Main|×38|out:Qs, M16]</code>, hands as a <code>hand:</code> category on the character, and a stated rule that card identities always follow <code>=</code>, so <code>4d</code> (four of diamonds) can’t be mistaken for dice.</li>
+<li><strong>Combat Add-on v1.2.0.</strong> Damage gets its own line (<code>d: Damage 1d8=5</code>), tags record HP changes rather than both change and total, and <code>[COMBAT]</code> always closes. Compact rolls like <code>d:14≥15 Miss</code> are now <code>d:14&lt;15 -&gt;Miss</code>, the target goes in the action text (<code>@Slash Thug</code> versus <code>@(Thug)Slash</code>), roll context moves before the dice, range is a <code>pos:</code> category, group sizes are counts (<code>[F:Pirates|×2]</code>), and PC tags are named. <code>!</code> stays Partylog’s: in solo play, foes act through <code>@(Name)</code>.</li>
+<li><strong>Resource Tracking v1.2.0.</strong> Quantities are counts (<code>[Inv:Torch|×3]</code>, <code>[Inv:Torch|×-1]</code>), five shorthand forms collapse into core’s rules, and purses name their owner (<code>[Wealth:Kael|Gold 45]</code>). New <code>owner:</code> and <code>where:</code> categories cover shared and stashed gear, and charges are always <code>charges N/M</code>.</li>
+<li><strong>Dungeon Crawling v1.2.0.</strong> Room status is a <code>status:</code> category, so a cleared room is no longer also unexplored; exits are <code>exits:N R2, E R7 secret</code>; <code>[R:3]</code> is room R3 everywhere, with a <code>level:</code> category for multi-level dungeons. A new section covers exploration turns with core notation alone: the turn in the scene context, <code>[Timer:Torch-1]</code>, <code>d: Wandering d6=5 -&gt; No</code>.</li>
+<li><strong>Solo Wargaming v1.1.0.</strong> Unit status, formation and position are categories; <code>[Force:]</code> and <code>[Scenario:]</code> fields are labelled; campaign and hit-location rolls that give content use <code>tbl:</code>. The system examples were wrong in places and are corrected: BattleTech weapon damage and heat, Mordheim’s d66 injuries, 2d6 advances and exploration, Frostgrave’s d20 rolls.</li>
+<li><strong>Community Add-on Guidelines v1.2.0.</strong> <code>tbl:</code> sits with the core symbols, and a new §1.3 lists the reserved syntax add-ons must not reuse: <code>#</code>, brackets around dice, the tag update rules and the core meta-note labels.</li>
+<li><strong>Partylog v1.1.0, Lorelog v0.1.1, Maplog v0.2.2.</strong> The same alignment wherever they share Lonelog’s notation. Partylog’s <code>[Party:]</code> tag is named after the group (<code>[Party:Crew|Gold 150]</code>), its combat rounds are <code>Rd1</code> like the Combat Add-on’s, Lorelog’s factions become <code>[Faction:]</code> so they don’t collide with Combat’s <code>[F:]</code> foes, and Maplog’s room examples follow the new Room tag.</li>
+</ul>
+<p>The Italian and French translations will follow.</p>
+<hr>
+<p><strong>Your existing logs are fine.</strong> Nothing in v1.7 invalidates a log written for any earlier 1.x version. If you want your old logs to match the new examples, Appendix E has the full list of deprecated forms next to their current equivalents.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>devlog</category>
+  <guid>https://lonelog.org/blog/lonelog-1-7/</guid>
+  <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lonelog is now live at lonelog.org!</title>
+  <dc:creator>Roberto Bisceglie</dc:creator>
+  <link>https://lonelog.org/blog/lonelog-org-launch/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Hey everyone,</p>
+<p>I am incredibly proud to announce that Lonelog has officially moved to a brand new home! You can now find us over at&nbsp;<strong>lonelog.org</strong>.</p>
+<p>This launch is actually the first step of a broader, general reorganization of the project. As some of you might have noticed, I have already taken our first major step by moving Lonelog under its own dedicated <a href="https://github.com/lonelog">GitHub Organization</a> to improve collaboration and development.</p>
+<p>I want Lonelog to grow the right way, so here is what you can expect next:</p>
+<ul>
+<li><strong>Dedicated</strong> <a href="http://itch.io"><strong>itch.io</strong></a> <strong>account</strong>: I will soon migrate Lonelog and make separate game pages for each add-on.</li>
+<li><strong>Governance policy</strong>: I am defining a clear framework for decision-making and contributions.</li>
+</ul>
+<p>Everything I do will strictly follow open-source ethics and principles. I am fully committed to keeping this project transparent, community-driven, and open to everyone.</p>
+<p>I will share more details and updates over the coming weeks. For now, go check out the new site and let me know what you think in the comments!</p>
+<p>Thank you for being part of this journey.</p>
+<p>See you there,<br>
+Roberto</p>
+
+
+
+ ]]></description>
+  <category>announcement</category>
+  <guid>https://lonelog.org/blog/lonelog-org-launch/</guid>
+  <pubDate>Sat, 16 May 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lonelog 1.5.0 - Oracle Dice Notation and Block Tag Consistency</title>
+  <dc:creator>Roberto Bisceglie</dc:creator>
+  <link>https://lonelog.org/blog/lonelog-1-5-0/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>After months of community feedback and playtesting across dozens of solo campaigns, Lonelog v1.5.0 is now available as a free download on <a href="https://zeruhur.itch.io/lonelog">Itch.io</a> and in the <a href="https://lonelog.org/docs/en/">online documentation</a>.</p>
+<section id="clarifying-oracle-dice-notation-in-v1.5.0" class="level2">
+<h2 class="anchored" data-anchor-id="clarifying-oracle-dice-notation-in-v1.5.0">Clarifying Oracle Dice Notation in v1.5.0</h2>
+<p>One of the things I’ve watched people get confused by since the early days of this notation is the oracle roll line. When you ask the oracle a question and roll dice to answer it, how do you write that down?</p>
+<p>The old answer was: use <code>-&gt;</code>. But <code>-&gt;</code> was already the symbol for <em>any</em> resolution outcome — mechanics and oracle alike. The result was ambiguity. When you saw <code>-&gt; No (d6=3)</code>, was that a standalone oracle answer, or the tail end of a <code>d:</code> line? Readable in isolation, but inconsistent when mixed with mechanics-heavy logs.</p>
+<p><strong>What changed in v1.5.0:</strong></p>
+<p><code>d:</code> is now the preferred notation for oracle dice rolls, exactly as it is for mechanics rolls:</p>
+<pre><code>? Do they see Phoebe?
+d: d100=60 vs 35 (Unlikely) -&gt; No
+=&gt; Distracted, but one guard lingers. [N:Guard|watchful]
+
+? Is anyone home?
+d: d6=5 vs 4+ -&gt; Yes
+=&gt; Lights are on inside.</code></pre>
+<p>The logic is simple: if you’re rolling dice, write <code>d:</code>. Doesn’t matter whether that roll is resolving an action or answering an oracle question — dice are dice. <code>-&gt;</code> follows to declare the outcome, as it always did.</p>
+<p>The old <code>-&gt; Yes (d6=6)</code> format isn’t gone. It’s now explicitly a shorthand — for when you don’t need to show the roll at all:</p>
+<pre><code>-&gt; Yes, and... (d6=6)
+-&gt; No, but... (d6=3)</code></pre>
+<p>Use it when the dice details don’t matter and you just want to capture the result. Use <code>d:</code> when the roll itself is part of the story.</p>
+<p><strong>The three oracle resolution forms, clarified:</strong></p>
+<p>There was also a subtler confusion about when to use <code>d:</code> vs <code>tbl:</code> vs <code>gen:</code> for oracle answers. v1.5.0 pins this down explicitly:</p>
+<ul>
+<li><strong><code>d:</code></strong> — direct dice roll against a probability or target (yes/no checks, likelihood rolls)</li>
+<li><strong><code>tbl:</code></strong> — lookup on a named oracle table (Mythic Random Event table, your own custom oracle)</li>
+<li><strong><code>gen:</code></strong> — compound generator producing multi-axis results</li>
+</ul>
+<pre><code>? Does the guard notice me? (Unlikely)
+d: d100=60 vs 35 -&gt; No                           (direct probability roll)
+
+? What random event disrupts the scene?
+tbl: Mythic Event d100=78 -&gt; NPC Action           (named table oracle)
+
+? What does the oracle reveal about my enemy?
+gen: Mythic Event d100=78+d100=34 -&gt; NPC Action / Betray  (compound generator)</code></pre>
+<p><strong>Add-on updates:</strong></p>
+<p>All three official add-ons are updated to reference Lonelog v1.5.0 as their parent. Oracle examples in the Dungeon Crawling and Resource Tracking add-ons have been updated to use the preferred <code>d:</code> form. Two stray <code>R1</code>/<code>R2</code> round markers were also corrected to <code>Rd1</code>/<code>Rd2</code>.</p>
+<p><strong>Your existing logs are fine.</strong> The <code>-&gt; result (d#=N)</code> format still appears in the spec as valid shorthand. This is a clarification, not a breaking change.</p>
+</section>
+<section id="add-on-block-tags-now-consistent-across-the-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="add-on-block-tags-now-consistent-across-the-ecosystem">Add-on Block Tags Now Consistent Across the Ecosystem</h2>
+<p>Small but satisfying fix.</p>
+<p>The three official add-ons — Combat, Dungeon Crawling, and Resource Tracking — each introduced a structural block to delimit a mode of play: a combat encounter, a dungeon session status, a resource snapshot. The Combat Add-on got this right from the start: <code>[COMBAT]</code> / <code>[/COMBAT]</code>, bracket tags, consistent with everything else in Lonelog. The other two didn’t. Dungeon Crawling used <code>=== Dungeon Status ===</code> with no closing tag. Resource Tracking used <code>--- RESOURCES ---</code> / <code>--- /RESOURCES ---</code> with dash separators.</p>
+<p>That inconsistency bugged me. If you’re using all three add-ons together — which is the point — switching mental models for block delimiters mid-session is friction you shouldn’t have to deal with.</p>
+<p><strong>What changed:</strong></p>
+<ul>
+<li><code>=== Dungeon Status ===</code> → <code>[DUNGEON STATUS]</code> / <code>[/DUNGEON STATUS]</code></li>
+<li><code>--- RESOURCES ---</code> / <code>--- /RESOURCES ---</code> → <code>[RESOURCES]</code> / <code>[/RESOURCES]</code></li>
+<li>Analog notebook alternatives now consistently use <code>--- BLOCK ---</code> / <code>--- END BLOCK ---</code> across all three add-ons</li>
+</ul>
+<p>Both updated add-ons are now at <strong>v1.1.0</strong>.</p>
+<p>The Community Add-on Guidelines have also been updated (v1.1.0) with an explicit §3.3 on structural block syntax, so future add-ons get this right from the start. The rule is simple: bracket tags for digital, dashed separators for analog, explicit closing tag always required.</p>
+<p>No changes to any notation logic, tag semantics, or examples beyond the block delimiters themselves. If you have session logs using the old format, they’re still perfectly readable — this only affects how you write new blocks going forward.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>devlog</category>
+  <guid>https://lonelog.org/blog/lonelog-1-5-0/</guid>
+  <pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Getting Started with Lonelog</title>
+  <dc:creator>Roberto Bisceglie</dc:creator>
+  <link>https://lonelog.org/blog/quick-start-guide/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Lonelog is designed to be picked up in under five minutes. This guide walks you through the five core symbols using a short dungeon-delve example.</p>
+<section id="the-five-core-symbols" class="level2">
+<h2 class="anchored" data-anchor-id="the-five-core-symbols">The Five Core Symbols</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>@</code></td>
+<td>Action</td>
+<td>Something the character attempts</td>
+</tr>
+<tr class="even">
+<td><code>d:</code></td>
+<td>Dice</td>
+<td>A mechanical roll or resolution</td>
+</tr>
+<tr class="odd">
+<td><code>-&gt;</code></td>
+<td>Result</td>
+<td>The outcome of a roll or oracle query</td>
+</tr>
+<tr class="even">
+<td><code>=&gt;</code></td>
+<td>Fiction</td>
+<td>What happens in the story</td>
+</tr>
+<tr class="odd">
+<td><code>?</code></td>
+<td>Oracle</td>
+<td>A yes/no question to the oracle</td>
+</tr>
+</tbody>
+</table>
+<p>You do not need all five in every entry. Use what the moment calls for.</p>
+</section>
+<section id="a-sample-scene" class="level2">
+<h2 class="anchored" data-anchor-id="a-sample-scene">A Sample Scene</h2>
+<p>Here is a complete scene logged with Lonelog:</p>
+<pre><code>### S1  Dark alley, midnight
+
+@ Sneak past the guard
+d: Stealth 4 vs TN 5  -&gt;  Fail
+=&gt; I kick a bottle. The guard turns.
+?  Does he see me clearly?
+   -&gt;  No, but...
+=&gt; He's suspicious — starts walking toward the noise.
+@ Duck behind the crates
+d: Stealth 6 vs TN 4  -&gt;  Success
+=&gt; I press flat against the wall, holding my breath.</code></pre>
+<p>Notice how <code>d:</code> captures the <em>mechanics</em> and <code>=&gt;</code> captures the <em>fiction</em>. They are always separate lines. This is the heart of Lonelog: mechanics and narrative live side by side but never bleed into each other.</p>
+</section>
+<section id="starting-a-session" class="level2">
+<h2 class="anchored" data-anchor-id="starting-a-session">Starting a Session</h2>
+<p>Open a plain-text file or a paper notebook and write a scene header:</p>
+<pre><code>### S1  The Ruined Tower, dusk</code></pre>
+<p>That is all the structure you need. From here, log actions as they happen. Do not worry about formatting every line perfectly — the goal is speed at the table, not beauty.</p>
+</section>
+<section id="tips-for-new-users" class="level2">
+<h2 class="anchored" data-anchor-id="tips-for-new-users">Tips for New Users</h2>
+<p><strong>Use <code>=&gt;</code> liberally.</strong> The fiction lines are the most valuable part of a log to read back later. Err on the side of more prose, not less.</p>
+<p><strong>Keep <code>d:</code> lines terse.</strong> Skill, value, target number, result. No adjectives needed.</p>
+<p><strong>The oracle <code>?</code> is optional.</strong> If your game system has a built-in yes/no oracle, use <code>-&gt;</code> to record its answer. If it does not, you can use any external oracle and record the result the same way.</p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<p>Once you are comfortable with the core five, explore the optional modules in the <a href="https://lonelog.readthedocs.io">full specification</a>: Clocks for progress tracking, Threads for narrative arcs, and NPC tags for recurring characters.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>tutorial</category>
+  <guid>https://lonelog.org/blog/quick-start-guide/</guid>
+  <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

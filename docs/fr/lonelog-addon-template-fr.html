@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Votre nom ou pseudo">
+
+<title>Lonelog : Extension [Nom de l’Extension] – Lonelog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/fr/lonelog-combat-addon-fr.html" rel="next">
+<link href="../../docs/fr/lonelog-addon-guidelines-fr.html" rel="prev">
+<link href="../../assets/banner.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e5f5294698a128606ef5f4cfe63e5fe8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7e2f14f9a527615529190f7f63649c5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+
+
+<meta property="og:title" content="Lonelog : Extension [Nom de l’Extension] – Lonelog">
+<meta property="og:description" content="[Description d’une ligne de ce que cette extension permet]">
+<meta property="og:site_name" content="Lonelog">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lonelog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Recherche"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en.html"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/lonelog.html"> 
+<span class="menu-text">Lonelog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-add-ons" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Add-ons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-add-ons">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-guidelines.html">
+ <span class="dropdown-text">Writing an add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-template.html">
+ <span class="dropdown-text">Add-on template</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-combat-addon.html">
+ <span class="dropdown-text">Lonelog: Combat Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dungeon-crawling-addon.html">
+ <span class="dropdown-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-resource-tracking-addon.html">
+ <span class="dropdown-text">Lonelog: Resource Tracking Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dice-notation-addon.html">
+ <span class="dropdown-text">Lonelog: Dice Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-cards-addon.html">
+ <span class="dropdown-text">Lonelog: Card Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-wargaming-addon.html">
+ <span class="dropdown-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/partylog.html"> 
+<span class="menu-text">Partylog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/it.html">
+ <span class="dropdown-text">Italiano</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.reddit.com/r/lonelog/"> <i class="bi bi-reddit" role="img" aria-label="Reddit">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/DBpgvvC2sG"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lonelog/lonelog"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss" role="img" aria-label="Blog feed">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Basculer le mode sombre"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-addon-guidelines-fr.html">Extensions</a></li><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-addon-template-fr.html">Lonelog : Extension [Nom de l’Extension]</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extensions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-addon-guidelines-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Directives pour les Extensions de la Communauté</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-addon-template-fr.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lonelog : Extension [Nom de l’Extension]</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-combat-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension de Combat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-dungeon-crawling-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension d’Exploration de Donjon</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-resource-tracking-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension de Suivi des Ressources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#extension-nom-de-lextension" id="toc-extension-nom-de-lextension" class="nav-link active" data-scroll-target="#extension-nom-de-lextension">Extension [Nom de l’Extension]</a>
+  <ul class="collapse">
+  <li><a href="#présentation" id="toc-présentation" class="nav-link" data-scroll-target="#présentation">Présentation</a>
+  <ul class="collapse">
+  <li><a href="#ce-que-cette-extension-ajoute" id="toc-ce-que-cette-extension-ajoute" class="nav-link" data-scroll-target="#ce-que-cette-extension-ajoute">Ce que cette extension ajoute</a></li>
+  <li><a href="#principes-de-conception" id="toc-principes-de-conception" class="nav-link" data-scroll-target="#principes-de-conception">Principes de conception</a></li>
+  </ul></li>
+  <li><a href="#première-fonctionnalité-majeure" id="toc-première-fonctionnalité-majeure" class="nav-link" data-scroll-target="#première-fonctionnalité-majeure">1. [Première fonctionnalité majeure]</a></li>
+  <li><a href="#deuxième-fonctionnalité-majeure" id="toc-deuxième-fonctionnalité-majeure" class="nav-link" data-scroll-target="#deuxième-fonctionnalité-majeure">2. [Deuxième fonctionnalité majeure]</a></li>
+  <li><a href="#bloc-structurel-si-applicable" id="toc-bloc-structurel-si-applicable" class="nav-link" data-scroll-target="#bloc-structurel-si-applicable">3. [Bloc structurel — si applicable]</a></li>
+  <li><a href="#interactions-entre-extensions" id="toc-interactions-entre-extensions" class="nav-link" data-scroll-target="#interactions-entre-extensions">Interactions entre extensions</a></li>
+  <li><a href="#adaptations-du-système" id="toc-adaptations-du-système" class="nav-link" data-scroll-target="#adaptations-du-système">Adaptations du système</a>
+  <ul class="collapse">
+  <li><a href="#nom-du-système-1" id="toc-nom-du-système-1" class="nav-link" data-scroll-target="#nom-du-système-1">[Nom du Système 1]</a></li>
+  <li><a href="#nom-du-système-2" id="toc-nom-du-système-2" class="nav-link" data-scroll-target="#nom-du-système-2">[Nom du Système 2]</a></li>
+  </ul></li>
+  <li><a href="#bonnes-pratiques" id="toc-bonnes-pratiques" class="nav-link" data-scroll-target="#bonnes-pratiques">Bonnes pratiques</a></li>
+  <li><a href="#référence-rapide" id="toc-référence-rapide" class="nav-link" data-scroll-target="#référence-rapide">Référence rapide</a>
+  <ul class="collapse">
+  <li><a href="#nouvelles-balises" id="toc-nouvelles-balises" class="nav-link" data-scroll-target="#nouvelles-balises">Nouvelles balises</a></li>
+  <li><a href="#blocs-structurels-si-applicable" id="toc-blocs-structurels-si-applicable" class="nav-link" data-scroll-target="#blocs-structurels-si-applicable">[Blocs structurels — si applicable]</a></li>
+  <li><a href="#autre-catégorie-délément-si-applicable" id="toc-autre-catégorie-délément-si-applicable" class="nav-link" data-scroll-target="#autre-catégorie-délément-si-applicable">[Autre catégorie d’élément — si applicable]</a></li>
+  <li><a href="#exemple-complet" id="toc-exemple-complet" class="nav-link" data-scroll-target="#exemple-complet">Exemple complet</a></li>
+  </ul></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
+  <li><a href="#crédits-licence" id="toc-crédits-licence" class="nav-link" data-scroll-target="#crédits-licence">Crédits &amp; Licence</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/fr/lonelog-addon-template-fr.md" class="toc-action"><i class="bi bi-github"></i>Voir la source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div><div class="quarto-alternate-formats"><h2>Autres formats</h2><ul><li><a href="lonelog-addon-template-fr.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="lonelog-addon-template-fr.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="lonelog-addon-template-fr.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="lonelog-addon-template-fr-gfm.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-addon-guidelines-fr.html">Extensions</a></li><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-addon-template-fr.html">Lonelog : Extension [Nom de l’Extension]</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lonelog : Extension [Nom de l’Extension]</h1>
+<p class="subtitle lead">[Description d’une ligne de ce que cette extension permet]</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Auteur·rice</div>
+    <div class="quarto-title-meta-contents">
+             <p>Votre nom ou pseudo </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!--
+  MODÈLE D'EXTENSION LONELOG
+  ==========================
+  Remplacez tous les espaces réservés entre [crochets] par votre contenu.
+  Supprimez les commentaires d'instructions (comme celui-ci) avant de publier.
+  
+  Sections requises : Présentation, Ce que cette extension ajoute, au moins une
+  section de fonctionnalité principale, Bonnes pratiques, Référence rapide, FAQ.
+  
+  Sections facultatives : Principes de conception, Interactions entre extensions,
+  Adaptations du système. Incluez-les si elles s'appliquent.
+  
+  Consultez les Directives pour les Extensions de la Communauté pour un guide complet.
+-->
+<section id="extension-nom-de-lextension" class="level1">
+<h1>Extension [Nom de l’Extension]</h1>
+<section id="présentation" class="level2">
+<h2 class="anchored" data-anchor-id="présentation">Présentation</h2>
+<!--
+  2 à 4 paragraphes. Répondez à :
+  - Quelle lacune du cœur de Lonelog cette extension comble-t-elle ?
+  - Pour quel type de jeu ou de système est-elle conçue ?
+  - Quand les joueurs devraient-ils utiliser cette extension plutôt que de rester sur le cœur ?
+  
+  Ne cherchez pas à "vendre". Décrivez honnêtement, y compris ses limites.
+-->
+<p>[Décrivez la situation que le cœur de Lonelog ne gère pas totalement — le moment où un joueur réalise qu’il a besoin de plus de structure que les cinq symboles de base seuls.]</p>
+<p>[Expliquez ce que l’extension apporte concrètement : nouvelles balises, blocs structurels ou conventions de formatage. Restez bref ici — les sections ci-dessous entreront dans les détails.]</p>
+<p>[Précisez quand <em>ne pas</em> utiliser cette extension. L’honnêteté ici renforce la confiance et évite aux joueurs d’adopter une notation dont ils n’ont pas besoin.]</p>
+<hr>
+<section id="ce-que-cette-extension-ajoute" class="level3">
+<h3 class="anchored" data-anchor-id="ce-que-cette-extension-ajoute">Ce que cette extension ajoute</h3>
+<!--
+  Un tableau résumant chaque nouvel élément. C'est la première chose
+  qu'un joueur expérimenté de Lonelog lira. Soyez précis.
+-->
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Ajout</th>
+<th>Objectif</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[BALISE:Nom\|prop]</code></td>
+<td>[Ce qu’elle suit]</td>
+<td><code>[BALISE:Exemple\|prop1]</code></td>
+</tr>
+<tr class="even">
+<td>[Bloc structurel]</td>
+<td>[Ce qu’il délimite]</td>
+<td><code>[BLOC] ... [/BLOC]</code></td>
+</tr>
+<tr class="odd">
+<td>[Nom de convention]</td>
+<td>[Ce qu’elle standardise]</td>
+<td>[exemple bref]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Aucun nouveau symbole de base.</strong> Cette extension n’introduit aucun ajout à <code>@</code>, <code>?</code>, <code>d:</code>, <code>-&gt;</code> ou <code>=&gt;</code>.</p>
+<hr>
+</section>
+<section id="principes-de-conception" class="level3">
+<h3 class="anchored" data-anchor-id="principes-de-conception">Principes de conception</h3>
+<!--
+  Facultatif mais précieux. 3 à 5 principes courts qui expliquent le *pourquoi*
+  derrière la conception. Aide les futurs contributeurs et auteurs dérivés
+  à comprendre l'intention.
+  
+  Prenez modèle sur la section "Principes de conception" de l'Extension de Suivi des Ressources.
+-->
+<p><strong>[Principe 1 — titre court].</strong> [Une ou deux phrases expliquant le principe et pourquoi il est important pour le domaine de cette extension.]</p>
+<p><strong>[Principe 2 — titre court].</strong> [Une ou deux phrases.]</p>
+<p><strong>[Principe 3 — titre court].</strong> [Une ou deux phrases.]</p>
+<hr>
+</section>
+</section>
+<section id="première-fonctionnalité-majeure" class="level2">
+<h2 class="anchored" data-anchor-id="première-fonctionnalité-majeure">1. [Première fonctionnalité majeure]</h2>
+<!--
+  Une section par fonctionnalité majeure. Titrez-la en fonction de ce qu'elle fait,
+  pas de son nom technique. Ex: "Suivi de l'état des pièces" plutôt que "La balise P:".
+  
+  Chaque section nécessite :
+  - Spécification du format
+  - Au moins deux exemples (minimal et développé)
+  - Conseils sur quand l'utiliser et quand s'en passer
+-->
+<p>[Brève introduction : quel problème cette fonctionnalité résout-elle au sein du domaine de l’extension ?]</p>
+<p><strong>Format :</strong></p>
+<pre><code>[BALISE:Nom|champ-requis|champ-optionnel]</code></pre>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><code>Nom</code> — [ce qu’il identifie]</li>
+<li><code>champ-requis</code> — [sa signification, valeurs attendues]</li>
+<li><code>champ-optionnel</code> — [sa signification, quand l’inclure]</li>
+</ul>
+<section id="sous-fonctionnalité-ou-cas-dutilisation-courant" class="level4">
+<h4 class="anchored" data-anchor-id="sous-fonctionnalité-ou-cas-dutilisation-courant">[1.1 Sous-fonctionnalité ou Cas d’utilisation courant]</h4>
+<p>[Expliquez la manière la plus courante d’utiliser cette fonctionnalité.]</p>
+<p><strong>Exemple — minimal :</strong></p>
+<pre><code>[Ligne compacte unique montrant la fonctionnalité dans un contexte de jeu rapide]</code></pre>
+<p><strong>Exemple — développé :</strong></p>
+<pre><code>[Séquence complète montrant la fonctionnalité dans un journal de jeu réaliste :
+action, jet, conséquence, mise à jour de balise. Au moins 5 à 8 lignes.]</code></pre>
+</section>
+<section id="autre-sous-fonctionnalité-ou-cas-limite" class="level4">
+<h4 class="anchored" data-anchor-id="autre-sous-fonctionnalité-ou-cas-limite">[1.2 Autre sous-fonctionnalité ou Cas limite]</h4>
+<p>[Couvrez la variante ou le cas limite le plus important suivant.]</p>
+<pre><code>[Exemple]</code></pre>
+<hr>
+</section>
+</section>
+<section id="deuxième-fonctionnalité-majeure" class="level2">
+<h2 class="anchored" data-anchor-id="deuxième-fonctionnalité-majeure">2. [Deuxième fonctionnalité majeure]</h2>
+<!--
+  Répétez la structure de la Section 1 pour chaque fonctionnalité majeure.
+  La plupart des extensions ont 2 à 4 fonctionnalités majeures.
+-->
+<p>[Paragraphe d’introduction.]</p>
+<p><strong>Format :</strong></p>
+<pre><code>[Spécification du format]</code></pre>
+<p><strong>Exemple — minimal :</strong></p>
+<pre><code>[Exemple compact]</code></pre>
+<p><strong>Exemple — développé :</strong></p>
+<pre><code>[Exemple de séquence complète]</code></pre>
+<hr>
+</section>
+<section id="bloc-structurel-si-applicable" class="level2">
+<h2 class="anchored" data-anchor-id="bloc-structurel-si-applicable">3. [Bloc structurel — si applicable]</h2>
+<!--
+  Si votre extension introduit un bloc structurel (comme [COMBAT]...[/COMBAT]
+  ou --- RESSOURCES ---), consacrez-lui sa propre section.
+  
+  Expliquez : ce qui va à l'intérieur, quand l'ouvrir/le fermer, et ce que
+  cela signifie lors de la lecture d'un journal.
+-->
+<p>[Certaines extensions bénéficient d’un bloc structurel qui délimite clairement un mode de jeu au sein du journal. Si c’est votre cas, expliquez-le ici. Sinon, supprimez cette section.]</p>
+<p><strong>Format :</strong></p>
+<pre><code>[NOMDUBLOC]
+[Contenu du bloc]
+[/NOMDUBLOC]</code></pre>
+<p><strong>Quand ouvrir un bloc :</strong> [Déclencheur spécifique — ex: “quand l’initiative est déclarée” ou “au début de la session quand les ressources comptent”.]</p>
+<p><strong>Quand le fermer :</strong> [Condition spécifique — ex: “quand tous les combattants sont résolus” ou “à la fin de la session”.]</p>
+<p><strong>Format numérique :</strong></p>
+<pre><code>[Exemple dans un contexte markdown]</code></pre>
+<p><strong>Format analogique :</strong></p>
+<pre><code>[Exemple pour les carnets papier]</code></pre>
+<hr>
+</section>
+<section id="interactions-entre-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="interactions-entre-extensions">Interactions entre extensions</h2>
+<!--
+  Facultatif. Incluez cette section si votre extension est conçue pour fonctionner
+  avec d'autres extensions, ou s'il existe des modèles d'interaction connus.
+  
+  Incluez au moins un exemple combiné montrant les deux extensions
+  dans la même séquence de journal.
+-->
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 44%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Extension(s) utilisée(s)</th>
+<th>Balises/Blocs clés</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>[Scénario combiné courant]</td>
+<td>[Cette extension] + [Autre extension]</td>
+<td>[Éléments principaux]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple combiné — [Cette Extension] + [Autre Extension] :</strong></p>
+<pre><code>[Une séquence de journal réaliste de 10 à 15 lignes montrant les deux extensions
+fonctionnant ensemble. Doit ressembler à du jeu réel, pas à une démonstration.]</code></pre>
+<hr>
+</section>
+<section id="adaptations-du-système" class="level2">
+<h2 class="anchored" data-anchor-id="adaptations-du-système">Adaptations du système</h2>
+<!--
+  Facultatif mais recommandé. Montrez comment l'extension s'adapte à 2–4
+  systèmes de JDR spécifiques que les joueurs utilisent couramment avec Lonelog.
+  
+  Couvrez au plus moins un système OSR/traditionnel et un système narratif/PbtA
+  si votre extension est largement applicable.
+-->
+<section id="nom-du-système-1" class="level3">
+<h3 class="anchored" data-anchor-id="nom-du-système-1">[Nom du Système 1]</h3>
+<p>[Un paragraphe sur la façon dont les mécaniques de ce système correspondent à la notation de l’extension.]</p>
+<pre><code>[Exemple spécifique au système]</code></pre>
+</section>
+<section id="nom-du-système-2" class="level3">
+<h3 class="anchored" data-anchor-id="nom-du-système-2">[Nom du Système 2]</h3>
+<p>[Un paragraphe.]</p>
+<pre><code>[Exemple spécifique au système]</code></pre>
+<hr>
+</section>
+</section>
+<section id="bonnes-pratiques" class="level2">
+<h2 class="anchored" data-anchor-id="bonnes-pratiques">Bonnes pratiques</h2>
+<!--
+  Paires "À faire / À éviter" dans le style de Lonelog §7.
+  Visez 4 à 6 paires couvrant les erreurs les plus courantes et les
+  modèles positifs les plus clairs.
+  
+  Chaque paire doit avoir des exemples de code fonctionnels, pas seulement de la prose.
+-->
+<p><strong>À faire : [Titre du modèle positif]</strong></p>
+<pre><code>✔ [Exemple positif — complet, réaliste, clairement correct]</code></pre>
+<p><strong>À éviter : [Titre de l’anti-modèle]</strong></p>
+<pre><code>✗ [Ce qu'il faut éviter — complet, réaliste, clairement erroné]
+
+✔ [La version corrigée]</code></pre>
+<p><strong>À faire : [Titre du modèle positif]</strong></p>
+<pre><code>✔ [Exemple]</code></pre>
+<p><strong>À éviter : [Titre de l’anti-modèle]</strong></p>
+<pre><code>✗ [Mauvais]
+
+✔ [Bon]</code></pre>
+<hr>
+</section>
+<section id="référence-rapide" class="level2">
+<h2 class="anchored" data-anchor-id="référence-rapide">Référence rapide</h2>
+<!--
+  Requis. Tableaux couvrant chaque nouvel élément. C'est ce vers quoi les joueurs
+  reviennent pendant le jeu après avoir lu l'extension une fois.
+  
+  Un tableau par catégorie d'élément.
+-->
+<section id="nouvelles-balises" class="level3">
+<h3 class="anchored" data-anchor-id="nouvelles-balises">Nouvelles balises</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 37%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Balise</th>
+<th>Objectif</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[BALISE:Nom\|champ]</code></td>
+<td>[Ce qu’elle suit]</td>
+<td><code>[BALISE:Exemple\|valeur]</code></td>
+</tr>
+<tr class="even">
+<td><code>[#BALISE:Nom]</code></td>
+<td>Référence à un élément établi précédemment</td>
+<td><code>[#BALISE:Exemple]</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="blocs-structurels-si-applicable" class="level3">
+<h3 class="anchored" data-anchor-id="blocs-structurels-si-applicable">[Blocs structurels — si applicable]</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bloc</th>
+<th>S’ouvre quand</th>
+<th>Se ferme quand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[NOMDUBLOC]</code></td>
+<td>[Déclencheur]</td>
+<td>[Condition]</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="autre-catégorie-délément-si-applicable" class="level3">
+<h3 class="anchored" data-anchor-id="autre-catégorie-délément-si-applicable">[Autre catégorie d’élément — si applicable]</h3>
+<p>[Tableau ou liste compacte de tout nouvel élément restant.]</p>
+</section>
+<section id="exemple-complet" class="level3">
+<h3 class="anchored" data-anchor-id="exemple-complet">Exemple complet</h3>
+<!--
+  Une ligne compacte ou une courte séquence montrant les éléments
+  principaux de l'extension ensemble. La "ligne aide-mémoire" qui
+  capture toute l'extension en miniature.
+-->
+<pre><code>[L'exemple unique le plus utile pour une référence rapide pendant le jeu]</code></pre>
+<hr>
+</section>
+</section>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<!--
+  4 à 8 questions couvrant les cas limites anticipés, les décisions de conception
+  et les interactions avec d'autres systèmes. Écrivez les questions avec la
+  voix d'un joueur qui a lu l'extension une fois et essaie maintenant de l'utiliser.
+-->
+<p><strong>Q : [Question anticipée la plus courante]</strong><br>
+R : [Réponse directe et pratique. Pointez vers la section concernée si approprié.]</p>
+<p><strong>Q : [Question sur la justification de la conception — “pourquoi avez-vous…”]</strong><br>
+R : [Expliquez le raisonnement. Cela renforce la confiance et aide les joueurs à adapter la convention.]</p>
+<p><strong>Q : [Question sur un cas limite]</strong><br>
+R : [Réponse spécifique. Si le cas limite n’a pas de bonne réponse, dites-le et suggérez une approche.]</p>
+<p><strong>Q : [Question d’intégration — “puis-je utiliser ceci avec…”]</strong><br>
+R : [Oui/non/ça dépend, avec une brève explication.]</p>
+<p><strong>Q : [Question sur l’analogique — “comment ça marche sur papier ?”]</strong><br>
+R : [Adaptation pratique pour l’analogique.]</p>
+<hr>
+<!--
+  CRÉDITS & HISTORIQUE DES VERSIONS
+  ================================
+  Conservez cette section même si vous êtes le seul auteur — elle établit
+  l'historique et rend l'attribution claire pour les dérivés.
+-->
+</section>
+<section id="crédits-licence" class="level2">
+<h2 class="anchored" data-anchor-id="crédits-licence">Crédits &amp; Licence</h2>
+<p>© [Année] [Votre nom ou pseudo]</p>
+<p>Cette extension étend <a href="https://%5Blien%20vers%20le%20document%20principal%5D">Lonelog</a> par Roberto Bisceglie.</p>
+<!--
+  Si vous avez été inspiré par ou si vous avez construit sur le travail de quelqu'un d'autre, citez-le :
+  
+  Inspiré par le travail de [Nom] ([travail]) sur [lien].
+  
+  Merci à [membre de la communauté] pour [contribution spécifique].
+-->
+<p><strong>Historique des versions :</strong></p>
+<ul>
+<li>v 0.1.0 : Brouillon initial</li>
+</ul>
+<p>Ce travail est sous licence <strong>Creative Commons Attribution-ShareAlike 4.0 International</strong>.</p>
+<p>Vous êtes libre de partager et d’adapter ce matériel, à condition de donner le crédit approprié et de distribuer les adaptations sous la même licence. Les journaux de session et les enregistrements de jeu créés à l’aide de la notation de cette extension sont votre propre travail et ne sont pas soumis à cette licence.</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Réutilisation</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  var formats = document.querySelector(".quarto-alternate-formats");
+  if (sidebar && formats) {
+    sidebar.insertBefore(formats, sidebar.firstChild);
+  }
+
+  // Rename "Typst" label to "PDF"
+  document.querySelectorAll(".quarto-alternate-formats a").forEach(function (a) {
+    a.childNodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "Typst") {
+        node.textContent = "PDF";
+      }
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copié");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copié");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lonelog\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/fr/lonelog-addon-guidelines-fr.html" class="pagination-link" aria-label="Lonelog : Directives pour les Extensions de la Communauté">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lonelog : Directives pour les Extensions de la Communauté</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/fr/lonelog-combat-addon-fr.html" class="pagination-link" aria-label="Lonelog : Extension de Combat">
+        <span class="nav-page-text">Lonelog : Extension de Combat</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Lonelog by Roberto Bisceglie · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/fr/lonelog-addon-template-fr.md" class="toc-action"><i class="bi bi-github"></i>Voir la source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://zeruhur.itch.io/lonelog">itch.io</a> · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

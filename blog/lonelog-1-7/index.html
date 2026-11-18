@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Bisceglie">
+<meta name="dcterms.date" content="2026-11-13">
+<meta name="description" content="Fixing the drift between the spec, its examples and the add-ons.">
+
+<title>Lonelog v1.7: The Consolidation Release – Lonelog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/banner.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e5f5294698a128606ef5f4cfe63e5fe8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7e2f14f9a527615529190f7f63649c5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+
+
+<meta property="og:title" content="Lonelog v1.7: The Consolidation Release – Lonelog">
+<meta property="og:description" content="Fixing the drift between the spec, its examples and the add-ons.">
+<meta property="og:site_name" content="Lonelog">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lonelog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en.html"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/lonelog.html"> 
+<span class="menu-text">Lonelog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-add-ons" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Add-ons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-add-ons">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-guidelines.html">
+ <span class="dropdown-text">Writing an add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-template.html">
+ <span class="dropdown-text">Add-on template</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-combat-addon.html">
+ <span class="dropdown-text">Lonelog: Combat Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dungeon-crawling-addon.html">
+ <span class="dropdown-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-resource-tracking-addon.html">
+ <span class="dropdown-text">Lonelog: Resource Tracking Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dice-notation-addon.html">
+ <span class="dropdown-text">Lonelog: Dice Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-cards-addon.html">
+ <span class="dropdown-text">Lonelog: Card Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-wargaming-addon.html">
+ <span class="dropdown-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/partylog.html"> 
+<span class="menu-text">Partylog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/it.html">
+ <span class="dropdown-text">Italiano</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.reddit.com/r/lonelog/"> <i class="bi bi-reddit" role="img" aria-label="Reddit">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/DBpgvvC2sG"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lonelog/lonelog"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss" role="img" aria-label="Blog feed">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#oracle-answers-three-forms-all-valid" id="toc-oracle-answers-three-forms-all-valid" class="nav-link active" data-scroll-target="#oracle-answers-three-forms-all-valid">Oracle answers: three forms, all valid</a></li>
+  <li><a href="#d-gives-a-verdict-tbl-gives-content-and-gen-is-gone" id="toc-d-gives-a-verdict-tbl-gives-content-and-gen-is-gone" class="nav-link" data-scroll-target="#d-gives-a-verdict-tbl-gives-content-and-gen-is-gone"><code>d:</code> gives a verdict, <code>tbl:</code> gives content, and <code>gen:</code> is gone</a></li>
+  <li><a href="#comparisons-that-are-true" id="toc-comparisons-that-are-true" class="nav-link" data-scroll-target="#comparisons-that-are-true">Comparisons that are true</a></li>
+  <li><a href="#roll-context-moves-in-front-of-the-dice" id="toc-roll-context-moves-in-front-of-the-dice" class="nav-link" data-scroll-target="#roll-context-moves-in-front-of-the-dice">Roll context moves in front of the dice</a></li>
+  <li><a href="#events-are-events-clocks-are-clocks" id="toc-events-are-events-clocks-are-clocks" class="nav-link" data-scroll-target="#events-are-events-clocks-are-clocks">Events are events, clocks are clocks</a></li>
+  <li><a href="#tags-accumulate" id="toc-tags-accumulate" class="nav-link" data-scroll-target="#tags-accumulate">Tags accumulate</a></li>
+  <li><a href="#parallel-storylines" id="toc-parallel-storylines" class="nav-link" data-scroll-target="#parallel-storylines">Parallel storylines</a></li>
+  <li><a href="#meta-note-labels-and-retcons" id="toc-meta-note-labels-and-retcons" class="nav-link" data-scroll-target="#meta-note-labels-and-retcons">Meta-note labels and retcons</a></li>
+  <li><a href="#where-symbols-go" id="toc-where-symbols-go" class="nav-link" data-scroll-target="#where-symbols-go">Where symbols go</a></li>
+  <li><a href="#a-specification-summary-and-a-shorter-front-door" id="toc-a-specification-summary-and-a-shorter-front-door" class="nav-link" data-scroll-target="#a-specification-summary-and-a-shorter-front-door">A specification summary, and a shorter front door</a></li>
+  <li><a href="#the-rest-of-the-ecosystem" id="toc-the-rest-of-the-ecosystem" class="nav-link" data-scroll-target="#the-rest-of-the-ecosystem">The rest of the ecosystem</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/blog/lonelog-1-7/index.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lonelog v1.7: The Consolidation Release</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">devlog</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Fixing the drift between the spec, its examples and the add-ons.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roberto Bisceglie </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 13, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Every release from v1.0 to v1.6 added something: inline tables, add-ons, tag categories, multiple actors, oracle rolls with <code>d:</code>, Lead/Assist. Each one made sense on its own. None of them went back and checked the examples, the legend or the add-ons that relied on the old way of doing things.</p>
+<p>When I sat down and read the spec start to finish, the drift was obvious. v1.5 told you to write oracle rolls with <code>d:</code>, and nearly every example in the document still used <code>-&gt; Yes, but... (d6=4)</code>. <code>[E:Alert 2/6]</code> and <code>[Clock:Alert 2/6]</code> did the same job. <code>≤</code> meant “failed”, which is false whenever you roll exactly the target. The FitD example called a single 6 a critical. The Fate examples had dice that didn’t add up. The add-on table pointed at files that don’t exist.</p>
+<p>So v1.7 adds almost nothing new. It settles things. Most of what changed is a decision about something that was already ambiguous in real logs.</p>
+<p><strong>No log becomes invalid.</strong> Every form v1.7 retires is <em>deprecated</em>: still readable, still meaning what it meant, just no longer shown in examples. The full list is in the new Appendix E.</p>
+<hr>
+<section id="oracle-answers-three-forms-all-valid" class="level2">
+<h2 class="anchored" data-anchor-id="oracle-answers-three-forms-all-valid">Oracle answers: three forms, all valid</h2>
+<p>v1.5 tried to make <code>d:</code> the one way to record an oracle roll and demoted <code>-&gt;</code> to shorthand. In practice, nobody stopped writing <code>-&gt; No, but... (d6=3)</code>, including me. It’s compact and it keeps the roll. So v1.7 stops fighting it and names three equal forms:</p>
+<pre><code>d: d100=60 vs 35 -&gt; No        full: the roll and the target matter
+-&gt; No, but... (d6=3)          compact: the roll, no target
+-&gt; No, but...                 bare: just the answer</code></pre>
+<p>And likelihood finally has one home: on the question, because it describes what you asked, not the roll.</p>
+<pre><code>? Does the guard notice me? (Unlikely)
+d: d100=60 vs 35 -&gt; No</code></pre>
+<p>For compact logs there are now standard answer codes: <code>Y</code>, <code>N</code>, <code>Ya</code>, <code>Yb</code>, <code>Na</code>, <code>Nb</code>, <code>Yx</code>, <code>Nx</code>.</p>
+</section>
+<section id="d-gives-a-verdict-tbl-gives-content-and-gen-is-gone" class="level2">
+<h2 class="anchored" data-anchor-id="d-gives-a-verdict-tbl-gives-content-and-gen-is-gone"><code>d:</code> gives a verdict, <code>tbl:</code> gives content, and <code>gen:</code> is gone</h2>
+<p>This one took the most thinking. The old rule was: <code>tbl:</code> for one roll on a simple table, <code>gen:</code> for several rolls combined. But that’s a rule about <em>how many dice</em>, and nobody reading a log cares how many dice you rolled. The spec itself filed the same Mythic Event roll under both prefixes.</p>
+<p>What a reader does care about is what kind of thing came back:</p>
+<ul>
+<li><strong><code>d:</code> gives a verdict.</strong> Did it work? Is it so? Success, failure, yes, no.</li>
+<li><strong><code>tbl:</code> gives content.</strong> What is it? Who? What happens? A thing, a name, an event.</li>
+</ul>
+<pre><code>? Does the guard notice me? (Unlikely)
+d: d100=60 vs 35 -&gt; No
+
+? What disrupts the scene?
+tbl: Mythic Event
+  Focus: d100=78 -&gt; NPC Action
+  Meaning: d100=34 -&gt; Betray</code></pre>
+<p><code>gen:</code> is folded into <code>tbl:</code>. Old logs that use it read exactly as before. One nice side effect: a <code>tbl:</code> line <em>without</em> <code>-&gt;</code> is a table definition, and one <em>with</em> <code>-&gt;</code> is a result, so a tool can tell them apart without guessing.</p>
+</section>
+<section id="comparisons-that-are-true" class="level2">
+<h2 class="anchored" data-anchor-id="comparisons-that-are-true">Comparisons that are true</h2>
+<p>Before:</p>
+<pre><code>d: 2≤4 F
+d:4≥5 F</code></pre>
+<p>After:</p>
+<pre><code>d: 2&lt;4 -&gt; F
+d: 4&lt;5 -&gt; F</code></pre>
+<p><code>≥</code> means meets or beats, <code>&lt;</code> means falls short, and <code>vs</code> stays neutral. The comparison has to be a true statement. Outcome abbreviations always go after <code>-&gt;</code>. The <code>d:</code> line also has a standard order now, <code>d: [Label] &lt;dice&gt;[+mod]=&lt;total&gt; [vs &lt;target&gt;] -&gt; &lt;outcome&gt;</code>, matching the Dice Notation Add-on.</p>
+</section>
+<section id="roll-context-moves-in-front-of-the-dice" class="level2">
+<h2 class="anchored" data-anchor-id="roll-context-moves-in-front-of-the-dice">Roll context moves in front of the dice</h2>
+<p>v1.3 put roll context in brackets after the dice. The Dice Notation Add-on put individual die results in brackets in the same spot. Two features, one position, and a reader left to guess whether <code>[4, 4]</code> was a pair of dice or a pair of tags.</p>
+<p>Before:</p>
+<pre><code>d: Investigate 2d6 [Be kind to others, Naive] = 8 -&gt; Mixed</code></pre>
+<p>After:</p>
+<pre><code>d: Investigate +[Be kind to others, Naive] 2d6=8 -&gt; Mixed
+d: Stealth +[cover] -[injured] d6=3 vs TN 4 -&gt; Fail</code></pre>
+<p>Brackets before the dice are context, <code>+</code> for what helps and <code>-</code> for what hinders. Brackets after the dice are results. And <code>against:</code> isn’t needed any more, because <code>-[…]</code> already says it.</p>
+</section>
+<section id="events-are-events-clocks-are-clocks" class="level2">
+<h2 class="anchored" data-anchor-id="events-are-events-clocks-are-clocks">Events are events, clocks are clocks</h2>
+<p><code>[E:Name X/Y]</code> and <code>[Clock:Name X/Y]</code> were the same thing, and the core examples used them interchangeably. Now:</p>
+<ul>
+<li><code>[Clock:Alert 2/6]</code> is the counter.</li>
+<li><code>[E:Bridge Collapse]</code>, with no number, marks something notable that happened.</li>
+</ul>
+<p>That gives <code>E:</code> a job nothing else does: search a campaign for <code>[E:</code> and you get its turning points.</p>
+</section>
+<section id="tags-accumulate" class="level2">
+<h2 class="anchored" data-anchor-id="tags-accumulate">Tags accumulate</h2>
+<p>v1.6 offered four ways to update a tag, and two of them looked identical: was <code>[N:Jonah|captured]</code> a full restatement or an addition? Now there’s one rule. A later tag adds to what’s known. <code>-tag</code> removes, <code>old&gt;new</code> replaces, <code>HP 6</code> sets a number, <code>HP-2</code> adjusts it.</p>
+<pre><code>[N:Jonah|friendly|injured]
+[N:Jonah|captured]              still friendly and injured
+[N:Jonah|-injured]
+[N:Jonah|friendly&gt;hostile]</code></pre>
+<p>Adding things up is right for traits and conditions, but wrong for anything that can only be one thing at a time. A room is unexplored, then cleared; it shouldn’t end up both. So there’s a second rule: <strong>a value written as <code>category:value</code> replaces whatever that category held.</strong></p>
+<pre><code>[N:Guard|status:alert]
+[N:Guard|status:unconscious]    no longer alert
+[PC:Jonah|trait:+reckless]      adds one entry to a list</code></pre>
+<p>Two more rules finish the set. <strong>Counts are values, not part of the name</strong>: <code>[N:Bandits|×6]</code> then <code>[N:Bandits|×4]</code>, so the bandits stay the same element as their numbers drop. And <strong>progress tags advance from the name</strong>: <code>[Clock:Alert+1]</code>, <code>[Timer:Dawn-1]</code>. Every add-on was already writing that last one, so core now says it officially.</p>
+<p>The same review turned up add-on tags whose fields only made sense in a fixed order: <code>[R:ID|status|description|exits]</code>, <code>[Unit:Name|size|stats|position|status]</code>. Skip a field and the rest shift. Now every value says what it is — a labelled number, a count, a category or a plain word — so the order stops mattering: <code>[R:3|status:cleared|library|exits:N R2, W R4]</code>. And tags that used to have no name, like <code>[Wealth:Gold 45]</code>, now name their owner: <code>[Wealth:Kael|Gold 45]</code>.</p>
+<p><code>&gt;</code> is the ASCII form of <code>→</code>, so you don’t need a special character. <code>#</code> references work for every tag type, not just NPCs. And every tag has a name, PCs included: <code>[PC:Alex|HP 6]</code>, never <code>[PC:HP 6]</code>.</p>
+</section>
+<section id="parallel-storylines" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-storylines">Parallel storylines</h2>
+<p>“Thread” meant two things: a <code>[Thread:]</code> story question and a <code>T1-S1</code> parallel line of play. The syntax stays, but the second one is now called a <strong>storyline</strong>. A storyline can declare its point-of-view character on its first scene line, so a bare <code>@</code> inside it means that character:</p>
+<pre><code>T2-S1 *City archives, same time* @(Jordan)
+@ Search for lighthouse records</code></pre>
+<p>When storylines merge, you go back to plain scene numbers with a note. There’s one way to do it now instead of two.</p>
+</section>
+<section id="meta-note-labels-and-retcons" class="level2">
+<h2 class="anchored" data-anchor-id="meta-note-labels-and-retcons">Meta-note labels and retcons</h2>
+<p>Meta notes get a starter set of labels: <code>note:</code>, <code>house:</code>, <code>ruling:</code>, <code>interp:</code>, <code>retcon:</code>, <code>todo:</code>, <code>question:</code>, <code>reflection:</code>, <code>source:</code>, <code>break:</code>. They’re suggestions, not rules; invent your own when they don’t fit. The point is that two players writing about the same thing reach for the same word.</p>
+<p><code>retcon:</code> fills a real gap. Everyone forgets a modifier now and then, and a silent edit makes a shared log untrustworthy. Leave the original line and correct it right after:</p>
+<pre><code>d: Stealth d6=3 vs TN 4 -&gt; Fail
+(retcon: forgot +1 from cover — actually 4 vs TN 4, Success)
+=&gt; I slip past unnoticed.</code></pre>
+<p>No strike-through: Lonelog notation lives in code blocks, where formatting doesn’t render anyway.</p>
+</section>
+<section id="where-symbols-go" class="level2">
+<h2 class="anchored" data-anchor-id="where-symbols-go">Where symbols go</h2>
+<p>The spec never said. Now it does: in the standard form, each element starts a line. In the compact form, elements can share a line as long as each symbol has a space before it. That’s all a tool needs to split <code>S1 @Sneak d:4&lt;5 -&gt;F =&gt; noise</code>, and it’s what people were already writing. One more rule keeps it reliable: <code>-&gt;</code> marks an outcome and nothing else. It isn’t an arrow for prose or tags; a change inside a tag is <code>old&gt;new</code>.</p>
+</section>
+<section id="a-specification-summary-and-a-shorter-front-door" class="level2">
+<h2 class="anchored" data-anchor-id="a-specification-summary-and-a-shorter-front-door">A specification summary, and a shorter front door</h2>
+<p>Lonelog is written as a friendly tutorial, which is right for players. But anyone building a parser had to reverse-engineer the rules from about sixty examples. The new <strong>Appendix D</strong> states them in two pages, with MUST / SHOULD / MAY, for tool builders and add-on authors. The tutorial stays as it is.</p>
+<p>The history of the name and the migration from Solo TTRPG Notation moved to the new <strong>Appendix E</strong>, so a new reader’s first page is the notation itself. Appendix A, the legend, is rebuilt to match the spec again. I fixed the system examples in §9 and cut sections that repeated each other.</p>
+<p>The document still came out longer than v1.6: Appendix D and the deprecated-forms table add more than the cuts remove.</p>
+<hr>
+</section>
+<section id="the-rest-of-the-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="the-rest-of-the-ecosystem">The rest of the ecosystem</h2>
+<p>Every add-on and companion notation now targets v1.7:</p>
+<ul>
+<li><strong>Dice Notation Add-on v1.1.0.</strong> Individual results go in brackets right after the expression, before <code>=</code>. Any expression with a compare point takes a space before its result (<code>5d10&gt;=7 =3</code>). The Savage Worlds example now keeps the higher of trait die and Wild Die. The full roller grammar moves to an appendix, so the add-on starts with what solo play uses. <code>#</code> and <code>[ … ]</code> descriptions aren’t used in Lonelog logs any more, because core already uses both; <code>//</code> and <code>/* */</code> remain.</li>
+<li><strong>Card Notation Add-on v1.1.0.</strong> The biggest change outside core. Most draws give content, so they’re now <code>tbl:</code>. A draw that answers yes or no stays <code>d:</code>. New: deck state with <code>[Deck:Main|×38|out:Qs, M16]</code>, hands as a <code>hand:</code> category on the character, and a stated rule that card identities always follow <code>=</code>, so <code>4d</code> (four of diamonds) can’t be mistaken for dice.</li>
+<li><strong>Combat Add-on v1.2.0.</strong> Damage gets its own line (<code>d: Damage 1d8=5</code>), tags record HP changes rather than both change and total, and <code>[COMBAT]</code> always closes. Compact rolls like <code>d:14≥15 Miss</code> are now <code>d:14&lt;15 -&gt;Miss</code>, the target goes in the action text (<code>@Slash Thug</code> versus <code>@(Thug)Slash</code>), roll context moves before the dice, range is a <code>pos:</code> category, group sizes are counts (<code>[F:Pirates|×2]</code>), and PC tags are named. <code>!</code> stays Partylog’s: in solo play, foes act through <code>@(Name)</code>.</li>
+<li><strong>Resource Tracking v1.2.0.</strong> Quantities are counts (<code>[Inv:Torch|×3]</code>, <code>[Inv:Torch|×-1]</code>), five shorthand forms collapse into core’s rules, and purses name their owner (<code>[Wealth:Kael|Gold 45]</code>). New <code>owner:</code> and <code>where:</code> categories cover shared and stashed gear, and charges are always <code>charges N/M</code>.</li>
+<li><strong>Dungeon Crawling v1.2.0.</strong> Room status is a <code>status:</code> category, so a cleared room is no longer also unexplored; exits are <code>exits:N R2, E R7 secret</code>; <code>[R:3]</code> is room R3 everywhere, with a <code>level:</code> category for multi-level dungeons. A new section covers exploration turns with core notation alone: the turn in the scene context, <code>[Timer:Torch-1]</code>, <code>d: Wandering d6=5 -&gt; No</code>.</li>
+<li><strong>Solo Wargaming v1.1.0.</strong> Unit status, formation and position are categories; <code>[Force:]</code> and <code>[Scenario:]</code> fields are labelled; campaign and hit-location rolls that give content use <code>tbl:</code>. The system examples were wrong in places and are corrected: BattleTech weapon damage and heat, Mordheim’s d66 injuries, 2d6 advances and exploration, Frostgrave’s d20 rolls.</li>
+<li><strong>Community Add-on Guidelines v1.2.0.</strong> <code>tbl:</code> sits with the core symbols, and a new §1.3 lists the reserved syntax add-ons must not reuse: <code>#</code>, brackets around dice, the tag update rules and the core meta-note labels.</li>
+<li><strong>Partylog v1.1.0, Lorelog v0.1.1, Maplog v0.2.2.</strong> The same alignment wherever they share Lonelog’s notation. Partylog’s <code>[Party:]</code> tag is named after the group (<code>[Party:Crew|Gold 150]</code>), its combat rounds are <code>Rd1</code> like the Combat Add-on’s, Lorelog’s factions become <code>[Faction:]</code> so they don’t collide with Combat’s <code>[F:]</code> foes, and Maplog’s room examples follow the new Room tag.</li>
+</ul>
+<p>The Italian and French translations will follow.</p>
+<hr>
+<p><strong>Your existing logs are fine.</strong> Nothing in v1.7 invalidates a log written for any earlier 1.x version. If you want your old logs to match the new examples, Appendix E has the full list of deprecated forms next to their current equivalents.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  var formats = document.querySelector(".quarto-alternate-formats");
+  if (sidebar && formats) {
+    sidebar.insertBefore(formats, sidebar.firstChild);
+  }
+
+  // Rename "Typst" label to "PDF"
+  document.querySelectorAll(".quarto-alternate-formats a").forEach(function (a) {
+    a.childNodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "Typst") {
+        node.textContent = "PDF";
+      }
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lonelog\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Lonelog by Roberto Bisceglie · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/blog/lonelog-1-7/index.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://zeruhur.itch.io/lonelog">itch.io</a> · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

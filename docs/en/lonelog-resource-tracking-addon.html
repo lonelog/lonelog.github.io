@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Bisceglie">
+
+<title>Lonelog: Resource Tracking Add-on – Lonelog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/en/lonelog-dice-notation-addon.html" rel="next">
+<link href="../../docs/en/lonelog-dungeon-crawling-addon.html" rel="prev">
+<link href="../../assets/banner.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e5f5294698a128606ef5f4cfe63e5fe8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7e2f14f9a527615529190f7f63649c5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+
+
+<meta property="og:title" content="Lonelog: Resource Tracking Add-on – Lonelog">
+<meta property="og:description" content="Inventory, Supplies, and Wealth Notation">
+<meta property="og:site_name" content="Lonelog">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lonelog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../docs/en.html" aria-current="page"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/lonelog.html"> 
+<span class="menu-text">Lonelog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-add-ons" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Add-ons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-add-ons">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-guidelines.html">
+ <span class="dropdown-text">Writing an add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-template.html">
+ <span class="dropdown-text">Add-on template</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-combat-addon.html">
+ <span class="dropdown-text">Lonelog: Combat Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dungeon-crawling-addon.html">
+ <span class="dropdown-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-resource-tracking-addon.html">
+ <span class="dropdown-text">Lonelog: Resource Tracking Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dice-notation-addon.html">
+ <span class="dropdown-text">Lonelog: Dice Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-cards-addon.html">
+ <span class="dropdown-text">Lonelog: Card Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-wargaming-addon.html">
+ <span class="dropdown-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/partylog.html"> 
+<span class="menu-text">Partylog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/it.html">
+ <span class="dropdown-text">Italiano</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.reddit.com/r/lonelog/"> <i class="bi bi-reddit" role="img" aria-label="Reddit">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/DBpgvvC2sG"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lonelog/lonelog"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss" role="img" aria-label="Blog feed">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/en/lonelog-addon-guidelines.html">Add-ons</a></li><li class="breadcrumb-item"><a href="../../docs/en/lonelog-resource-tracking-addon.html">Lonelog: Resource Tracking Add-on</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/partylog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Partylog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Add-ons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-addon-guidelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Community Add-on Guidelines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-addon-template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: [Add-on Name] Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-combat-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Combat Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-dungeon-crawling-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-resource-tracking-addon.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lonelog: Resource Tracking Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-dice-notation-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Dice Notation Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-cards-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Card Notation Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-wargaming-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#resource-tracking-add-on" id="toc-resource-tracking-add-on" class="nav-link active" data-scroll-target="#resource-tracking-add-on">Resource Tracking Add-on</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#what-this-add-on-adds" id="toc-what-this-add-on-adds" class="nav-link" data-scroll-target="#what-this-add-on-adds">What This Add-on Adds</a></li>
+  <li><a href="#design-principles" id="toc-design-principles" class="nav-link" data-scroll-target="#design-principles">Design Principles</a></li>
+  </ul></li>
+  <li><a href="#the-inventory-tag" id="toc-the-inventory-tag" class="nav-link" data-scroll-target="#the-inventory-tag">1. The Inventory Tag</a></li>
+  <li><a href="#abstract-supply-tracking" id="toc-abstract-supply-tracking" class="nav-link" data-scroll-target="#abstract-supply-tracking">2. Abstract Supply Tracking</a></li>
+  <li><a href="#wealth-and-currency" id="toc-wealth-and-currency" class="nav-link" data-scroll-target="#wealth-and-currency">3. Wealth and Currency</a></li>
+  <li><a href="#resource-events" id="toc-resource-events" class="nav-link" data-scroll-target="#resource-events">4. Resource Events</a></li>
+  <li><a href="#the-resource-status-block" id="toc-the-resource-status-block" class="nav-link" data-scroll-target="#the-resource-status-block">5. The Resource Status Block</a></li>
+  <li><a href="#cross-add-on-interactions" id="toc-cross-add-on-interactions" class="nav-link" data-scroll-target="#cross-add-on-interactions">Cross-Add-on Interactions</a></li>
+  <li><a href="#system-adaptations" id="toc-system-adaptations" class="nav-link" data-scroll-target="#system-adaptations">System Adaptations</a>
+  <ul class="collapse">
+  <li><a href="#the-black-hack-usage-dice-systems" id="toc-the-black-hack-usage-dice-systems" class="nav-link" data-scroll-target="#the-black-hack-usage-dice-systems">The Black Hack / Usage Dice Systems</a></li>
+  <li><a href="#ironsworn-supply-track" id="toc-ironsworn-supply-track" class="nav-link" data-scroll-target="#ironsworn-supply-track">Ironsworn / Supply Track</a></li>
+  <li><a href="#osr-encumbrance-systems" id="toc-osr-encumbrance-systems" class="nav-link" data-scroll-target="#osr-encumbrance-systems">OSR / Encumbrance Systems</a></li>
+  <li><a href="#fate-narrative-first-systems" id="toc-fate-narrative-first-systems" class="nav-link" data-scroll-target="#fate-narrative-first-systems">Fate / Narrative-First Systems</a></li>
+  <li><a href="#survival-horror-scarcity-games" id="toc-survival-horror-scarcity-games" class="nav-link" data-scroll-target="#survival-horror-scarcity-games">Survival Horror / Scarcity Games</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference">Quick Reference</a>
+  <ul class="collapse">
+  <li><a href="#new-tags" id="toc-new-tags" class="nav-link" data-scroll-target="#new-tags">New Tags</a></li>
+  <li><a href="#abstract-resources-in-pc" id="toc-abstract-resources-in-pc" class="nav-link" data-scroll-target="#abstract-resources-in-pc">Abstract Resources in <code>[PC:]</code></a></li>
+  <li><a href="#structural-blocks" id="toc-structural-blocks" class="nav-link" data-scroll-target="#structural-blocks">Structural Blocks</a></li>
+  <li><a href="#usage-die-step-down-chain" id="toc-usage-die-step-down-chain" class="nav-link" data-scroll-target="#usage-die-step-down-chain">Usage Die Step-Down Chain</a></li>
+  <li><a href="#complete-example" id="toc-complete-example" class="nav-link" data-scroll-target="#complete-example">Complete Example</a></li>
+  </ul></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
+  <li><a href="#credits-license" id="toc-credits-license" class="nav-link" data-scroll-target="#credits-license">Credits &amp; License</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/en/lonelog-resource-tracking-addon.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lonelog-resource-tracking-addon.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="lonelog-resource-tracking-addon.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="lonelog-resource-tracking-addon.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="lonelog-resource-tracking-addon-gfm.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/en/lonelog-addon-guidelines.html">Add-ons</a></li><li class="breadcrumb-item"><a href="../../docs/en/lonelog-resource-tracking-addon.html">Lonelog: Resource Tracking Add-on</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lonelog: Resource Tracking Add-on</h1>
+<p class="subtitle lead">Inventory, Supplies, and Wealth Notation</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roberto Bisceglie </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="resource-tracking-add-on" class="level1">
+<h1>Resource Tracking Add-on</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Some games don’t care what’s in your pack. Others treat every torch, every ration, every last arrow as a decision that matters. This add-on is for the second kind.</p>
+<p>Core Lonelog already handles light resource tracking — you can put <code>Gear:Flashlight,Notebook</code> inside a <code>[PC:]</code> tag and call it a day. That works fine when resources are flavor. But when your game makes resource management a <em>mechanic</em> — when running out of torches in a dungeon means something, when the Usage Die ticking down creates real tension, when you need to know exactly how many silver pieces you have left — you need more structure.</p>
+<p>That’s what this add-on provides: a dedicated notation layer for tracking resources as they flow in and out of your game.</p>
+<p>If your system handwaves supplies or resolves resource scarcity with a single oracle question, you don’t need this add-on. Core Lonelog’s <code>[PC:]</code> tag with a <code>Gear:</code> field is more than enough.</p>
+<hr>
+<section id="what-this-add-on-adds" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-add-on-adds">What This Add-on Adds</h3>
+<ul>
+<li><code>[Inv:Item|×N|props]</code> — Track individual items with a count and properties. Example: <code>[Inv:Torch|×3]</code></li>
+<li>Supply notation — Abstract resource levels inside <code>[PC:]</code>. Example: <code>[PC:Kael|Supply d8]</code></li>
+<li><code>[Wealth:Owner|Currency N]</code> — Currency and trade tracking. Example: <code>[Wealth:Kael|Gold 45|Silver 12]</code></li>
+<li><code>[RESOURCES]</code> / <code>[/RESOURCES]</code> block — Snapshot of current resources at session boundaries. Example: See §5</li>
+</ul>
+<p><strong>No new core symbols.</strong> This add-on introduces no additions to <code>@</code>, <code>?</code>, <code>d:</code>, <code>-&gt;</code>, or <code>=&gt;</code>.</p>
+<hr>
+</section>
+<section id="design-principles" class="level3">
+<h3 class="anchored" data-anchor-id="design-principles">Design Principles</h3>
+<p><strong>Track what the game tracks.</strong> If your system uses Usage Dice, use the Usage Die notation. If it counts individual arrows, count individual arrows. If it handwaves supplies, don’t invent tracking that isn’t there.</p>
+<p><strong>Separate what you carry from who you are.</strong> The <code>[PC:]</code> tag describes your character — HP, stress, conditions, abstract resources that feel like stats. The <code>[Inv:]</code> tag describes your stuff — concrete, countable things that come and go. This separation keeps both tags readable as your campaign grows.</p>
+<p><strong>Record changes at the point of fiction.</strong> Don’t maintain a separate inventory spreadsheet you update silently. Show resources changing <em>when they change</em>, inline with the actions and consequences that cause it. Your log should tell the story of your resources, not just their current state.</p>
+<p><strong>Block tags follow the core convention.</strong> Structural blocks use <code>[BLOCK]</code> / <code>[/BLOCK]</code> bracket syntax — identical to <code>[COMBAT]</code> / <code>[/COMBAT]</code> in the Combat Add-on. For analog notebooks, use <code>--- BLOCK ---</code> / <code>--- END BLOCK ---</code> dashed separators instead.</p>
+<hr>
+</section>
+</section>
+<section id="the-inventory-tag" class="level2">
+<h2 class="anchored" data-anchor-id="the-inventory-tag">1. The Inventory Tag</h2>
+<p>The <code>[Inv:]</code> tag tracks a specific, concrete item or resource. It’s the thing you can pick up, use, drop, trade, or lose.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[Inv:Item|×count|properties]</code></pre>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><code>Item</code> — the item name, unique enough to search for in a log</li>
+<li><code>×count</code> — how many you have, written <code>×N</code> like any count in core Lonelog (§4.1); omit it for unique or singular items</li>
+<li><code>properties</code> — freeform; use for weight, condition, magical status, ammunition type, or anything else your game cares about</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<pre><code>[Inv:Torch|×3]
+[Inv:Rope|×1|50ft]
+[Inv:Healing Potion|×2|magical|restores d8 HP]
+[Inv:Rations|×5|days]
+[Inv:Arrow|×12]</code></pre>
+<p><strong>Unique or singular items</strong> (no quantity needed):</p>
+<pre><code>[Inv:Skeleton Key|unique]
+[Inv:Father's Compass|quest]
+[Inv:Map to the Ruins]</code></pre>
+<section id="gaining-items" class="level4">
+<h4 class="anchored" data-anchor-id="gaining-items">1.1 Gaining Items</h4>
+<p>When you acquire something, introduce it with a full <code>[Inv:]</code> tag, just as you introduce an NPC with <code>[N:]</code>:</p>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>=&gt; I find supplies! [Inv:Torch|×4] [Inv:Rope|×1|50ft] [Inv:Gold|×25]</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>@ Search the chest
+d: Investigation d6=5 vs TN 4 -&gt; Success
+=&gt; Inside: torches, rope, some coin.
+[Inv:Torch|×4] [Inv:Rope|×1|50ft] [Inv:Gold|×25]
+
+@ Loot the fallen guard
+=&gt; [Inv:Short Sword|×1|rusty] [Inv:Rations|×2|days]
+
+tbl: d100=67 -&gt; "A strange amulet"
+=&gt; [Inv:Bone Amulet|×1|unknown|magical?]</code></pre>
+<p><strong>Multiple items at once</strong> — list them; no special syntax needed:</p>
+<pre><code>=&gt; The merchant's pack contains:
+   [Inv:Torch|×6] [Inv:Rope|×2|50ft each] [Inv:Rations|×10|days]
+   [Inv:Flint &amp; Steel|×1] [Inv:Waterskin|×1|full]</code></pre>
+</section>
+<section id="consuming-and-losing-items" class="level4">
+<h4 class="anchored" data-anchor-id="consuming-and-losing-items">1.2 Consuming and Losing Items</h4>
+<p>Two approaches, same result — choose what fits your flow.</p>
+<p><strong>Approach A: Inline with consequences</strong></p>
+<p>Depletion happens inside the <code>=&gt;</code> line, as part of the fiction:</p>
+<pre><code>=&gt; The tunnel is pitch dark. I light a torch. [Inv:Torch|×3→2]
+=&gt; I bandage the wound with my last healing potion. [Inv:Healing Potion|×0]
+=&gt; Arrow flies true. [Inv:Arrow|×12→11]</code></pre>
+<p><strong>Approach B: Standalone update</strong></p>
+<p>Depletion gets its own line, separate from narrative:</p>
+<pre><code>=&gt; The tunnel is pitch dark. I light a torch.
+[Inv:Torch|×-1]
+
+=&gt; I bandage the wound.
+[Inv:Healing Potion|×-1]</code></pre>
+<p><strong>Which to use?</strong> Approach A is more compact and keeps resource flow visible within the fiction. Approach B is clearer when multiple things change at once, or when you want to visually separate narrative from bookkeeping. Many players mix both depending on context.</p>
+<p><strong>Quantity changes</strong> follow core’s rules for counts:</p>
+<ul>
+<li><code>[Inv:Torch|×-1]</code> — used one</li>
+<li><code>[Inv:Torch|×+2]</code> — found two more</li>
+<li><code>[Inv:Torch|×1]</code> — sets the count: one left</li>
+<li><code>[Inv:Torch|×3&gt;1]</code> — sets it, showing the old value too (<code>→</code> works as well)</li>
+<li><code>[Inv:Torch|×0]</code> — none left</li>
+</ul>
+<p>Keep <code>depleted</code> for things that run out without being counted, like a lantern’s oil or a flashlight’s battery.</p>
+</section>
+<section id="item-state-changes" class="level4">
+<h4 class="anchored" data-anchor-id="item-state-changes">1.3 Item State Changes</h4>
+<p>Items don’t just appear and disappear — they break, get repaired, become cursed, run out of charges. Use properties to track this:</p>
+<ul>
+<li><code>[Inv:Short Sword|×1|rusty]</code> — initial state</li>
+<li><code>[Inv:Short Sword|rusty&gt;repaired]</code> — one property replaced by another</li>
+<li><code>[Inv:Short Sword|enchanted]</code> — a property added</li>
+<li><code>[Inv:Short Sword|-rusty|sharpened]</code> — one removed, one added</li>
+</ul>
+<p><strong>Condition shorthand:</strong></p>
+<pre><code>[Inv:Lantern|×1|broken]
+[Inv:Shield|×1|cracked]
+[Inv:Rations|×3|spoiled]
+[Inv:Wand|×1|charges 2/5]</code></pre>
+<p>These are core Lonelog’s tag update rules (§4.1): properties accumulate, <code>-</code> removes one, <code>old&gt;new</code> replaces one.</p>
+<p><strong>Charges and uses</strong> are always written <code>charges N/M</code>, whether the game calls them charges, uses or doses. Spend one with <code>charges-1</code>: <code>[Inv:Wand|charges-1]</code>.</p>
+</section>
+<section id="reference-tags-for-items" class="level4">
+<h4 class="anchored" data-anchor-id="reference-tags-for-items">1.4 Reference Tags for Items</h4>
+<p>Just like NPCs, use <code>#</code> for items already established:</p>
+<p>The first mention gives the full details:</p>
+<pre><code>[Inv:Bone Amulet|×1|unknown|magical?]
+
+... later in the log ...
+
+@ Examine the amulet more closely
+d: Arcana d6=6 vs TN 5 -&gt; Success
+=&gt; [#Inv:Bone Amulet] — it's a ward against undead!
+[Inv:Bone Amulet|unknown&gt;Ward of the Dead|identified]</code></pre>
+</section>
+<section id="grouped-and-bulk-items" class="level4">
+<h4 class="anchored" data-anchor-id="grouped-and-bulk-items">1.5 Grouped and Bulk Items</h4>
+<p>Some games track bundles or containers rather than individual items. Count the bundle, or list a container’s contents as a property:</p>
+<pre><code>[Inv:Arrow|×20]
+[Inv:Adventuring Kit|×1|contains: rope, pitons, torch×2, rations×3]
+[Inv:Quiver|×1|contains: arrow×15]</code></pre>
+<p>For slot-based inventory systems:</p>
+<pre><code>[Inv:Slot 1|Short Sword]
+[Inv:Slot 2|Shield|cracked]
+[Inv:Slot 3|Torch×3]
+[Inv:Slot 4|empty]</code></pre>
+</section>
+<section id="shared-and-stored-gear" class="level4">
+<h4 class="anchored" data-anchor-id="shared-and-stored-gear">1.6 Shared and Stored Gear</h4>
+<p>Not everything you own is on your back. Two categories cover it:</p>
+<ul>
+<li><code>owner:</code> — who the item belongs to, when it isn’t the character whose log this is: <code>[Inv:Rope|×1|50ft|owner:Party]</code>. In group play, Partylog’s <code>[Party:Crew|…]</code> tag does the same job for shared resources.</li>
+<li><code>where:</code> — where it is, when that isn’t on your person: <code>[Inv:Spare Torches|×6|where:base camp]</code>.</li>
+</ul>
+<p>Both are categories, so moving an item replaces its location (core §4.1):</p>
+<pre><code>=&gt; I stash the spare torches at the cave mouth.
+[Inv:Spare Torches|where:cave mouth]
+=&gt; Back for them on the way out.
+[Inv:Spare Torches|where:carried]</code></pre>
+<hr>
+</section>
+</section>
+<section id="abstract-supply-tracking" class="level2">
+<h2 class="anchored" data-anchor-id="abstract-supply-tracking">2. Abstract Supply Tracking</h2>
+<p>Not every game counts individual items. Many solo systems use abstract mechanics to represent “how well-supplied are you?”—Usage Dice (Black Hack, Macchiato Monsters), Supply tracks (Ironsworn), or simple qualitative levels. These feel more like character stats than inventory, so they live in the <code>[PC:]</code> tag alongside HP, Stress, and other abstract attributes.</p>
+<section id="usage-dice" class="level4">
+<h4 class="anchored" data-anchor-id="usage-dice">2.1 Usage Dice</h4>
+<p>The Usage Die is a staple of OSR-adjacent solo play. You have a die representing supply level—roll it when you use a resource. On a 1–2, the die steps down. When it steps below d4, the resource is gone.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[PC:Kael|Supply d8]
+[PC:Kael|Torchlight d6]
+[PC:Kael|Ammo d10]</code></pre>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>d: Supply d8=2 -&gt; Step down!
+=&gt; [PC:Kael|Supply d8→d6]</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>@ Make camp, use supplies
+d: Supply d8=2 -&gt; Step down!
+=&gt; Supplies dwindling. [PC:Kael|Supply d8→d6]
+
+@ Fire another volley
+d: Ammo d6=1 -&gt; Step down!
+=&gt; Running low on arrows. [PC:Kael|Ammo d6→d4]
+
+@ Light another torch
+d: Torchlight d4=2 -&gt; Depleted!
+=&gt; Last torch sputters out. [PC:Kael|Torchlight depleted]</code></pre>
+<p><strong>The step-down chain:</strong> <code>d12 → d10 → d8 → d6 → d4 → depleted</code></p>
+</section>
+<section id="supply-tracks" class="level4">
+<h4 class="anchored" data-anchor-id="supply-tracks">2.2 Supply Tracks</h4>
+<p>Some systems use numbered tracks for supply—similar to progress tracks but counting down as resources are spent.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[PC:Kael|Supply 5/5]</code></pre>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>=&gt; I make camp and eat. [PC:Kael|Supply 5→4]</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>=&gt; I make camp and eat. [PC:Kael|Supply 5→4]
+=&gt; I forage successfully. [PC:Kael|Supply 4→5]
+=&gt; Desperate — I eat the last of it. [PC:Kael|Supply 1→0|starving]</code></pre>
+<p>This is functionally the same as core Lonelog’s <code>[Timer:]</code> used for resources. The difference is semantic: a Timer is a narrative pressure device, while a Supply track inside <code>[PC:]</code> is a character stat. Use whichever framing matches your game.</p>
+</section>
+<section id="qualitative-levels" class="level4">
+<h4 class="anchored" data-anchor-id="qualitative-levels">2.3 Qualitative Levels</h4>
+<p>For games that don’t use numbers at all — or when you want to track a resource loosely:</p>
+<pre><code>[PC:Kael|supplies:abundant]
+[PC:Kael|supplies:adequate]
+[PC:Kael|supplies:low]
+[PC:Kael|supplies:critical]
+[PC:Kael|supplies:depleted]</code></pre>
+<p><strong>Updating:</strong> because <code>supplies:</code> is a category, writing it again replaces the old level (core §4.1):</p>
+<pre><code>=&gt; After three days in the wastes, food is scarce.
+[PC:Kael|supplies:low]</code></pre>
+<p>You can define your own levels. These aren’t hard-coded — use whatever vocabulary your game provides or that feels right.</p>
+<hr>
+</section>
+</section>
+<section id="wealth-and-currency" class="level2">
+<h2 class="anchored" data-anchor-id="wealth-and-currency">3. Wealth and Currency</h2>
+<p>Money behaves differently from gear. You don’t usually track each coin as an “item” — you track totals, and those totals change through spending, earning, looting, and trading.</p>
+<section id="the-wealth-tag" class="level4">
+<h4 class="anchored" data-anchor-id="the-wealth-tag">3.1 The Wealth Tag</h4>
+<p>For games with concrete currency, use the <code>[Wealth:]</code> tag. Its name is the owner — a character, the party, a ship’s purse — so each purse stays one element as its amounts change, and several characters can each have one:</p>
+<p><strong>Format:</strong></p>
+<pre><code>[Wealth:Kael|Gold 45|Silver 12|Copper 30]
+[Wealth:Kael|Credits 1500]
+[Wealth:Kael|Caps 87]</code></pre>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>=&gt; Good price! [Wealth:Kael|Gold+15]
+=&gt; [Wealth:Kael|Gold-8] [Inv:Rations|×5|days] [Inv:Rope|×1|50ft]</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>@ Sell the jeweled dagger to the merchant
+d: Persuasion d6=5 vs TN 4 -&gt; Success
+=&gt; Good price! [Wealth:Kael|Gold+15]
+
+@ Buy rations and a new rope
+=&gt; [Wealth:Kael|Gold-8] [Inv:Rations|×5|days] [Inv:Rope|×1|50ft]</code></pre>
+<p><strong>Full state vs.&nbsp;delta updates:</strong></p>
+<ul>
+<li><code>[Wealth:Kael|Gold 45]</code> — explicit total</li>
+<li><code>[Wealth:Kael|Gold+15]</code> — earned 15</li>
+<li><code>[Wealth:Kael|Gold-8]</code> — spent 8</li>
+<li><code>[Wealth:Kael|Gold 45→52]</code> — was 45, now 52</li>
+</ul>
+</section>
+<section id="abstract-wealth" class="level4">
+<h4 class="anchored" data-anchor-id="abstract-wealth">3.2 Abstract Wealth</h4>
+<p>Some games don’t count coins — they use wealth levels or resource rolls:</p>
+<ul>
+<li><code>[PC:Kael|wealth:comfortable]</code> — a qualitative level</li>
+<li><code>[PC:Kael|Wealth d8]</code> — a Usage Die for wealth</li>
+<li><code>[PC:Kael|Resources 3/5]</code> — a track</li>
+</ul>
+<p>These live in <code>[PC:]</code> rather than <code>[Wealth:]</code>, because abstract wealth feels more like a stat than a ledger.</p>
+</section>
+<section id="trade-and-barter" class="level4">
+<h4 class="anchored" data-anchor-id="trade-and-barter">3.3 Trade and Barter</h4>
+<p>For transactions, record both sides:</p>
+<pre><code>@ Trade the amulet for passage
+=&gt; I hand over the amulet. [Inv:Bone Amulet|×0]
+=&gt; The captain agrees to take me north. [Thread:Passage to Northport|Open]
+
+@ Barter rations for information
+=&gt; [Inv:Rations|×-2] The fisherman tells me about the sea caves.</code></pre>
+<p>No special syntax needed — the existing consequence notation handles trades naturally. The key is recording <em>what left</em> and <em>what arrived</em>.</p>
+<hr>
+</section>
+</section>
+<section id="resource-events" class="level2">
+<h2 class="anchored" data-anchor-id="resource-events">4. Resource Events</h2>
+<p>Resources interact with the rest of your game. These patterns show how resources connect to actions, oracle questions, and ongoing pressures.</p>
+<section id="resource-checks" class="level4">
+<h4 class="anchored" data-anchor-id="resource-checks">4.1 Resource Checks</h4>
+<p>When the game asks “do you have enough?”:</p>
+<pre><code>@ Cross the frozen river
+? Do I have enough rope?
+-&gt; Yes (checking: [#Inv:Rope] 50ft — river is ~30ft wide)
+=&gt; I anchor the rope and cross safely. [Inv:Rope|×1|50ft|frayed]
+
+@ Camp in the wilderness
+d: Supply d8=1 -&gt; Step down!
+=&gt; Food's running low. [PC:Kael|Supply d8→d6]
+? Do I find water nearby?
+-&gt; No, but...
+=&gt; A dry streambed — if I follow it, maybe tomorrow.
+[Timer:Dehydration 2]</code></pre>
+</section>
+<section id="scarcity-as-oracle-modifier" class="level4">
+<h4 class="anchored" data-anchor-id="scarcity-as-oracle-modifier">4.2 Scarcity as Oracle Modifier</h4>
+<p>Some systems modify oracle likelihood based on resource state. Note it:</p>
+<pre><code>? Can I find more arrows in the ruins? (Unlikely)
+(note: remote area)
+d: d6=4 -&gt; Yes, but...
+=&gt; I find a quiver with only 3 usable arrows. [Inv:Arrow|×+3]
+
+? Is there food in this abandoned camp? (Very Unlikely)
+(note: the camp is old)
+d: d6=1 -&gt; No, and...
+=&gt; The food is rotted and the smell attracts something. [Clock:Predator 1/4]</code></pre>
+</section>
+<section id="resources-in-combat" class="level4">
+<h4 class="anchored" data-anchor-id="resources-in-combat">4.3 Resources in Combat</h4>
+<p>When the Combat Add-on is in use, resource consumption integrates naturally:</p>
+<pre><code>[COMBAT]
+Rd1
+@ Fire bow at Orc 1
+d: Ranged d6=5 vs TN 4 -&gt; Success
+=&gt; Arrow hits! [F:Orc 1|HP-3] [Inv:Arrow|×-1]
+
+Rd2
+@ Throw last flask of oil
+d: Ranged d6=3 vs TN 4 -&gt; Fail
+=&gt; Missed! The oil splatters uselessly. [Inv:Oil Flask|depleted]
+[/COMBAT]</code></pre>
+</section>
+<section id="resources-in-dungeon-crawling" class="level4">
+<h4 class="anchored" data-anchor-id="resources-in-dungeon-crawling">4.4 Resources in Dungeon Crawling</h4>
+<p>When the Dungeon Crawling Add-on is in use, resource depletion tracks alongside room exploration:</p>
+<pre><code>[R:4|status:active|Fungal cavern|exits:E R5, W R2]
+
+@ Navigate the cavern carefully
+d: Survival d6=4 vs TN 4 -&gt; Success
+=&gt; I find a path through. Torch is getting low.
+[Inv:Torch|×2→1] [Timer:Torchlight 3]
+
+@ Search for useful fungi
+tbl: d6=5 -&gt; "Glowing moss — edible"
+=&gt; [Inv:Edible Moss|×3|restores 1 HP each]
+[R:4|status:cleared, looted]</code></pre>
+<hr>
+</section>
+</section>
+<section id="the-resource-status-block" class="level2">
+<h2 class="anchored" data-anchor-id="the-resource-status-block">5. The Resource Status Block</h2>
+<p>For long sessions or campaigns where resources matter, a snapshot at session boundaries helps you pick up where you left off.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[RESOURCES]
+[PC:Name|stats]
+[Wealth:Owner|currencies]
+[Inv:items...]
+[/RESOURCES]</code></pre>
+<p><strong>Example — digital:</strong></p>
+<pre><code>[RESOURCES]
+[PC:Kael|HP 12/15|Supply d6|Stress 2]
+[Wealth:Kael|Gold 52|Silver 8]
+[Inv:Short Sword|×1|sharpened]
+[Inv:Shield|×1|cracked]
+[Inv:Torch|×2]
+[Inv:Rations|×3|days]
+[Inv:Rope|×1|50ft|frayed]
+[Inv:Healing Potion|×1|restores d8 HP]
+[Inv:Arrow|×9]
+[Inv:Bone Amulet|×1|Ward of the Dead]
+[/RESOURCES]</code></pre>
+<p><strong>Example — analog:</strong></p>
+<pre><code>--- RESOURCES ---
+PC:  Kael | HP 12/15 | Supply d6 | Stress 2
+Wealth: Gold 52 | Silver 8
+Inv: Short Sword (sharpened), Shield (cracked)
+     Torch ×2, Rations ×3 days
+     Rope 50ft (frayed), Healing Potion ×1
+     Arrow ×9, Bone Amulet (Ward of the Dead)
+--- END RESOURCES ---</code></pre>
+<p><strong>When to use it:</strong></p>
+<ul>
+<li>At the <strong>end of a session</strong> to freeze state</li>
+<li>At the <strong>start of next session</strong> as a recap</li>
+<li><strong>Before a major expedition</strong> (dungeon dive, long journey, dangerous mission)</li>
+<li>After <strong>significant loot or loss</strong> — a natural checkpoint</li>
+</ul>
+<p><strong>When to skip it:</strong></p>
+<ul>
+<li>Resources aren’t mechanically important in your game</li>
+<li>The session is short and changes are minimal</li>
+<li>You can reconstruct state easily from the log</li>
+</ul>
+<hr>
+</section>
+<section id="cross-add-on-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="cross-add-on-interactions">Cross-Add-on Interactions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 35%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Add-on(s) Used</th>
+<th>Key Tags/Blocks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dungeon exploration with supply pressure</td>
+<td>Dungeon Crawling + Resource Tracking</td>
+<td><code>[R:]</code>, <code>[Inv:]</code>, <code>[Timer:]</code></td>
+</tr>
+<tr class="even">
+<td>Combat with ammunition tracking</td>
+<td>Combat + Resource Tracking</td>
+<td><code>[F:]</code>, <code>[COMBAT]</code>, <code>[Inv:]</code></td>
+</tr>
+<tr class="odd">
+<td>Trading in a settlement</td>
+<td>Resource Tracking only</td>
+<td><code>[Inv:]</code>, <code>[Wealth:]</code>, <code>[N:]</code></td>
+</tr>
+<tr class="even">
+<td>Full dungeon crawl with fights</td>
+<td>All three add-ons</td>
+<td><code>[R:]</code>, <code>[COMBAT]</code>, <code>[Inv:]</code>, <code>[Wealth:]</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Combined example — all three add-ons:</strong></p>
+<pre><code>[RESOURCES]
+[PC:Kael|HP 12/15|Supply d6]
+[Inv:Torch|×2] [Inv:Arrow|×9] [Inv:Healing Potion|×1]
+[Wealth:Kael|Gold 52]
+[/RESOURCES]
+
+S5 *Entering the crypt*
+[R:1|status:active|Entry hall, bones everywhere|exits:N R2, E R3]
+
+@ Light a torch and move in
+[Inv:Torch|×-1] [Timer:Torchlight 6]
+
+? Are there enemies?
+d: d6=6 -&gt; Yes, and...
+=&gt; Skeletons rise from the bone piles!
+
+[COMBAT]
+[F:Skeletons|×3|HP 3 each|pos:Close]
+
+Rd1
+@ Fire at the nearest skeleton
+d: Ranged d6=5 vs TN 4 -&gt; Success
+=&gt; Arrow shatters its skull! [F:Skeletons|×2] [Inv:Arrow|×-1]
+
+@(Skeleton) Charge at me
+d: Attack d6=3 vs TN 4 -&gt; Fail
+=&gt; Clumsy swing, I dodge.
+
+Rd2
+@ Draw sword, press the attack
+d: Melee d6=6 vs TN 4 -&gt; Success
+=&gt; Cut clean through! [F:Skeletons|×1]
+
+@ Finish the last one
+d: Melee d6=4 vs TN 4 -&gt; Success
+=&gt; The crypt goes quiet. [F:Skeletons|×0]
+[/COMBAT]
+
+@ Search the room
+tbl: d20=14 -&gt; "A locked chest"
+? Can I pick the lock?
+d: Lockpicking d6=5 vs TN 5 -&gt; Success
+=&gt; Inside: [Inv:Gold Bracelet|×1|valuable] [Wealth:Kael|Gold+10]
+[R:1|status:cleared, looted]
+[Timer:Torchlight-1]
+
+@ Move north toward R2
+[R:2|status:active|Ritual chamber|exits:S R1, D R3]</code></pre>
+<hr>
+</section>
+<section id="system-adaptations" class="level2">
+<h2 class="anchored" data-anchor-id="system-adaptations">System Adaptations</h2>
+<section id="the-black-hack-usage-dice-systems" class="level3">
+<h3 class="anchored" data-anchor-id="the-black-hack-usage-dice-systems">The Black Hack / Usage Dice Systems</h3>
+<p>Usage Dice are the primary resource mechanic. Track them in <code>[PC:]</code>:</p>
+<pre><code>[PC:Varn|Torches d8|Rations d6|Ammo d10|HP 14/18]
+
+@ Set up camp
+d: Rations d6=2 -&gt; Step down!
+=&gt; [PC:Varn|Rations d6→d4]
+(note: one more step-down and they're gone)</code></pre>
+</section>
+<section id="ironsworn-supply-track" class="level3">
+<h3 class="anchored" data-anchor-id="ironsworn-supply-track">Ironsworn / Supply Track</h3>
+<p>Supply is a single stat from 0–5:</p>
+<pre><code>[PC:Kael|Supply 4/5|Health 4/5|Spirit 3/5|Momentum 6/10]
+
+@ Sojourn at the settlement
+d: Sojourn d6+2=7 vs 3,8 -&gt; Weak Hit
+=&gt; I resupply but time passes. [PC:Kael|Supply+2|Momentum-1]</code></pre>
+</section>
+<section id="osr-encumbrance-systems" class="level3">
+<h3 class="anchored" data-anchor-id="osr-encumbrance-systems">OSR / Encumbrance Systems</h3>
+<p>Slot-based inventory is common in OSR games:</p>
+<pre><code>[Inv:Slot 1|Sword]
+[Inv:Slot 2|Shield]
+[Inv:Slot 3|Torch×3]
+[Inv:Slot 4|Rations×4]
+[Inv:Slot 5|Rope 50ft]
+[Inv:Slot 6-10|empty]
+(house: 10 slots max, STR-based encumbrance)
+
+@ Pick up the golden idol
+=&gt; [Inv:Slot 6|Golden Idol|heavy|occupies 2 slots]
+[Inv:Slot 7|occupied]
+(note: at 7/10 slots — movement penalty at 8+)</code></pre>
+</section>
+<section id="fate-narrative-first-systems" class="level3">
+<h3 class="anchored" data-anchor-id="fate-narrative-first-systems">Fate / Narrative-First Systems</h3>
+<p>Resources are aspects or stress tracks, not inventories:</p>
+<pre><code>[PC:Sable|Aspect:Well-Provisioned]
+[PC:Sable|Aspect:Well-Provisioned→Running Low]
+[PC:Sable|Aspect:Running Low|invoked against me]</code></pre>
+<p>Or simply note it in prose and skip <code>[Inv:]</code> entirely. If your game doesn’t mechanize resources, neither should your notation.</p>
+</section>
+<section id="survival-horror-scarcity-games" class="level3">
+<h3 class="anchored" data-anchor-id="survival-horror-scarcity-games">Survival Horror / Scarcity Games</h3>
+<p>When every bullet counts:</p>
+<pre><code>[Inv:9mm Round|×7]
+[Inv:First Aid Kit|×1|charges 2/3]
+[Inv:Flashlight|×1|battery d4]
+
+@ Fire at the creature
+d: Firearms d6=4 vs TN 4 -&gt; Success
+=&gt; Hit! [Inv:9mm Round|×-1]
+
+@ Patch up the wound
+=&gt; [Inv:First Aid Kit|charges-1] [PC:Casey|HP+3]
+
+@ Check the flashlight
+d: Battery d4=1 -&gt; Step down!
+=&gt; Flickering badly. [Inv:Flashlight|×1|battery d4→depleted]
+=&gt; Darkness. [Clock:Panic 1/4]</code></pre>
+<hr>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<p><strong>Do: Record resource changes at the point of fiction</strong></p>
+<pre><code>✔ @ Light a torch to see
+  =&gt; The cavern reveals a narrow passage. [Inv:Torch|×-1]</code></pre>
+<p><strong>Don’t: Silently update resources outside the log.</strong> If you subtract three arrows, write it down, even briefly:</p>
+<pre><code>✔ [Inv:Arrow|×-3]</code></pre>
+<p><strong>Do: Use the Resource Status Block at session boundaries</strong></p>
+<pre><code>✔ [RESOURCES]
+  [PC:Kael|HP 12/15|Supply d6]
+  [Inv:Torch|×2] [Inv:Arrow|×9]
+  [/RESOURCES]</code></pre>
+<p><strong>Don’t: Let bookkeeping overwhelm the fiction.</strong> Track what matters this beat, and batch the rest in a status block.</p>
+<pre><code>✗ =&gt; I fight the orc.
+  [Inv:Arrow|×-1] [Inv:Arrow|×11] [PC:Kael|HP-2] [PC:Kael|HP 13]
+  [F:Orc|HP-4] [Clock:Alert+1] [Timer:Torch-1]
+  (note: this is a spreadsheet, not a story)
+
+✔ =&gt; Arrow finds its mark — the orc staggers.
+  [Inv:Arrow|×-1] [F:Orc|HP-4]</code></pre>
+<p><strong>Do: Match your notation to your system’s resource model</strong></p>
+<pre><code>✔ Usage Die game:    [PC:Kael|Supply d8]
+✔ Counting game:     [Inv:Arrow|×12]
+✔ Narrative game:    [PC:Sable|Aspect:Well-Provisioned]</code></pre>
+<p><strong>Don’t: Track resources the game doesn’t care about</strong> (unless your game literally tracks bootlaces)</p>
+<pre><code>✗ [Inv:Bootlaces|×2|leather]
+
+✔ Only track what creates meaningful decisions or tension.</code></pre>
+<p><strong>Do: Separate concrete items (<code>[Inv:]</code>) from abstract stats (<code>[PC:]</code>)</strong></p>
+<pre><code>✔ [Inv:Healing Potion|×2]
+✔ [PC:Kael|Supply d6]</code></pre>
+<p><strong>Don’t: Put an inventory list inside a character stat tag</strong></p>
+<pre><code>✗ [PC:Kael|HP 12|Torch 3|Arrow 9|Rations 5]
+
+✔ [PC:Kael|HP 12|Supply d6]
+  [Inv:Torch|×3] [Inv:Arrow|×9] [Inv:Rations|×5]</code></pre>
+<hr>
+</section>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick Reference</h2>
+<section id="new-tags" class="level3">
+<h3 class="anchored" data-anchor-id="new-tags">New Tags</h3>
+<ul>
+<li><code>[Inv:Item|×N|props]</code> — Concrete inventory item. Example: <code>[Inv:Torch|×3]</code></li>
+<li><code>[#Inv:Item]</code> — Reference previously established item. Example: <code>[#Inv:Bone Amulet]</code></li>
+<li><code>[Inv:Item|×+N]</code> / <code>[Inv:Item|×-N]</code> — Quantity change (gain/lose). Example: <code>[Inv:Arrow|×-1]</code></li>
+<li><code>[Inv:Item|×N&gt;M]</code> — Explicit quantity transition. Example: <code>[Inv:Torch|×3&gt;2]</code></li>
+<li><code>[Inv:Item|depleted]</code> — Item fully consumed or gone. Example: <code>[Inv:Oil Flask|depleted]</code></li>
+<li><code>[Wealth:Owner|Currency N]</code> — Concrete currency total. Example: <code>[Wealth:Kael|Gold 45]</code></li>
+<li><code>[Wealth:Owner|Currency+N]</code> — Currency earned. Example: <code>[Wealth:Kael|Gold+15]</code></li>
+<li><code>[Wealth:Owner|Currency-N]</code> — Currency spent. Example: <code>[Wealth:Kael|Gold-8]</code></li>
+</ul>
+</section>
+<section id="abstract-resources-in-pc" class="level3">
+<h3 class="anchored" data-anchor-id="abstract-resources-in-pc">Abstract Resources in <code>[PC:]</code></h3>
+<ul>
+<li><code>Supply d8</code> — Usage Die resource. Example: <code>[PC:Kael|Supply d8]</code></li>
+<li><code>Supply d8→d6</code> — Usage Die step-down. Example: <code>[PC:Kael|Supply d8→d6]</code></li>
+<li><code>Supply 4/5</code> — Supply track. Example: <code>[PC:Kael|Supply 4/5]</code></li>
+<li><code>supplies:low</code> — Qualitative level. Example: <code>[PC:Kael|supplies:low]</code></li>
+<li><code>Wealth d8</code> — Abstract wealth as Usage Die. Example: <code>[PC:Kael|Wealth d8]</code></li>
+<li><code>Aspect:Running Low</code> — Narrative resource state. Example: <code>[PC:Sable|Aspect:Running Low]</code></li>
+</ul>
+</section>
+<section id="structural-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="structural-blocks">Structural Blocks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 35%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block</th>
+<th>Opens When</th>
+<th>Closes When</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[RESOURCES]</code> / <code>[/RESOURCES]</code></td>
+<td>Session start/end, before major expeditions</td>
+<td>After all current <code>[Inv:]</code> and <code>[PC:]</code> tags are listed</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="usage-die-step-down-chain" class="level3">
+<h3 class="anchored" data-anchor-id="usage-die-step-down-chain">Usage Die Step-Down Chain</h3>
+<pre><code>d12 → d10 → d8 → d6 → d4 → depleted</code></pre>
+</section>
+<section id="complete-example" class="level3">
+<h3 class="anchored" data-anchor-id="complete-example">Complete Example</h3>
+<pre><code>[RESOURCES]
+[PC:Kael|HP 10/15|Supply d6] [Wealth:Kael|Gold 52]
+[Inv:Torch|×2] [Inv:Arrow|×9] [Inv:Healing Potion|×1]
+[/RESOURCES]
+
+@ Light a torch
+[Inv:Torch|×-1] [Timer:Torchlight 6]
+
+@ Fire at the orc
+d: Ranged d6=5 vs TN 4 -&gt; Success
+=&gt; [F:Orc|HP-4] [Inv:Arrow|×-1]
+
+=&gt; I bandage up after the fight. [Inv:Healing Potion|×-1] [PC:Kael|HP+5|HP 15]</code></pre>
+<hr>
+</section>
+</section>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<p><strong>Q: When should I use <code>[Inv:]</code> vs.&nbsp;just putting gear in <code>[PC:]</code>?</strong> A: If resources are mechanically important and change often, use <code>[Inv:]</code>. If they’re background flavor or you’re only tracking one or two things, <code>[PC:Name|Gear:Sword,Shield]</code> is fine. There’s no wrong answer — use what keeps your log clear.</p>
+<p><strong>Q: Do I need the <code>[Wealth:]</code> tag, or can I put money in <code>[Inv:]</code>?</strong> A: Either works. <code>[Wealth:]</code> is cleaner for multi-currency systems (gold/silver/copper) and for money that flows frequently. <code>[Inv:Gold|×45]</code> works fine for simpler games or if you’re already using <code>[Inv:]</code> for everything.</p>
+<p><strong>Q: Should I write a Resource Status Block every session?</strong> A: Only if it helps you. If resources are central to your game (dungeon crawls, survival horror), a block at session start and end saves you from scrolling back. If resources rarely change or aren’t mechanically important, skip it.</p>
+<p><strong>Q: What if I’m playing a game with no resource mechanics at all?</strong> A: Then you probably don’t need this add-on. Core Lonelog’s <code>[PC:]</code> tag with a <code>Gear:</code> field is more than enough. This add-on exists for games where resources create tension and decisions.</p>
+<p><strong>Q: Can I combine <code>[Inv:]</code> with the Dungeon Crawling Add-on’s <code>[R:]</code> tags?</strong> A: Absolutely — they’re designed to work together. Tag loot in the room where you find it: <code>[R:3|status:+looted] [Inv:Gold Ring|×1|valuable]</code>. The <code>[R:]</code> tag tracks what happened to the room; the <code>[Inv:]</code> tag tracks what happened to the loot.</p>
+<p><strong>Q: How do I handle containers, bags of holding, saddlebags?</strong> A: Either nest descriptively — <code>[Inv:Bag of Holding|contains: Wand, Scrolls×3, Gold 100]</code> — or track the container and contents separately. For slot-based systems, just mark which slots are “in the bag.” Don’t over-engineer it.</p>
+<p><strong>Q: The <code>×</code> symbol is hard to type. Can I use <code>x</code> instead?</strong> A: Yes. <code>[Inv:Arrow|×12]</code> and <code>[Inv:Arrow|x12]</code> are both fine. Readability over formality.</p>
+<p><strong>Q: How does this work in an analog notebook?</strong> A: The Resource Status Block works well in analog — write it in a box or across the top of the page. For inline changes, use shorthand in the margin: <code>Torch ×-1</code>, <code>Arrow ×9→8</code>. The <code>+</code>/<code>-</code> notation is fast enough that it doesn’t slow down handwriting.</p>
+<hr>
+</section>
+<section id="credits-license" class="level2">
+<h2 class="anchored" data-anchor-id="credits-license">Credits &amp; License</h2>
+<p>© 2025 Roberto Bisceglie</p>
+<p>This add-on extends <a href="https://zeruhur.itch.io/lonelog">Lonelog</a> by Roberto Bisceglie.</p>
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v 1.2.0: Charges are always <code>charges N/M</code>; new §1.6 on shared and stored gear (<code>owner:</code>, <code>where:</code>). Aligned with Lonelog v1.7: <code>[Wealth:]</code> is named after its owner (<code>[Wealth:Kael|Gold 45]</code>); named <code>[PC:]</code> tags, standard <code>d:</code> line for Ironsworn rolls. Quantities are <code>×N</code> counts (<code>[Inv:Torch|×3]</code>, <code>[Inv:Torch|×-1]</code>); qualitative levels use a <code>supplies:</code> category; likelihood on the question; explanations moved out of code blocks.</li>
+<li>v 1.1.0: Block tags unified with <code>[BLOCK]</code>/<code>[/BLOCK]</code> convention; design principles updated</li>
+<li>v 1.0.0: Rewritten as a compliant add-on (previously “Resource Tracking Module”)</li>
+</ul>
+<p>This work is licensed under the <strong>Creative Commons Attribution-ShareAlike 4.0 International License</strong>.</p>
+<p>You are free to share and adapt this material, provided you give appropriate credit and distribute adaptations under the same license. Session logs and play records created using this add-on’s notation are your own work and are not subject to this license.</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  var formats = document.querySelector(".quarto-alternate-formats");
+  if (sidebar && formats) {
+    sidebar.insertBefore(formats, sidebar.firstChild);
+  }
+
+  // Rename "Typst" label to "PDF"
+  document.querySelectorAll(".quarto-alternate-formats a").forEach(function (a) {
+    a.childNodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "Typst") {
+        node.textContent = "PDF";
+      }
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lonelog\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/en/lonelog-dungeon-crawling-addon.html" class="pagination-link" aria-label="Lonelog: Dungeon Crawling Add-on">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lonelog: Dungeon Crawling Add-on</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/en/lonelog-dice-notation-addon.html" class="pagination-link" aria-label="Lonelog: Dice Notation Add-on">
+        <span class="nav-page-text">Lonelog: Dice Notation Add-on</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Lonelog by Roberto Bisceglie · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/en/lonelog-resource-tracking-addon.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://zeruhur.itch.io/lonelog">itch.io</a> · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

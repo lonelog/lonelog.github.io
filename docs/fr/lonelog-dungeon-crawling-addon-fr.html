@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Bisceglie">
+
+<title>Lonelog : Extension d’Exploration de Donjon – Lonelog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/fr/lonelog-resource-tracking-addon-fr.html" rel="next">
+<link href="../../docs/fr/lonelog-combat-addon-fr.html" rel="prev">
+<link href="../../assets/banner.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e5f5294698a128606ef5f4cfe63e5fe8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7e2f14f9a527615529190f7f63649c5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+
+
+<meta property="og:title" content="Lonelog : Extension d’Exploration de Donjon – Lonelog">
+<meta property="og:description" content="Suivi de Pièces Optionnel pour l’Exploration de Donjon">
+<meta property="og:site_name" content="Lonelog">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lonelog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Recherche"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en.html"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/lonelog.html"> 
+<span class="menu-text">Lonelog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-add-ons" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Add-ons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-add-ons">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-guidelines.html">
+ <span class="dropdown-text">Writing an add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-template.html">
+ <span class="dropdown-text">Add-on template</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-combat-addon.html">
+ <span class="dropdown-text">Lonelog: Combat Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dungeon-crawling-addon.html">
+ <span class="dropdown-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-resource-tracking-addon.html">
+ <span class="dropdown-text">Lonelog: Resource Tracking Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dice-notation-addon.html">
+ <span class="dropdown-text">Lonelog: Dice Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-cards-addon.html">
+ <span class="dropdown-text">Lonelog: Card Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-wargaming-addon.html">
+ <span class="dropdown-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/partylog.html"> 
+<span class="menu-text">Partylog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/it.html">
+ <span class="dropdown-text">Italiano</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.reddit.com/r/lonelog/"> <i class="bi bi-reddit" role="img" aria-label="Reddit">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/DBpgvvC2sG"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lonelog/lonelog"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss" role="img" aria-label="Blog feed">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Basculer le mode sombre"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-addon-guidelines-fr.html">Extensions</a></li><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-dungeon-crawling-addon-fr.html">Lonelog : Extension d’Exploration de Donjon</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extensions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-addon-guidelines-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Directives pour les Extensions de la Communauté</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-addon-template-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension [Nom de l’Extension]</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-combat-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension de Combat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-dungeon-crawling-addon-fr.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lonelog : Extension d’Exploration de Donjon</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-resource-tracking-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension de Suivi des Ressources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#extension-dexploration-de-donjon" id="toc-extension-dexploration-de-donjon" class="nav-link active" data-scroll-target="#extension-dexploration-de-donjon">Extension d’Exploration de Donjon</a>
+  <ul class="collapse">
+  <li><a href="#présentation" id="toc-présentation" class="nav-link" data-scroll-target="#présentation">Présentation</a>
+  <ul class="collapse">
+  <li><a href="#ce-que-cette-extension-ajoute" id="toc-ce-que-cette-extension-ajoute" class="nav-link" data-scroll-target="#ce-que-cette-extension-ajoute">Ce que cette extension ajoute</a></li>
+  <li><a href="#principes-de-conception" id="toc-principes-de-conception" class="nav-link" data-scroll-target="#principes-de-conception">Principes de conception</a></li>
+  </ul></li>
+  <li><a href="#la-balise-de-pièce" id="toc-la-balise-de-pièce" class="nav-link" data-scroll-target="#la-balise-de-pièce">1. La Balise de Pièce</a></li>
+  <li><a href="#connexions-entre-les-pièces" id="toc-connexions-entre-les-pièces" class="nav-link" data-scroll-target="#connexions-entre-les-pièces">2. Connexions entre les pièces</a></li>
+  <li><a href="#le-bloc-de-statut-du-donjon" id="toc-le-bloc-de-statut-du-donjon" class="nav-link" data-scroll-target="#le-bloc-de-statut-du-donjon">3. Le Bloc de Statut du Donjon</a></li>
+  <li><a href="#les-balises-de-pièces-en-jeu" id="toc-les-balises-de-pièces-en-jeu" class="nav-link" data-scroll-target="#les-balises-de-pièces-en-jeu">4. Les Balises de Pièces en Jeu</a></li>
+  <li><a href="#interactions-entre-extensions" id="toc-interactions-entre-extensions" class="nav-link" data-scroll-target="#interactions-entre-extensions">Interactions entre extensions</a></li>
+  <li><a href="#adaptations-du-système" id="toc-adaptations-du-système" class="nav-link" data-scroll-target="#adaptations-du-système">Adaptations du système</a>
+  <ul class="collapse">
+  <li><a href="#systèmes-osr-old-school-essentials-basicexpert-dd" id="toc-systèmes-osr-old-school-essentials-basicexpert-dd" class="nav-link" data-scroll-target="#systèmes-osr-old-school-essentials-basicexpert-dd">Systèmes OSR (Old School Essentials, Basic/Expert D&amp;D)</a></li>
+  <li><a href="#ironsworn-starforged" id="toc-ironsworn-starforged" class="nav-link" data-scroll-target="#ironsworn-starforged">Ironsworn / Starforged</a></li>
+  </ul></li>
+  <li><a href="#bonnes-pratiques" id="toc-bonnes-pratiques" class="nav-link" data-scroll-target="#bonnes-pratiques">Bonnes pratiques</a></li>
+  <li><a href="#référence-rapide" id="toc-référence-rapide" class="nav-link" data-scroll-target="#référence-rapide">Référence rapide</a>
+  <ul class="collapse">
+  <li><a href="#nouvelles-balises" id="toc-nouvelles-balises" class="nav-link" data-scroll-target="#nouvelles-balises">Nouvelles balises</a></li>
+  <li><a href="#termes-de-statut" id="toc-termes-de-statut" class="nav-link" data-scroll-target="#termes-de-statut">Termes de statut</a></li>
+  <li><a href="#blocs-structurels" id="toc-blocs-structurels" class="nav-link" data-scroll-target="#blocs-structurels">Blocs structurels</a></li>
+  <li><a href="#raccourcis-de-direction" id="toc-raccourcis-de-direction" class="nav-link" data-scroll-target="#raccourcis-de-direction">Raccourcis de direction</a></li>
+  <li><a href="#exemple-complet" id="toc-exemple-complet" class="nav-link" data-scroll-target="#exemple-complet">Exemple complet</a></li>
+  </ul></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
+  <li><a href="#crédits-license" id="toc-crédits-license" class="nav-link" data-scroll-target="#crédits-license">Crédits &amp; License</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/fr/lonelog-dungeon-crawling-addon-fr.md" class="toc-action"><i class="bi bi-github"></i>Voir la source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div><div class="quarto-alternate-formats"><h2>Autres formats</h2><ul><li><a href="lonelog-dungeon-crawling-addon-fr.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="lonelog-dungeon-crawling-addon-fr.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="lonelog-dungeon-crawling-addon-fr.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="lonelog-dungeon-crawling-addon-fr-gfm.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-addon-guidelines-fr.html">Extensions</a></li><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-dungeon-crawling-addon-fr.html">Lonelog : Extension d’Exploration de Donjon</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lonelog : Extension d’Exploration de Donjon</h1>
+<p class="subtitle lead">Suivi de Pièces Optionnel pour l’Exploration de Donjon</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Auteur·rice</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roberto Bisceglie </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="extension-dexploration-de-donjon" class="level1">
+<h1>Extension d’Exploration de Donjon</h1>
+<section id="présentation" class="level2">
+<h2 class="anchored" data-anchor-id="présentation">Présentation</h2>
+<p>Lonelog a été conçu pour un jeu en solo axé sur la narration — le genre où vous vous souciez plus de <em>ce qui s’est passé et pourquoi</em> que de <em>où je suis et ce qu’il me reste</em>. L’exploration de donjon (dungeon crawling) tire dans une direction différente : les relations spatiales comptent, les pièces accumulent des états, et vous vous demandez constamment “ai-je déjà fouillé ce coffre ?”.</p>
+<p>Cette tension est réelle. Une notation textuelle ne remplacera jamais une bonne carte. Mais elle <em>peut</em> vous aider à suivre l’<strong>état des pièces</strong> — ce que vous avez trouvé, ce que vous avez nettoyé, ce qui attend encore derrière une porte verrouillée — aux côtés de la narration que Lonelog gère déjà bien.</p>
+<p>Cette extension introduit un nouvel élément persistant : la balise de Pièce <code>[P:]</code> (Pièce). C’est tout. Tout le reste — actions, jets, questions à l’oracle, conséquences, fils conducteurs, horloges — reste exactement pareil. Vous ajoutez simplement les pièces au vocabulaire des choses que Lonelog peut suivre.</p>
+<p>Si le donjon est plus un décor narratif qu’un défi mécanique, ou si vous vous déplacez rapidement dans des espaces sans suivre leur état, restez avec le cœur de Lonelog. La balise de lieu <code>[L:]</code> gère très bien le contexte spatial simple. Cette extension prouve son utilité lorsque les pièces ont un état significatif qui change au fil du temps.</p>
+<hr>
+<section id="ce-que-cette-extension-ajoute" class="level3">
+<h3 class="anchored" data-anchor-id="ce-que-cette-extension-ajoute">Ce que cette extension ajoute</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 38%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ajout</th>
+<th>Objectif</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[P:ID\|statut]</code></td>
+<td>Suivre l’état d’exploration actuel d’une pièce</td>
+<td><code>[P:3\|nettoyée]</code></td>
+</tr>
+<tr class="even">
+<td><code>[P:ID\|statut\|desc]</code></td>
+<td>Balise de pièce avec description optionnelle</td>
+<td><code>[P:3\|nettoyée\|bibliothèque]</code></td>
+</tr>
+<tr class="odd">
+<td><code>sorties DIR:ID</code></td>
+<td>Enregistrer les connexions entre les pièces (optionnel)</td>
+<td><code>sorties N:P2, E:P3</code></td>
+</tr>
+<tr class="even">
+<td><code>[#P:ID]</code></td>
+<td>Faire référence à une pièce établie précédemment</td>
+<td><code>[#P:3]</code></td>
+</tr>
+<tr class="odd">
+<td><code>[STATUT DU DONJON]</code> / <code>[/STATUT DU DONJON]</code></td>
+<td>Instantané de début de session de tous les états des pièces</td>
+<td>Plusieurs balises <code>[P:]</code> groupées</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Aucun nouveau symbole de base.</strong> Cette extension n’introduit aucun ajout à <code>@</code>, <code>?</code>, <code>d:</code>, <code>-&gt;</code> ou <code>=&gt;</code>.</p>
+<hr>
+</section>
+<section id="principes-de-conception" class="level3">
+<h3 class="anchored" data-anchor-id="principes-de-conception">Principes de conception</h3>
+<p><strong>L’état avant l’espace.</strong> Une carte gère les relations spatiales mieux que le texte ne le fera jamais. Les balises de pièces suivent ce qui a <em>changé</em> — nettoyé, fouillé, verrouillé — et non la position relative des pièces. Utilisez le bon outil pour chaque tâche.</p>
+<p><strong>Vocabulaire minimal.</strong> Une seule nouvelle balise couvre toute l’extension. Tous les autres éléments — en-têtes de scène, questions à l’oracle, conséquences, horloges — utilisent la notation de base que vous connaissez déjà. La charge cognitive pour ajouter l’exploration de donjon à une session Lonelog se résume à un format de balise.</p>
+<p><strong>Conçu pour les cartes.</strong> Les balises de pièces sont conçues pour fonctionner aux côtés d’une carte visuelle, pas pour la remplacer. Les identifiants de pièces (ID) relient votre journal à votre carte. Marquez-les sur du papier millimétré ; faites référence aux mêmes identifiants dans vos balises. Les deux systèmes se renforcent mutuellement.</p>
+<p><strong>Les balises de bloc suivent la convention de base.</strong> Les blocs structurels utilisent la syntaxe entre crochets <code>[BLOC]</code> / <code>[/BLOC]</code> — identique à <code>[COMBAT]</code> / <code>[/COMBAT]</code> dans l’Extension de Combat. Pour les carnets papier, utilisez des séparateurs en pointillés <code>--- BLOC ---</code> / <code>--- FIN BLOC ---</code> à la place.</p>
+<hr>
+</section>
+</section>
+<section id="la-balise-de-pièce" class="level2">
+<h2 class="anchored" data-anchor-id="la-balise-de-pièce">1. La Balise de Pièce</h2>
+<p>La balise de Pièce <code>[P:]</code> (Pièce) suit l’état actuel d’une pièce. Elle fonctionne comme tout autre élément persistant de Lonelog : vous la balisez quand quelque chose change, vous la mettez à jour au fur et à mesure que la situation évolue, et vous y faites référence plus tard.</p>
+<p><strong>Format :</strong></p>
+<pre><code>[P:ID|statut|description|sorties DIR:ID, DIR:ID]</code></pre>
+<p><strong>Champs :</strong></p>
+<ul>
+<li><code>ID</code> — identifiant unique de la pièce, généralement un numéro (<code>1</code>, <code>2</code>, <code>3</code>) correspondant à votre carte</li>
+<li><code>statut</code> — état d’exploration actuel (voir ci-dessous)</li>
+<li><code>description</code> — étiquette brève optionnelle pour vous rafraîchir la mémoire</li>
+<li><code>sorties</code> — connexions optionnelles vers les pièces adjacentes</li>
+</ul>
+<section id="statut-de-la-pièce" class="level4">
+<h4 class="anchored" data-anchor-id="statut-de-la-pièce">1.1 Statut de la Pièce</h4>
+<p>Le statut vous indique d’un coup d’œil l’état actuel d’une pièce. Utilisez les termes qui conviennent à votre jeu :</p>
+<pre><code>[P:1|inexplorée]          Pas encore entré
+[P:1|active]              En cours d'exploration
+[P:1|nettoyée]            Ennemis vaincus ou menaces résolues
+[P:1|nettoyée, fouillée]  Nettoyée et trésor récupéré
+[P:1|verrouillée]         Impossible d'entrer pour le moment
+[P:1|piégée]              Danger connu présent
+[P:1|sûre]                Vérifiée, utilisable comme refuge
+[P:1|effondrée]           Plus accessible</code></pre>
+<p>Combinez les statuts quand cela fait sens : <code>nettoyée, fouillée</code> vous indique à la fois que le combat est terminé <em>et</em> qu’il n’y a plus rien à prendre.</p>
+<p><strong>Exemple — minimal :</strong></p>
+<pre><code>[P:4|active]</code></pre>
+<p><strong>Exemple — développé :</strong></p>
+<pre><code>S5 *Couloir nord*
+
+@ Ouvrir la porte avec précaution
+? Est-elle verrouillée ?
+-&gt; Non (d6=5)
+=&gt; La porte s'ouvre facilement.
+
+[P:4|active|salle de stockage, étagères poussiéreuses|sorties S:P2, E:P5]
+
+@ Fouiller les étagères
+d: Investigation d6=5 vs ND 4 -&gt; Succès
+=&gt; Je trouve une clé rouillée derrière une brique desserrée.
+(note : pourrait ouvrir P5 ?)
+
+? Y a-t-il des ennemis ?
+-&gt; Non, et... (d6=6)
+=&gt; La pièce est totalement calme. Des années de poussière.
+
+[P:4|nettoyée, fouillée]</code></pre>
+</section>
+<section id="mise-à-jour-du-statut-dune-pièce" class="level4">
+<h4 class="anchored" data-anchor-id="mise-à-jour-du-statut-dune-pièce">1.2 Mise à jour du statut d’une pièce</h4>
+<p>Quand l’état d’une pièce change, répétez la balise avec le nouveau statut :</p>
+<pre><code>[P:1|inexplorée]
+
+... vous entrez et combattez ...
+
+[P:1|nettoyée]
+
+... vous fouillez ...
+
+[P:1|nettoyée, fouillée]</code></pre>
+<p>Ou utilisez le raccourci intégré pour un ajout de statut unique :</p>
+<pre><code>[P:1|+fouillée]</code></pre>
+</section>
+<section id="descriptions-des-pièces" class="level4">
+<h4 class="anchored" data-anchor-id="descriptions-des-pièces">1.3 Descriptions des pièces</h4>
+<p>Le champ de description est optionnel et bref — juste assez pour vous rafraîchir la mémoire :</p>
+<pre><code>[P:1|nettoyée|salle de garde]
+[P:2|active|bibliothèque, bougies encore allumées]
+[P:3|inexplorée|bruits d'eau]</code></pre>
+<p>Pour des descriptions plus riches, utilisez la narration régulière de Lonelog après la balise :</p>
+<pre><code>[P:4|active|chambre rituelle]
+=&gt; L'air vibre d'énergie. Un cercle de runes brille faiblement sur le sol.</code></pre>
+</section>
+<section id="balises-de-référence" class="level4">
+<h4 class="anchored" data-anchor-id="balises-de-référence">1.4 Balises de référence</h4>
+<p>Utilisez <code>#</code> pour faire référence à une pièce que vous avez déjà décrite, exactement comme pour les PNJ et les lieux dans le cœur de Lonelog :</p>
+<pre><code>[P:3|nettoyée|armurerie|sorties N:P2, O:P4]    (première mention)
+
+... plus tard ...
+
+[#P:3]                                         (référence à celle-ci)</code></pre>
+<hr>
+</section>
+</section>
+<section id="connexions-entre-les-pièces" class="level2">
+<h2 class="anchored" data-anchor-id="connexions-entre-les-pièces">2. Connexions entre les pièces</h2>
+<p>Pour enregistrer quelles pièces sont connectées, utilisez le mot-clé <code>sorties</code> à l’intérieur de la balise :</p>
+<pre><code>[P:1|nettoyée|salle de garde|sorties N:P2, E:P3, S:P4]</code></pre>
+<p>Lisez ceci comme : “La pièce 1 est nettoyée, c’est une salle de garde, avec des sorties au nord vers la pièce 2, à l’est vers la pièce 3, et au sud vers la pièce 4.”</p>
+<p><strong>Raccourcis de direction :</strong> <code>N</code> (Nord), <code>S</code> (Sud), <code>E</code> (Est), <code>O</code> (Ouest), <code>NE</code>, <code>NO</code>, <code>SE</code>, <code>SO</code>, <code>H</code> (Haut), <code>B</code> (Bas).</p>
+<p>Si la direction n’a pas d’importance, listez simplement les connexions :</p>
+<pre><code>[P:5|inexplorée|sorties P4, P6, P7]</code></pre>
+<p><strong>Vous n’êtes pas obligé d’enregistrer les sorties.</strong> Si vous tenez une carte visuelle, les sorties y figurent et vous n’avez besoin de la balise de pièce que pour le statut. Le mot-clé <code>sorties</code> est utile lorsque vous voulez un enregistrement entièrement textuel, ou lorsque vous découvrez une connexion spécifique en cours de jeu :</p>
+<pre><code>=&gt; Je trouve un passage secret derrière la bibliothèque !
+[P:3|sorties E:P7(secret)]</code></pre>
+<p><strong>Exemple — minimal :</strong></p>
+<pre><code>[P:6|inexplorée|sorties P5, P8]</code></pre>
+<p><strong>Exemple — développé :</strong></p>
+<pre><code>@ Vérifier s'il y a des sorties sur le mur du fond
+d: Perception d6=6 vs ND 4 -&gt; Succès
+=&gt; Une porte dissimulée — bien cachée mais pas verrouillée.
+[P:6|active|crypte|sorties O:P5, N:P8, E:P9(secret)]
+(note : mettre à jour la carte avec P9)</code></pre>
+<hr>
+</section>
+<section id="le-bloc-de-statut-du-donjon" class="level2">
+<h2 class="anchored" data-anchor-id="le-bloc-de-statut-du-donjon">3. Le Bloc de Statut du Donjon</h2>
+<p>Lorsque vous reprenez une session au milieu d’un donjon, vous avez besoin d’un instantané : quelles pièces sont nettoyées, où n’êtes-vous pas encore allé, qu’est-ce qui est encore verrouillé. Le <strong>Bloc de Statut du Donjon</strong> vous donne cela d’un coup d’œil.</p>
+<p><strong>Format :</strong></p>
+<pre><code>[STATUT DU DONJON]
+[P:1|statut|description]
+[P:2|statut|description]
+...
+[/STATUT DU DONJON]</code></pre>
+<p><strong>Quand ouvrir un bloc :</strong> Au début d’une session lors de la reprise d’une exploration de donjon, avant votre première scène.</p>
+<p><strong>Quand le mettre à jour :</strong> À la fin de la session, ou au début de la session suivante, pour refléter les changements.</p>
+<p><strong>Exemple numérique :</strong></p>
+<pre><code>[STATUT DU DONJON]
+[P:1|nettoyée, fouillée|grotte d'entrée|sorties N:P2, E:P3]
+[P:2|nettoyée|salle de garde|sorties S:P1, O:P5]
+[P:3|active|bibliothèque|sorties O:P1]
+[P:4|inexplorée]
+[P:5|verrouillée|porte lourde|sorties E:P2]
+[/STATUT DU DONJON]</code></pre>
+<p><strong>Exemple analogique :</strong></p>
+<pre><code>--- STATUT DU DONJON ---
+P1 : nettoyée, fouillée (grotte d'entrée)
+P2 : nettoyée (salle de garde)
+P3 : active (bibliothèque)
+P4 : inexplorée
+P5 : verrouillée
+--- FIN STATUT ---</code></pre>
+<p><strong>C’est une commodité, pas une exigence.</strong> Si votre donjon ne compte que trois pièces, vous n’avez pas besoin d’un bloc de statut — balisez simplement les pièces au fur et à mesure. Pour les donjons plus vastes, ou lors de la reprise d’une session après une pause, c’est un moyen rapide de s’orienter.</p>
+<hr>
+</section>
+<section id="les-balises-de-pièces-en-jeu" class="level2">
+<h2 class="anchored" data-anchor-id="les-balises-de-pièces-en-jeu">4. Les Balises de Pièces en Jeu</h2>
+<section id="pièces-comme-en-têtes-de-scène" class="level4">
+<h4 class="anchored" data-anchor-id="pièces-comme-en-têtes-de-scène">4.1 Pièces comme en-têtes de scène</h4>
+<p>Utilisez une balise de pièce directement dans votre en-tête de scène pour un contexte compact :</p>
+<pre><code>S5 [P:4|active] *Salle de stockage, étagères poussiéreuses*</code></pre>
+<p>Cela vous indique exactement où se déroule la scène sans ligne de balise séparée. Certains joueurs préfèrent cela pour séparer les descriptions de scène et les balises de pièces.</p>
+</section>
+<section id="donjons-générés" class="level4">
+<h4 class="anchored" data-anchor-id="donjons-générés">4.2 Donjons générés</h4>
+<p>Si vous générez le donjon au fur et à mesure (en utilisant des tables aléatoires ou un oracle), enregistrez la génération aux côtés de la balise de pièce :</p>
+<pre><code>@ Ouvrir la porte est
+tbl: d20=14 -&gt; "Grande pièce, deux sorties"
+
+? Qu'y a-t-il à l'intérieur ?
+tbl: d100=67 -&gt; "Bibliothèque avec un coffre piégé"
+
+[P:6|active|bibliothèque, coffre piégé|sorties O:P3, N:P7]</code></pre>
+<p>Les jets de génération vous indiquent <em>comment</em> vous avez découvert la pièce. La balise de pièce vous indique <em>ce qu’elle est maintenant</em>.</p>
+</section>
+<section id="cartes-et-lonelog" class="level4">
+<h4 class="anchored" data-anchor-id="cartes-et-lonelog">4.3 Cartes et Lonelog</h4>
+<p>Soyons directs : <strong>une carte visuelle est presque toujours meilleure que le texte pour les relations spatiales.</strong> Papier millimétré, outil numérique, croquis rapide sur une serviette — peu importe ce qui fonctionne. Le rôle de la balise de pièce n’est pas de remplacer votre carte. C’est de suivre un état qu’une carte gère mal : si une pièce est nettoyée, ce que vous y avez trouvé, comment son statut a changé au cours du jeu.</p>
+<p>La répartition recommandée :</p>
+<ul>
+<li><strong>La carte</strong> gère la disposition, les relations spatiales et la navigation.</li>
+<li><strong>Les balises de pièces</strong> gèrent l’état, les changements de statut et le contexte narratif.</li>
+<li><strong>Le cœur de Lonelog</strong> gère tout le reste (actions, jets, conséquences, histoire).</li>
+</ul>
+<p>Marquez les numéros de pièces sur votre carte. Utilisez ces mêmes numéros dans vos balises de pièces. Votre carte et votre journal se font maintenant mutuellement référence de manière transparente :</p>
+<pre><code>S7 [P:4] *Examen de l'autel*
+
+@ Fouiller l'autel
+d: Investigation d6=6 vs ND 4 -&gt; Succès
+=&gt; Compartiment secret ! [Fil:Rituel du Culte|Ouvert]
+[P:4|nettoyée, fouillée]
+
+(note : marquer P4 comme nettoyée sur la carte)</code></pre>
+<p>Si vous voulez un journal de donjon <strong>entièrement textuel</strong> sans carte séparée, le mot-clé <code>sorties</code> vous permet de reconstruire la disposition à partir de vos notes. Mais c’est l’exception, pas la recommandation.</p>
+<hr>
+</section>
+</section>
+<section id="interactions-entre-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="interactions-entre-extensions">Interactions entre extensions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 45%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Extension(s) utilisée(s)</th>
+<th>Balises/Blocs clés</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Un combat éclate dans une pièce</td>
+<td>Exploration de Donjon + Combat</td>
+<td><code>[P:]</code>, <code>[COMBAT]</code>, <code>[F:]</code></td>
+</tr>
+<tr class="even">
+<td>Suivi des torches et rations par pièce</td>
+<td>Exploration de Donjon + Suivi des Ressources</td>
+<td><code>[P:]</code>, <code>[Inv:Nom\|#]</code></td>
+</tr>
+<tr class="odd">
+<td>Combat tout en suivant les ressources</td>
+<td>Les trois extensions</td>
+<td><code>[P:]</code>, <code>[COMBAT]</code>, <code>[Inv:]</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple combiné — Exploration de Donjon + Combat :</strong></p>
+<pre><code>S6 *Approche des casernes*
+
+@ Se déplacer silencieusement dans le couloir
+d: Discrétion d6=4 vs ND 4 -&gt; Succès
+=&gt; Je rampe vers l'avant sans être vu.
+
+[P:5|active|casernes, odeur de sueur|sorties S:P3, O:P6, N:P7]
+
+? Combien de gardes ?
+tbl: d6=3 -&gt; "Trois ennemis"
+=&gt; Deux mangent, un aiguise une lame.
+
+[COMBAT]
+[PJ:Alex|PV 12|Engagé]
+[F:Garde 1|PV 5|Proche|mange]
+[F:Garde 2|PV 5|Proche|mange]
+[F:Garde 3|PV 5|Proche|alerte]
+
+@ Embusquer le garde alerte en premier
+d: d20+4=18 vs CA 12 -&gt; Touche, 1d8=7
+=&gt; [F:Garde 3|mort]
+
+@(Garde 1) Attrape son arme et charge
+d: d20+3=11 vs CA 14 -&gt; Échec
+
+P2
+@ Frapper les deux gardes restants
+d: d20+4=15 vs CA 12 -&gt; Touche, 1d8=5 =&gt; [F:Garde 1|mort]
+d: d20+4=12 vs CA 12 -&gt; Touche, 1d8=3 =&gt; [F:Garde 2|mort]
+
+[/COMBAT]
+=&gt; Pièce nettoyée avant qu'ils ne puissent sonner l'alarme.
+[P:5|nettoyée]
+
+@ Fouiller les casernes
+tbl: d20=8 -&gt; "Rations et une carte rudimentaire"
+=&gt; Une carte grossière tracée sur une peau. Indique des pièces à l'ouest !
+[P:5|nettoyée, fouillée]
+[P:6|inexplorée|indiquée sur la carte orc]
+(note : mettre à jour ma carte avec P6)</code></pre>
+<hr>
+</section>
+<section id="adaptations-du-système" class="level2">
+<h2 class="anchored" data-anchor-id="adaptations-du-système">Adaptations du système</h2>
+<section id="systèmes-osr-old-school-essentials-basicexpert-dd" class="level3">
+<h3 class="anchored" data-anchor-id="systèmes-osr-old-school-essentials-basicexpert-dd">Systèmes OSR (Old School Essentials, Basic/Expert D&amp;D)</h3>
+<p>Les procédures classiques d’exploration de donjon s’adaptent naturellement à cette extension. L’exploration au tour par tour, les tests de monstres errants et la structure de tour de dix minutes génèrent des points de mise à jour de balises naturels. Utilisez des balises de pièces à la fin de chaque tour ou quand quelque chose d’important change.</p>
+<pre><code>[STATUT DU DONJON]
+[P:1|nettoyée, fouillée|hall d'entrée|sorties N:P2, E:P3]
+[P:2|nettoyée|salle de garde|sorties S:P1, O:P5]
+[P:3|active|crypte|sorties O:P1, B:P8]
+[/STATUT DU DONJON]
+
+S4 *P3 – Crypte, tour 3*
+
+@ Fouiller les sarcophages
+d: Test de porte secrète 1-sur-6 : d6=2 -&gt; Rien trouvé
+? Test de monstre errant
+-&gt; Non (d6=5)
+
+@ Allumer les appliques murales et examiner les inscriptions
+d: Test INT d20=8 vs DD 12 -&gt; Échec
+=&gt; L'écriture est trop archaïque — je n'arrive pas à la comprendre.
+[P:3|nettoyée]
+(note : réserve de torches -1 pour ce tour)</code></pre>
+</section>
+<section id="ironsworn-starforged" class="level3">
+<h3 class="anchored" data-anchor-id="ironsworn-starforged">Ironsworn / Starforged</h3>
+<p>La mécanique <em>Delve</em> d’Ironsworn utilise des secteurs thématiques plutôt que des pièces numérotées. Faites correspondre les secteurs aux ID de pièces et utilisez le résultat de la manœuvre <code>Delve the Depths</code> pour déterminer ce que vous trouvez. Les jauges de progression fonctionnent naturellement aux côtés du statut de la pièce.</p>
+<pre><code>[Jauge:Tertre de Fer|Progression 2/10]
+
+[STATUT DU DONJON]
+[P:1|nettoyée|Seuil – grille rouillée|sorties N:P2]
+[P:2|active|Ombre – couloir effondré]
+[/STATUT DU DONJON]
+
+@ Delve the Depths (thème Ombre)
+d: d6+2=7 vs d10=4, d10=9 -&gt; Succès Faible
+tbl: Élément d'Ombre : d100=44 -&gt; "Symboles d'un dieu oublié"
+=&gt; Je trouve des marquages rituels. Progression, mais à un prix.
+[Jauge:Tertre de Fer|Progression+2|4/10]
+[P:2|nettoyée|Ombre – marquages oubliés|sorties N:P3]
+[P:3|inexplorée]
+[Fil:Le Dieu Oublié|Ouvert]</code></pre>
+<hr>
+</section>
+</section>
+<section id="bonnes-pratiques" class="level2">
+<h2 class="anchored" data-anchor-id="bonnes-pratiques">Bonnes pratiques</h2>
+<p><strong>À faire : Utiliser les balises de pièces pour l’état, votre carte pour l’espace</strong></p>
+<pre><code>✔ [P:4|nettoyée, fouillée]
+  (note : marquer P4 nettoyée sur la carte)</code></pre>
+<p><strong>À éviter : Essayer de remplacer votre carte par des chaînes de sorties</strong></p>
+<pre><code>✗ [P:1|nettoyée|sorties N:P2, E:P3]
+  [P:2|nettoyée|sorties S:P1, N:P4, E:P5]
+  [P:3|active|sorties O:P1, N:P6, E:P7, SE:P8]
+  (C'est plus difficile à naviguer qu'un croquis)
+
+✔ Dessinez la carte. Utilisez les balises de pièces uniquement pour l'état.</code></pre>
+<p><strong>À faire : Mettre à jour le statut immédiatement quand il change</strong></p>
+<pre><code>✔ @ Fouiller la pièce après le combat
+  d: Investigation d6=5 vs ND 4 -&gt; Succès
+  =&gt; Je trouve une clé et quelques pièces.
+  [P:3|nettoyée, fouillée]</code></pre>
+<p><strong>À éviter : Laisser le statut ambigu et reconstruire plus tard</strong></p>
+<pre><code>✗ (Trois scènes d'exploration sans mise à jour de balises)
+  (note : je crois que P3 et P4 sont nettoyées ? à vérifier)
+
+✔ Balisez chaque changement au fur et à mesure qu'il se produit.</code></pre>
+<p><strong>À faire : Ouvrir un Bloc de Statut du Donjon lors de la reprise d’une session</strong></p>
+<pre><code>✔ [STATUT DU DONJON]
+  [P:1|nettoyée, fouillée|entrée]
+  [P:2|nettoyée|casernes]
+  [P:3|inexplorée]
+  [P:4|verrouillée|porte de fer]
+  [/STATUT DU DONJON]</code></pre>
+<p><strong>À éviter : Reconstruire l’état du donjon en scannant tout le journal</strong></p>
+<pre><code>✗ (Faire défiler deux sessions de notes pour savoir quelles
+   pièces sont nettoyées)
+
+✔ Écrivez le bloc de statut à la fin de la session. Commencez la session
+  suivante avec une image actuelle.</code></pre>
+<hr>
+</section>
+<section id="référence-rapide" class="level2">
+<h2 class="anchored" data-anchor-id="référence-rapide">Référence rapide</h2>
+<section id="nouvelles-balises" class="level3">
+<h3 class="anchored" data-anchor-id="nouvelles-balises">Nouvelles balises</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 37%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Balise</th>
+<th>Objectif</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[P:ID\|statut]</code></td>
+<td>Pièce avec statut uniquement</td>
+<td><code>[P:3\|nettoyée]</code></td>
+</tr>
+<tr class="even">
+<td><code>[P:ID\|statut\|desc]</code></td>
+<td>Pièce avec description</td>
+<td><code>[P:3\|nettoyée\|bibliothèque]</code></td>
+</tr>
+<tr class="odd">
+<td><code>[P:ID\|statut\|desc\|sorties]</code></td>
+<td>Pièce avec connexions</td>
+<td><code>[P:3\|nettoyée\|bibliothèque\|sorties O:P1]</code></td>
+</tr>
+<tr class="even">
+<td><code>[P:ID\|+statut]</code></td>
+<td>Ajouter un statut intégré</td>
+<td><code>[P:3\|+fouillée]</code></td>
+</tr>
+<tr class="odd">
+<td><code>[#P:ID]</code></td>
+<td>Faire référence à une pièce établie</td>
+<td><code>[#P:3]</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="termes-de-statut" class="level3">
+<h3 class="anchored" data-anchor-id="termes-de-statut">Termes de statut</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Statut</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>inexplorée</code></td>
+<td>Pas encore entré</td>
+</tr>
+<tr class="even">
+<td><code>active</code></td>
+<td>En cours d’exploration</td>
+</tr>
+<tr class="odd">
+<td><code>nettoyée</code></td>
+<td>Menaces résolues</td>
+</tr>
+<tr class="even">
+<td><code>nettoyée, fouillée</code></td>
+<td>Nettoyée et fouillée</td>
+</tr>
+<tr class="odd">
+<td><code>verrouillée</code></td>
+<td>Impossible d’entrer pour le moment</td>
+</tr>
+<tr class="even">
+<td><code>piégée</code></td>
+<td>Danger connu présent</td>
+</tr>
+<tr class="odd">
+<td><code>sûre</code></td>
+<td>Vérifiée, utilisable comme refuge</td>
+</tr>
+<tr class="even">
+<td><code>effondrée</code></td>
+<td>Plus accessible</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="blocs-structurels" class="level3">
+<h3 class="anchored" data-anchor-id="blocs-structurels">Blocs structurels</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 40%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bloc</th>
+<th>S’ouvre quand</th>
+<th>Se ferme quand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[STATUT DU DONJON]</code> / <code>[/STATUT DU DONJON]</code></td>
+<td>Début de session lors de la reprise d’un donjon</td>
+<td>Remplacé par le bloc mis à jour à la session suivante</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="raccourcis-de-direction" class="level3">
+<h3 class="anchored" data-anchor-id="raccourcis-de-direction">Raccourcis de direction</h3>
+<p><code>N</code> <code>S</code> <code>E</code> <code>O</code> <code>NE</code> <code>NO</code> <code>SE</code> <code>SO</code> <code>H</code> (haut) <code>B</code> (bas)</p>
+</section>
+<section id="exemple-complet" class="level3">
+<h3 class="anchored" data-anchor-id="exemple-complet">Exemple complet</h3>
+<pre><code>[STATUT DU DONJON]
+[P:1|nettoyée, fouillée|grotte d'entrée|sorties N:P2, E:P3]
+[P:2|inexplorée] [P:3|inexplorée]
+[/STATUT DU DONJON]
+
+S7 *Passage nord*
+
+@ S'approcher de P2 silencieusement
+d: Discrétion d6=4 vs ND 4 -&gt; Succès
+
+[P:2|active|casernes|sorties S:P1, O:P4]
+? Ennemis ? -&gt; Oui (d6=2) =&gt; Deux gardes, armés.
+...combat...
+[P:2|nettoyée, fouillée]
+[P:4|inexplorée|indiquée sur la carte du garde]</code></pre>
+<hr>
+</section>
+</section>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<p><strong>Q : Ai-je besoin d’une carte séparée, ou puis-je utiliser les sorties pour suivre la disposition ?</strong> R : Une carte visuelle est presque toujours meilleure pour la disposition et la navigation. Utilisez les sorties dans vos balises de pièces uniquement quand vous voulez un enregistrement entièrement textuel, ou quand vous découvrez une connexion spécifique (comme une porte secrète) qui mérite d’être notée dans le journal. Pour tout le reste, dessinez la carte.</p>
+<p><strong>Q : Quel système d’ID de pièce dois-je utiliser ?</strong> R : Les chiffres sont les plus simples (<code>P1</code>, <code>P2</code>, <code>P3</code>) et correspondent naturellement à une carte numérotée. Vous pouvez aussi utiliser des codes qui reflètent la structure (<code>P1-A</code>, <code>P1-B</code> pour des sous-pièces, ou <code>N1-1</code>, <code>N1-2</code> pour niveau-et-pièce). Utilisez ce qui vous aide à relier les balises à votre carte d’un coup d’œil.</p>
+<p><strong>Q : Puis-je utiliser ceci avec l’Extension de Combat ?</strong> R : Oui — elles sont conçues pour fonctionner ensemble. Lorsqu’un combat éclate dans une pièce, ouvrez un bloc <code>[COMBAT]</code> dans la scène. Quand il se termine, fermez-le et mettez à jour le statut de la balise de pièce. La section Interactions entre extensions propose un exemple complet.</p>
+<p><strong>Q : Que faire si j’utilise un donjon publié avec sa propre numérotation des pièces ?</strong> R : Utilisez les numéros de pièces du document publié comme ID. <code>[P:12|nettoyée|Terriers Gobelins p.4]</code> fonctionne parfaitement — la carte publiée gère la disposition, la balise gère l’état.</p>
+<p><strong>Q : Comment le Bloc de Statut du Donjon fonctionne-t-il dans un carnet analogique ?</strong> R : Écrivez-le avec des séparateurs en pointillés : <code>--- STATUT DU DONJON ---</code>. Listez une pièce par ligne avec son statut et une brève étiquette. Rayez ou mettez à jour les entrées au fur et à mesure que les pièces changent. Au début de chaque nouvelle session, écrivez un nouveau bloc de statut avec les informations actuelles plutôt que de corriger l’ancien.</p>
+<p><strong>Q : Dois-je baliser chaque pièce que je traverse ?</strong> R : Uniquement les pièces où il se passe quelque chose qui mérite d’être suivi. Si vous marchez dans un couloir vide, vous n’avez pas besoin de balise — décrivez-le simplement en prose. Balisez les pièces quand leur statut a une signification : quand vous les nettoyez, trouvez quelque chose, les verrouillez ou devez y revenir plus tard.</p>
+<p><strong>Q : Qu’en est-il des éléments du donjon qui ne sont pas des pièces — couloirs, pièges, portes ?</strong> R : Utilisez la notation de base de Lonelog. Les portes et les pièges sont des événements (<code>[E:]</code>) ou un contexte temporaire en prose. Les couloirs n’ont généralement pas besoin d’un suivi persistant. La balise de pièce est spécifiquement destinée aux espaces ayant un état continu qui compte sur plusieurs scènes ou sessions.</p>
+<hr>
+</section>
+<section id="crédits-license" class="level2">
+<h2 class="anchored" data-anchor-id="crédits-license">Crédits &amp; License</h2>
+<p>© 2025 Roberto Bisceglie</p>
+<p>Cette extension complète <a href="https://zeruhur.itch.io/lonelog">Lonelog</a> par Roberto Bisceglie.</p>
+<p><strong>Historique des versions :</strong></p>
+<ul>
+<li>v 1.1.0 : Les balises de bloc sont unifiées avec la convention <code>[BLOC]</code>/<code>[/BLOC]</code> ; principes de conception mis à jour</li>
+<li>v 1.0.0 : Réécrit comme une extension conforme (auparavant “Module d’Exploration de Donjon”)</li>
+</ul>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Réutilisation</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  var formats = document.querySelector(".quarto-alternate-formats");
+  if (sidebar && formats) {
+    sidebar.insertBefore(formats, sidebar.firstChild);
+  }
+
+  // Rename "Typst" label to "PDF"
+  document.querySelectorAll(".quarto-alternate-formats a").forEach(function (a) {
+    a.childNodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "Typst") {
+        node.textContent = "PDF";
+      }
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copié");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copié");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lonelog\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/fr/lonelog-combat-addon-fr.html" class="pagination-link" aria-label="Lonelog : Extension de Combat">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lonelog : Extension de Combat</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/fr/lonelog-resource-tracking-addon-fr.html" class="pagination-link" aria-label="Lonelog : Extension de Suivi des Ressources">
+        <span class="nav-page-text">Lonelog : Extension de Suivi des Ressources</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Lonelog by Roberto Bisceglie · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/fr/lonelog-dungeon-crawling-addon-fr.md" class="toc-action"><i class="bi bi-github"></i>Voir la source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://zeruhur.itch.io/lonelog">itch.io</a> · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

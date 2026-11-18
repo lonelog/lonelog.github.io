@@ -1,0 +1,2838 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Bisceglie">
+
+<title>Lonelog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/fr/lonelog-addon-guidelines-fr.html" rel="next">
+<link href="../../docs/fr.html" rel="prev">
+<link href="../../assets/banner.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e5f5294698a128606ef5f4cfe63e5fe8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7e2f14f9a527615529190f7f63649c5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+
+
+<meta property="og:title" content="Lonelog">
+<meta property="og:description" content="Une notation standardisée pour la prise de note de session JDR solo">
+<meta property="og:site_name" content="Lonelog">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lonelog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Recherche"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en.html"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/lonelog.html"> 
+<span class="menu-text">Lonelog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-add-ons" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Add-ons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-add-ons">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-guidelines.html">
+ <span class="dropdown-text">Writing an add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-template.html">
+ <span class="dropdown-text">Add-on template</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-combat-addon.html">
+ <span class="dropdown-text">Lonelog: Combat Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dungeon-crawling-addon.html">
+ <span class="dropdown-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-resource-tracking-addon.html">
+ <span class="dropdown-text">Lonelog: Resource Tracking Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dice-notation-addon.html">
+ <span class="dropdown-text">Lonelog: Dice Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-cards-addon.html">
+ <span class="dropdown-text">Lonelog: Card Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-wargaming-addon.html">
+ <span class="dropdown-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/partylog.html"> 
+<span class="menu-text">Partylog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/it.html">
+ <span class="dropdown-text">Italiano</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.reddit.com/r/lonelog/"> <i class="bi bi-reddit" role="img" aria-label="Reddit">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/DBpgvvC2sG"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lonelog/lonelog"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss" role="img" aria-label="Blog feed">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Basculer le mode sombre"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/fr/lonelog-fr.html">Lonelog</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-fr.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extensions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-addon-guidelines-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Directives pour les Extensions de la Communauté</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-addon-template-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension [Nom de l’Extension]</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-combat-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension de Combat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-dungeon-crawling-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension d’Exploration de Donjon</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/fr/lonelog-resource-tracking-addon-fr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog : Extension de Suivi des Ressources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#lonelog" id="toc-lonelog" class="nav-link active" data-scroll-target="#lonelog">Lonelog</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a>
+  <ul class="collapse">
+  <li><a href="#pourquoi-lonelog" id="toc-pourquoi-lonelog" class="nav-link" data-scroll-target="#pourquoi-lonelog">1.1 Pourquoi “Lonelog” ?</a></li>
+  <li><a href="#ce-que-fait-lonelog" id="toc-ce-que-fait-lonelog" class="nav-link" data-scroll-target="#ce-que-fait-lonelog">1.2 Ce que Fait Lonelog</a></li>
+  <li><a href="#comment-utiliser-cette-notation" id="toc-comment-utiliser-cette-notation" class="nav-link" data-scroll-target="#comment-utiliser-cette-notation">1.3 Comment Utiliser Cette Notation</a></li>
+  <li><a href="#démarrage-rapide-votre-première-session" id="toc-démarrage-rapide-votre-première-session" class="nav-link" data-scroll-target="#démarrage-rapide-votre-première-session">1.4 Démarrage Rapide : Votre Première Session</a></li>
+  <li><a href="#migration-depuis-solo-ttrpg-notation-v2.0" id="toc-migration-depuis-solo-ttrpg-notation-v2.0" class="nav-link" data-scroll-target="#migration-depuis-solo-ttrpg-notation-v2.0">1.5 Migration depuis Solo TTRPG Notation V2.0</a></li>
+  </ul></li>
+  <li><a href="#formats-numérique-vs-analogique" id="toc-formats-numérique-vs-analogique" class="nav-link" data-scroll-target="#formats-numérique-vs-analogique">2. Formats Numérique Vs Analogique</a>
+  <ul class="collapse">
+  <li><a href="#format-numérique-markdown" id="toc-format-numérique-markdown" class="nav-link" data-scroll-target="#format-numérique-markdown">2.1 Format Numérique (Markdown)</a></li>
+  <li><a href="#format-analogique-carnet" id="toc-format-analogique-carnet" class="nav-link" data-scroll-target="#format-analogique-carnet">2.2 Format Analogique (Carnet)</a></li>
+  <li><a href="#exemples-de-format" id="toc-exemples-de-format" class="nav-link" data-scroll-target="#exemples-de-format">2.3 Exemples de Format</a></li>
+  </ul></li>
+  <li><a href="#notation-de-base" id="toc-notation-de-base" class="nav-link" data-scroll-target="#notation-de-base">3. Notation de Base</a>
+  <ul class="collapse">
+  <li><a href="#actions" id="toc-actions" class="nav-link" data-scroll-target="#actions">3.1 Actions</a></li>
+  <li><a href="#résolutions" id="toc-résolutions" class="nav-link" data-scroll-target="#résolutions">3.2 Résolutions</a></li>
+  <li><a href="#conséquences" id="toc-conséquences" class="nav-link" data-scroll-target="#conséquences">3.3 Conséquences</a></li>
+  <li><a href="#séquences-daction-complètes" id="toc-séquences-daction-complètes" class="nav-link" data-scroll-target="#séquences-daction-complètes">3.4 Séquences D’action Complètes</a></li>
+  </ul></li>
+  <li><a href="#couches-optionnelles" id="toc-couches-optionnelles" class="nav-link" data-scroll-target="#couches-optionnelles">4. Couches Optionnelles</a>
+  <ul class="collapse">
+  <li><a href="#éléments-persistants" id="toc-éléments-persistants" class="nav-link" data-scroll-target="#éléments-persistants">4.1 Éléments Persistants</a></li>
+  <li><a href="#suivi-de-la-progression" id="toc-suivi-de-la-progression" class="nav-link" data-scroll-target="#suivi-de-la-progression">4.2 Suivi de la Progression</a></li>
+  <li><a href="#tables-aléatoires-générateurs" id="toc-tables-aléatoires-générateurs" class="nav-link" data-scroll-target="#tables-aléatoires-générateurs">4.3 Tables Aléatoires &amp; Générateurs</a></li>
+  <li><a href="#extraits-narratifs" id="toc-extraits-narratifs" class="nav-link" data-scroll-target="#extraits-narratifs">4.4 Extraits Narratifs</a></li>
+  <li><a href="#notes-méta" id="toc-notes-méta" class="nav-link" data-scroll-target="#notes-méta">4.5 Notes Méta</a></li>
+  </ul></li>
+  <li><a href="#structure-optionnelle" id="toc-structure-optionnelle" class="nav-link" data-scroll-target="#structure-optionnelle">5. Structure Optionnelle</a>
+  <ul class="collapse">
+  <li><a href="#en-tête-de-campagne" id="toc-en-tête-de-campagne" class="nav-link" data-scroll-target="#en-tête-de-campagne">5.1 En-tête de Campagne</a></li>
+  <li><a href="#en-tête-de-session" id="toc-en-tête-de-session" class="nav-link" data-scroll-target="#en-tête-de-session">5.2 En-tête de Session</a></li>
+  <li><a href="#structure-de-scène" id="toc-structure-de-scène" class="nav-link" data-scroll-target="#structure-de-scène">5.3 Structure de Scène</a></li>
+  </ul></li>
+  <li><a href="#exemples-complets" id="toc-exemples-complets" class="nav-link" data-scroll-target="#exemples-complets">6. Exemples Complets</a>
+  <ul class="collapse">
+  <li><a href="#journal-minimaliste-en-raccourci" id="toc-journal-minimaliste-en-raccourci" class="nav-link" data-scroll-target="#journal-minimaliste-en-raccourci">6.1 Journal Minimaliste en Raccourci</a></li>
+  <li><a href="#format-numérique-hybride" id="toc-format-numérique-hybride" class="nav-link" data-scroll-target="#format-numérique-hybride">6.2 Format Numérique Hybride</a></li>
+  <li><a href="#format-carnet-analogique" id="toc-format-carnet-analogique" class="nav-link" data-scroll-target="#format-carnet-analogique">6.3 Format Carnet Analogique</a></li>
+  <li><a href="#journal-de-campagne-complet-numérique" id="toc-journal-de-campagne-complet-numérique" class="nav-link" data-scroll-target="#journal-de-campagne-complet-numérique">6.4 Journal de Campagne Complet (Numérique)</a></li>
+  <li><a href="#journal-de-campagne-complet-analogique" id="toc-journal-de-campagne-complet-analogique" class="nav-link" data-scroll-target="#journal-de-campagne-complet-analogique">6.5 Journal de Campagne Complet (Analogique)</a></li>
+  </ul></li>
+  <li><a href="#bonnes-pratiques" id="toc-bonnes-pratiques" class="nav-link" data-scroll-target="#bonnes-pratiques">7. Bonnes Pratiques</a>
+  <ul class="collapse">
+  <li><a href="#bonnes-pratiques-1" id="toc-bonnes-pratiques-1" class="nav-link" data-scroll-target="#bonnes-pratiques-1">7.1 Bonnes Pratiques ✓</a></li>
+  <li><a href="#mauvaises-pratiques" id="toc-mauvaises-pratiques" class="nav-link" data-scroll-target="#mauvaises-pratiques">7.2 Mauvaises Pratiques ✗</a></li>
+  </ul></li>
+  <li><a href="#modèles" id="toc-modèles" class="nav-link" data-scroll-target="#modèles">8. Modèles</a>
+  <ul class="collapse">
+  <li><a href="#modèle-de-campagne-yaml-numérique" id="toc-modèle-de-campagne-yaml-numérique" class="nav-link" data-scroll-target="#modèle-de-campagne-yaml-numérique">8.1 Modèle de Campagne (YAML numérique)</a></li>
+  <li><a href="#modèle-de-campagne-analogique" id="toc-modèle-de-campagne-analogique" class="nav-link" data-scroll-target="#modèle-de-campagne-analogique">8.2 Modèle de Campagne (Analogique)</a></li>
+  <li><a href="#modèle-de-session" id="toc-modèle-de-session" class="nav-link" data-scroll-target="#modèle-de-session">8.3 Modèle de Session</a></li>
+  <li><a href="#modèle-de-scène-rapide" id="toc-modèle-de-scène-rapide" class="nav-link" data-scroll-target="#modèle-de-scène-rapide">8.4 Modèle de Scène Rapide</a></li>
+  </ul></li>
+  <li><a href="#adaptation-à-votre-système" id="toc-adaptation-à-votre-système" class="nav-link" data-scroll-target="#adaptation-à-votre-système">9. Adaptation à votre Système</a>
+  <ul class="collapse">
+  <li><a href="#notation-de-jet-spécifique-au-système" id="toc-notation-de-jet-spécifique-au-système" class="nav-link" data-scroll-target="#notation-de-jet-spécifique-au-système">9.1 Notation de Jet Spécifique au Système</a></li>
+  <li><a href="#adaptations-de-loracle" id="toc-adaptations-de-loracle" class="nav-link" data-scroll-target="#adaptations-de-loracle">9.2 Adaptations de L’oracle</a></li>
+  <li><a href="#gestion-des-cas-particuliers" id="toc-gestion-des-cas-particuliers" class="nav-link" data-scroll-target="#gestion-des-cas-particuliers">9.3 Gestion des Cas Particuliers</a></li>
+  </ul></li>
+  <li><a href="#add-ons" id="toc-add-ons" class="nav-link" data-scroll-target="#add-ons">10. Add-ons</a>
+  <ul class="collapse">
+  <li><a href="#ce-que-sont-les-add-ons" id="toc-ce-que-sont-les-add-ons" class="nav-link" data-scroll-target="#ce-que-sont-les-add-ons">10.1 Ce que sont les Add-ons</a></li>
+  <li><a href="#pourquoi-des-fichiers-séparés" id="toc-pourquoi-des-fichiers-séparés" class="nav-link" data-scroll-target="#pourquoi-des-fichiers-séparés">10.2 Pourquoi des fichiers séparés</a></li>
+  <li><a href="#comment-utiliser-les-add-ons" id="toc-comment-utiliser-les-add-ons" class="nav-link" data-scroll-target="#comment-utiliser-les-add-ons">10.3 Comment utiliser les Add-ons</a></li>
+  <li><a href="#add-ons-disponibles" id="toc-add-ons-disponibles" class="nav-link" data-scroll-target="#add-ons-disponibles">10.4 Add-ons Disponibles</a></li>
+  <li><a href="#une-note-pour-les-auteurs-dadd-ons" id="toc-une-note-pour-les-auteurs-dadd-ons" class="nav-link" data-scroll-target="#une-note-pour-les-auteurs-dadd-ons">10.5 Une note pour les auteurs d’Add-ons</a></li>
+  </ul></li>
+  <li><a href="#annexes" id="toc-annexes" class="nav-link" data-scroll-target="#annexes">Annexes</a>
+  <ul class="collapse">
+  <li><a href="#a.-légende-de-la-notation-de-jdr-solo" id="toc-a.-légende-de-la-notation-de-jdr-solo" class="nav-link" data-scroll-target="#a.-légende-de-la-notation-de-jdr-solo">A. Légende de la Notation de JDR Solo</a></li>
+  <li><a href="#b.-faq" id="toc-b.-faq" class="nav-link" data-scroll-target="#b.-faq">B. FAQ</a></li>
+  <li><a href="#c.-philosophie-de-conception-des-symboles" id="toc-c.-philosophie-de-conception-des-symboles" class="nav-link" data-scroll-target="#c.-philosophie-de-conception-des-symboles">C. Philosophie de Conception des Symboles</a></li>
+  </ul></li>
+  <li><a href="#crédits-licence" id="toc-crédits-licence" class="nav-link" data-scroll-target="#crédits-licence">Crédits &amp; Licence</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/fr/lonelog-fr.md" class="toc-action"><i class="bi bi-github"></i>Voir la source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div><div class="quarto-alternate-formats"><h2>Autres formats</h2><ul><li><a href="lonelog-fr.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="lonelog-fr.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="lonelog-fr.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="lonelog-fr-gfm.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lonelog</h1>
+<p class="subtitle lead">Une notation standardisée pour la prise de note de session JDR solo</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Auteur·rice</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roberto Bisceglie </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lonelog" class="level1">
+<h1>Lonelog</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>Si vous avez déjà joué à un JDR en solo, vous connaissez le défi : vous êtes au cœur d’une scène passionnante, les dés roulent, les oracles répondent aux questions, et soudain vous réalisez : comment puis-je noter tout cela sans interrompre le rythme ?</p>
+<p>Peut-être avez-vous essayé le journal de bord libre (qui devient désordonné), la prose pure (qui perd la mécanique de jeu), ou les listes à puces (difficiles à analyser plus tard). Ce système de notation offre une approche différente : un <strong>raccourci léger</strong> qui capture les éléments de jeu essentiels tout en laissant de la place pour autant (ou aussi peu) de narration que vous le souhaitez.</p>
+<section id="pourquoi-lonelog" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-lonelog">1.1 Pourquoi “Lonelog” ?</h3>
+<p>Ce système a commencé sous le nom de <strong>Solo TTRPG Notation</strong>, un nom descriptif mais peu pratique. Près de 5 000 téléchargements plus tard, il était clair que le concept trouvait un écho auprès de la communauté. Mais l’utilisation réelle a apporté de précieuses leçons sur ce qui fonctionnait, ce qui créait des frictions et où la notation pouvait évoluer.</p>
+<p>Le changement de nom pour <strong>Lonelog</strong> reflète trois idées :</p>
+<ul>
+<li><strong>Un nom qui reste.</strong> “Solo TTRPG Notation” a été abrégé d’une douzaine de manières différentes. <em>Lonelog</em> est compact et évocateur : <em>Lone</em> (jeu en solo) + <em>log</em> (journal de session). Ça fonctionne.</li>
+<li><strong>Un nom que vous pouvez trouver.</strong> Cherchez “solo ttrpg notation” et vous vous noierez dans des résultats génériques. Cherchez “lonelog” et vous obtenez <em>ce système</em>. Pensez à la façon dont <strong>Markdown</strong> a réussi à la fois comme format et comme marque, il ne s’appelle pas “Notation de Formatage de Texte”. Lonelog donne à cette notation une identité distincte et trouvable.</li>
+<li><strong>Un nom conçu pour durer.</strong> À mesure que le système mûrit, avoir une identité claire facilite le partage de ressources, d’outils et de journaux de session par la communauté sous une seule bannière.</li>
+</ul>
+<p>La philosophie de base n’a pas changé : séparer la mécanique de la fiction, rester compact à la table de jeu, s’adapter des one-shots aux longues campagnes, et fonctionner aussi bien en markdown que sur des carnets papier.</p>
+</section>
+<section id="ce-que-fait-lonelog" class="level3">
+<h3 class="anchored" data-anchor-id="ce-que-fait-lonelog">1.2 Ce que Fait Lonelog</h3>
+<p>Pensez-y comme un langage commun pour le jeu en solo. Que vous jouiez à <em>Ironsworn</em>, <em>Thousand Year Old Vampire</em>, à un JDR non solo avec le Mythic GME, ou à votre propre système maison, cette notation vous aide à :</p>
+<ul>
+<li><strong>Enregistrer ce qui s’est passé</strong> sans ralentir le jeu</li>
+<li><strong>Suivre les éléments en cours</strong> comme les PNJ, les lieux et les intrigues</li>
+<li><strong>Partager vos sessions</strong> avec d’autres joueurs solo qui comprendront le format</li>
+<li><strong>Relire les sessions passées</strong> et retrouver rapidement ce détail crucial d’il y a trois sessions</li>
+</ul>
+<p>La notation est conçue pour être :</p>
+<ul>
+<li><strong>Flexible</strong> — utilisable avec différents systèmes et formats</li>
+<li><strong>Superposable</strong> — fonctionne à la fois comme un raccourci rapide ou une narration développée</li>
+<li><strong>Recherchable</strong> — les balises et les codes facilitent le suivi des PNJ, des événements et des lieux</li>
+<li><strong>Indépendante du format</strong> — fonctionne dans des fichiers markdown numériques ou des carnets analogiques</li>
+</ul>
+<p>Les objectifs de la notation :</p>
+<ul>
+<li><strong>Rendre les rapports écrits par différentes personnes lisibles en un coup d’œil :</strong> les symboles standards facilitent la lecture</li>
+<li><strong>Séparer la mécanique de la fiction :</strong> les meilleurs rapports sont ceux qui mettent en évidence comment l’utilisation des règles et des oracles informe la fiction</li>
+<li><strong>Avoir un système modulaire et évolutif :</strong> vous pouvez utiliser les symboles de base ou étendre la notation comme vous le souhaitez</li>
+<li><strong>Le rendre utile pour les notes numériques et analogiques</strong></li>
+<li><strong>Conformité et extension de markdown pour un usage numérique</strong></li>
+</ul>
+</section>
+<section id="comment-utiliser-cette-notation" class="level3">
+<h3 class="anchored" data-anchor-id="comment-utiliser-cette-notation">1.3 Comment Utiliser Cette Notation</h3>
+<p>Considérez ceci comme une <strong>boîte à outils, pas un livre de règles</strong>. Le système est entièrement modulaire : prenez ce qui fonctionne pour vous et laissez le reste.</p>
+<p>À la base, il n’y a que <strong>cinq symboles</strong> (voir <em>Section 3 : Notation de base</em>). Ils sont soigneusement choisis pour éviter les conflits avec le formatage markdown et les opérateurs de comparaison. C’est le langage minimal du jeu :</p>
+<ul>
+<li><code>@</code> pour les actions du joueur</li>
+<li><code>?</code> pour les questions à l’oracle</li>
+<li><code>d:</code> pour les jets de mécanique</li>
+<li><code>-&gt;</code> pour les résultats de l’oracle/des dés</li>
+<li><code>=&gt;</code> pour les conséquences</li>
+</ul>
+<p>C’est tout. <strong>Tout le reste est optionnel.</strong></p>
+<p>Les scènes, les en-têtes de campagne, les en-têtes de session, les fils conducteurs, les horloges, les extraits narratifs — ce sont tous des ajouts que vous pouvez faire quand ils servent votre jeu. Vous voulez suivre une longue campagne ? Ajoutez des en-têtes de campagne. Besoin de suivre des intrigues complexes ? Utilisez des balises de fil conducteur. Vous jouez un one-shot rapide ? Tenez-vous-en aux cinq symboles de base.</p>
+<p>Pensez-y comme des cercles concentriques :</p>
+<ul>
+<li><strong>Notation de base</strong> (requise) : Actions, Résolutions, Conséquences</li>
+<li><strong>Couches optionnelles</strong> (à ajouter au besoin) : Éléments persistants, Suivi de progression, Notes, etc.</li>
+<li><strong>Structure optionnelle</strong> (pour l’organisation) : En-tête de campagne, En-tête de session, Scènes</li>
+</ul>
+<p><strong>Commencez petit.</strong> Essayez la notation de base pour une scène. Si ça vous plaît, super — continuez. Si vous avez besoin de plus, ajoutez ce qui vous aide. Vos notes doivent servir votre jeu, pas l’inverse.</p>
+<p><strong>Une note sur la licence :</strong> Ce travail est publié sous licence CC BY-SA 4.0, qui couvre la spécification Lonelog elle-même — ce document. Les journaux de session, les actual plays et tout autre contenu que vous créez à l’aide de la notation Lonelog sont votre propre travail et ne sont pas soumis à cette licence. Écrivez, publiez et licenciez vos sessions comme bon vous semble.</p>
+</section>
+<section id="démarrage-rapide-votre-première-session" class="level3">
+<h3 class="anchored" data-anchor-id="démarrage-rapide-votre-première-session">1.4 Démarrage Rapide : Votre Première Session</h3>
+<p>Jamais utilisé de notation auparavant ? Voici tout ce dont vous avez besoin :</p>
+<pre><code>S1 *Votre scène de départ*
+@ Action que vous entreprenez
+d: votre résultat de jet -&gt; Succès ou Échec
+=&gt; Ce qui se passe en conséquence
+
+? Question que vous posez à l'oracle
+-&gt; Réponse de l'oracle
+=&gt; Ce que cela signifie dans l'histoire</code></pre>
+<p><strong>C’est tout !</strong> Tout le reste est optionnel. Essayez ceci pour une scène et voyez ce que vous en pensez.</p>
+<section id="exemple-de-démarrage-rapide" class="level4">
+<h4 class="anchored" data-anchor-id="exemple-de-démarrage-rapide">Exemple de Démarrage Rapide</h4>
+<pre><code>S1 *Ruelle sombre, minuit*
+@ Se faufiler devant le garde
+d: Discrétion 4 vs ND 5 -&gt; Échec
+=&gt; Je donne un coup de pied dans une bouteille. Le garde se retourne !
+
+? Me voit-il clairement ?
+-&gt; Non, mais...
+=&gt; Il est méfiant, commence à marcher vers le bruit</code></pre>
+</section>
+</section>
+<section id="migration-depuis-solo-ttrpg-notation-v2.0" class="level3">
+<h3 class="anchored" data-anchor-id="migration-depuis-solo-ttrpg-notation-v2.0">1.5 Migration depuis Solo TTRPG Notation V2.0</h3>
+<p>Si vous utilisez déjà Solo TTRPG Notation v2.0, bienvenue ! Lonelog est une évolution de ce système avec des symboles clarifiés pour une meilleure cohérence.</p>
+<p><strong>Ce qui a changé :</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbole v2.0</th>
+<th>Symbole Lonelog</th>
+<th>Pourquoi le changement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td><code>@</code></td>
+<td>Évite le conflit avec les citations en bloc de Markdown</td>
+</tr>
+<tr class="even">
+<td><code>-&gt;</code> (oracle uniquement)</td>
+<td><code>-&gt;</code> (toutes les résolutions)</td>
+<td>Maintenant unifié pour les résultats des dés ET de l’oracle</td>
+</tr>
+<tr class="odd">
+<td><code>=&gt;</code> (surchargé)</td>
+<td><code>=&gt;</code> (conséquences uniquement)</td>
+<td>Clarifié — ne sert plus de résultat de dé</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Clarification clé :</strong> Dans la v2.0, <code>=&gt;</code> était utilisé de manière confuse pour les résultats des dés et les conséquences. Lonelog clarifie cela en utilisant <code>-&gt;</code> pour TOUTES les résolutions (dés et oracle), réservant <code>=&gt;</code> exclusivement aux conséquences.</p>
+<section id="vos-anciens-journaux-sont-toujours-valides" class="level4">
+<h4 class="anchored" data-anchor-id="vos-anciens-journaux-sont-toujours-valides">Vos Anciens Journaux Sont Toujours Valides</h4>
+<p>La structure et la philosophie restent identiques. Vos journaux existants sont parfaitement lisibles — vous n’avez pas besoin de les convertir à moins de vouloir une cohérence dans toute votre campagne.</p>
+</section>
+<section id="conversion" class="level4">
+<h4 class="anchored" data-anchor-id="conversion">Conversion</h4>
+<p>Si vous préférez une conversion manuelle, utilisez rechercher &amp; remplacer dans votre éditeur de texte :</p>
+<ol type="1">
+<li>Trouver : <code>&gt;</code> (en début de ligne) → Remplacer : <code>@</code></li>
+<li>Les symboles <code>-&gt;</code> et <code>=&gt;</code> sont conservés mais avec une utilisation clarifiée.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="formats-numérique-vs-analogique" class="level2">
+<h2 class="anchored" data-anchor-id="formats-numérique-vs-analogique">2. Formats Numérique Vs Analogique</h2>
+<p>Cette notation fonctionne à la fois dans des <strong>fichiers markdown numériques et des carnets analogiques</strong>. Choisissez le format qui convient à votre style de jeu.</p>
+<section id="format-numérique-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="format-numérique-markdown">2.1 Format Numérique (Markdown)</h3>
+<p>Dans les fichiers markdown numériques :</p>
+<ul>
+<li><strong>Métadonnées de la campagne</strong> → YAML front matter (en haut du fichier)</li>
+<li><strong>Titre de la campagne</strong> → Titre de niveau 1</li>
+<li><strong>Sessions</strong> → Titres de niveau 2 (<code>## Session 1</code>)</li>
+<li><strong>Scènes</strong> → Titres de niveau 3 (<code>### S1</code>)</li>
+<li><strong>Notation de base et suivi</strong> → Blocs de code pour faciliter la copie/l’analyse</li>
+<li><strong>Narration</strong> → Prose normale entre les blocs de code</li>
+</ul>
+<blockquote class="blockquote">
+<p>[!note]+ Note: Enveloppez toujours la notation dans des blocs de code (<code>```</code>) lorsque vous utilisez le markdown numérique. Cela évite les conflits avec la syntaxe Markdown et garantit que les symboles comme <code>=&gt;</code> s’affichent correctement. Certaines extensions Markdown (Mermaid, plugins Obsidian) peuvent interpréter <code>=&gt;</code> en dehors des blocs de code.</p>
+</blockquote>
+</section>
+<section id="format-analogique-carnet" class="level3">
+<h3 class="anchored" data-anchor-id="format-analogique-carnet">2.2 Format Analogique (Carnet)</h3>
+<p>Dans les carnets papier :</p>
+<ul>
+<li>Écrivez les en-têtes et les métadonnées directement comme indiqué</li>
+<li>La notation de base fonctionne de manière identique mais sans les clôtures de code</li>
+<li>Utilisez les mêmes symboles et la même structure</li>
+<li>Les crochets et les balises aident à parcourir les pages papier</li>
+</ul>
+</section>
+<section id="exemples-de-format" class="level3">
+<h3 class="anchored" data-anchor-id="exemples-de-format">2.3 Exemples de Format</h3>
+<section id="markdown-numérique" class="level4">
+<h4 class="anchored" data-anchor-id="markdown-numérique">Markdown Numérique</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session 1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>*Date : 2025-09-03 | Durée : 1h30 | Scènes : S1-S2*</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">### S1 *Bibliothèque de l'école après les cours*</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in">@ Se faufiler à l'intérieur pour vérifier les archives</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">d: Discrétion d6=5 vs ND 4 -&gt; Succès</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Je me glisse à l'intérieur sans être remarqué. [L:Bibliothèque|sombre|calme]</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="carnet-analogique" class="level4">
+<h4 class="anchored" data-anchor-id="carnet-analogique">Carnet Analogique</h4>
+<pre><code>=== Session 1 ===
+Date : 2025-09-03
+Durée : 1h30
+Scènes : S1-S2
+
+S1 *Bibliothèque de l'école après les cours*
+
+@ Se faufiler à l'intérieur pour vérifier les archives
+d: Discrétion d6=5 vs ND 4 -&gt; Succès
+=&gt; Je me glisse à l'intérieur sans être remarqué. [L:Bibliothèque|sombre|calme]</code></pre>
+<p>Les deux formats utilisent une notation identique — seul l’emballage diffère.</p>
+</section>
+</section>
+</section>
+<section id="notation-de-base" class="level2">
+<h2 class="anchored" data-anchor-id="notation-de-base">3. Notation de Base</h2>
+<p>C’est le cœur du système — les symboles que vous utiliserez dans presque chaque scène. Tout le reste dans ce document est optionnel, mais ces éléments de base sont ce qui fait fonctionner la notation.</p>
+<p>Il n’y a que cinq symboles à retenir, et ils reflètent le flux naturel du jeu en solo : vous entreprenez une action ou posez une question, vous la résolvez avec la mécanique ou un oracle, puis vous enregistrez ce qui se passe en conséquence.</p>
+<p>Détaillons cela.</p>
+<section id="actions" class="level3">
+<h3 class="anchored" data-anchor-id="actions">3.1 Actions</h3>
+<p>En jeu solo, l’incertitude provient de deux sources distinctes : <strong>vous ne savez pas si votre personnage peut faire quelque chose</strong> (c’est la mécanique), ou <strong>vous ne savez pas ce que fait le monde</strong> (c’est l’oracle).</p>
+<p>Cette distinction est fondamentale. Lorsque vous balancez une épée, vous utilisez la mécanique pour voir si vous touchez. Lorsque vous vous demandez si des gardes sont à proximité, vous demandez à l’oracle. Les deux créent de l’incertitude, mais ils sont résolus différemment.</p>
+<p>La notation reflète cela avec deux symboles différents — un pour chaque type d’action.</p>
+<p>Le symbole <code>@</code> vous représente, le joueur, agissant dans le monde du jeu. Pensez-y comme “à ce moment, je…”. Il est visuellement distinct des opérateurs de comparaison, rendant vos journaux plus clairs et évitant la confusion lors de l’enregistrement des jets de dés.</p>
+<p><strong>Actions orientées joueur (mécanique) :</strong></p>
+<pre><code>@ Crocheter la serrure
+@ Attaquer le garde
+@ Convaincre le marchand</code></pre>
+<p><strong>Questions sur le monde / MJ (oracle) :</strong></p>
+<pre><code>? Y a-t-il quelqu'un à l'intérieur ?
+? La corde tient-elle ?
+? Le marchand est-il honnête ?</code></pre>
+</section>
+<section id="résolutions" class="level3">
+<h3 class="anchored" data-anchor-id="résolutions">3.2 Résolutions</h3>
+<p>Une fois que vous avez déclaré une action (<code>@</code>) ou posé une question (<code>?</code>), vous devez résoudre l’incertitude. C’est là que le système de jeu ou l’oracle vous donne une réponse.</p>
+<p>Il existe deux types de résolutions : la <strong>mécanique</strong> (lorsque vous lancez des dés ou appliquez des règles) et les <strong>réponses de l’oracle</strong> (lorsque vous posez une question au monde du jeu).</p>
+<section id="jets-de-mécanique" class="level4">
+<h4 class="anchored" data-anchor-id="jets-de-mécanique">3.2.1 Jets de Mécanique</h4>
+<p>Format :</p>
+<pre><code>d: [jet ou règle] -&gt; résultat</code></pre>
+<p>Le préfixe <code>d:</code> indique une résolution par jet de mécanique ou par règle. Incluez toujours le résultat (Succès/Échec ou résultat narratif).</p>
+<section id="exemples" class="level5">
+<h5 class="anchored" data-anchor-id="exemples">Exemples</h5>
+<pre><code>d: d20+Crochetage=17 vs DC 15 -&gt; Succès
+d: 2d6=8 vs ND 7 -&gt; Succès
+d: d100=42 -&gt; Succès partiel (en utilisant une table de résultats)
+d: Pirater le terminal (dépenser 1 Équipement) -&gt; Succès</code></pre>
+</section>
+<section id="raccourci-de-comparaison" class="level5">
+<h5 class="anchored" data-anchor-id="raccourci-de-comparaison">Raccourci de Comparaison</h5>
+<p>Lors de la comparaison des jets à des nombres cibles, vous pouvez utiliser des opérateurs de comparaison :</p>
+<pre><code>d: 5 vs ND 4 -&gt; Succès (format standard)
+d: 5≥4 -&gt; S (raccourci : ≥ signifie atteint/dépasse le ND)
+d: 2≤4 -&gt; F (raccourci : ≤ signifie n'atteint pas le ND)</code></pre>
+<p><strong>Note :</strong> Les opérateurs de comparaison <code>≥</code> et <code>≤</code> fonctionnent de manière transparente avec la notation lonelog, sans conflit de symboles. Vous pouvez également utiliser <code>&gt;=</code> et <code>&lt;=</code>.</p>
+<p>Ajoutez les lettres <code>S</code> (Succès) ou <code>F</code> (Échec) si vous voulez des indicateurs explicites :</p>
+<pre><code>d: 2≤4 F
+d: 5≥4 S</code></pre>
+</section>
+</section>
+<section id="résultats-de-loracle-et-des-dés" class="level4">
+<h4 class="anchored" data-anchor-id="résultats-de-loracle-et-des-dés">3.2.2 Résultats de L’oracle et des Dés</h4>
+<p>Le symbole <code>-&gt;</code> représente une résolution définitive — une déclaration de résultat. La flèche montre visuellement “ceci mène au résultat”, qu’il soit déterminé par la mécanique des dés ou la réponse de l’oracle.</p>
+<p><strong>Format :</strong></p>
+<pre><code>-&gt; [résultat] (référence de jet optionnelle)</code></pre>
+<p>Le préfixe <code>-&gt;</code> indique tout résultat de résolution — mécanique ou oracle.</p>
+<section id="résultats-de-la-mécanique-des-dés" class="level5">
+<h5 class="anchored" data-anchor-id="résultats-de-la-mécanique-des-dés">Résultats de la Mécanique des Dés</h5>
+<p>Pour les jets de mécanique, <code>-&gt;</code> déclare le Succès ou l’Échec :</p>
+<pre><code>d: Discrétion d6=5 vs ND 4 -&gt; Succès
+d: Crochetage d20=8 vs DC 15 -&gt; Échec
+d: Attaque 2d6=7 vs ND 7 -&gt; Succès
+d: Piratage d10=3 -&gt; Succès Partiel</code></pre>
+</section>
+<section id="réponses-de-loracle" class="level5">
+<h5 class="anchored" data-anchor-id="réponses-de-loracle">Réponses de L’oracle</h5>
+<p>Pour les questions à l’oracle, <code>-&gt;</code> déclare ce que le monde révèle :</p>
+<pre><code>-&gt; Oui (d6=6)
+-&gt; Non, mais... (d6=3)
+-&gt; Oui, et... (d6=5)
+-&gt; Non, et... (d6=1)</code></pre>
+</section>
+<section id="formats-doracle-courants" class="level5">
+<h5 class="anchored" data-anchor-id="formats-doracle-courants">Formats D’oracle Courants</h5>
+<ul>
+<li><strong>Oracles Oui/Non :</strong> <code>-&gt; Oui</code>, <code>-&gt; Non</code></li>
+<li><strong>Oui/Non avec modificateurs :</strong> <code>-&gt; Oui, mais…</code>, <code>-&gt; Non, et…</code></li>
+<li><strong>Résultats gradués :</strong> <code>-&gt; Oui franc</code>, <code>-&gt; Non faible</code></li>
+<li><strong>Résultats personnalisés :</strong> <code>-&gt; Partiellement</code>, <code>-&gt; Avec un coût</code></li>
+</ul>
+</section>
+<section id="pourquoi-une-syntaxe-unifiée" class="level5">
+<h5 class="anchored" data-anchor-id="pourquoi-une-syntaxe-unifiée">Pourquoi une Syntaxe Unifiée ?</h5>
+<p>La mécanique et les oracles résolvent tous deux l’incertitude. Utiliser <code>-&gt;</code> pour les deux crée de la cohérence — chaque résolution reçoit la même déclaration, ce qui rend votre journal plus facile à parcourir et à analyser. Que vous ayez lancé des dés ou demandé à l’oracle, <code>-&gt;</code> marque le moment où l’incertitude devient certitude.</p>
+</section>
+</section>
+</section>
+<section id="conséquences" class="level3">
+<h3 class="anchored" data-anchor-id="conséquences">3.3 Conséquences</h3>
+<p>Enregistrez le résultat narratif après les jets en utilisant <code>=&gt;</code>. Le symbole montre les conséquences découlant des actions et des résolutions. La double flèche visualise comment les événements se répercutent dans votre histoire.</p>
+<pre><code>=&gt; La porte grince en s'ouvrant, mais le bruit résonne dans le couloir.
+=&gt; Le garde me repère et donne l'alarme.
+=&gt; Je trouve un journal intime caché avec un indice crucial.</code></pre>
+<section id="conséquences-multiples" class="level4">
+<h4 class="anchored" data-anchor-id="conséquences-multiples">Conséquences Multiples</h4>
+<p>Vous pouvez enchaîner plusieurs lignes de conséquences pour des effets en cascade :</p>
+<pre><code>d: Crochetage 5≥4 -&gt; Succès
+=&gt; La porte s'ouvre
+=&gt; Mais les gonds grincent bruyamment
+=&gt; [E:HorlogeAlerte 1/6]</code></pre>
+</section>
+</section>
+<section id="séquences-daction-complètes" class="level3">
+<h3 class="anchored" data-anchor-id="séquences-daction-complètes">3.4 Séquences D’action Complètes</h3>
+<p>Voici comment les éléments de base se combinent :</p>
+<section id="séquence-axée-sur-la-mécanique" class="level4">
+<h4 class="anchored" data-anchor-id="séquence-axée-sur-la-mécanique">Séquence Axée sur la Mécanique</h4>
+<pre><code>@ Crocheter la serrure
+d: d20+Crochetage=17 vs DC 15 -&gt; Succès
+=&gt; La porte grince en s'ouvrant, mais le bruit résonne dans le couloir.</code></pre>
+</section>
+<section id="séquence-axée-sur-loracle" class="level4">
+<h4 class="anchored" data-anchor-id="séquence-axée-sur-loracle">Séquence Axée sur L’oracle</h4>
+<pre><code>? Y a-t-il quelqu'un à l'intérieur ?
+-&gt; Oui, mais... (d6=4)
+=&gt; Quelqu'un est là, mais il est distrait.</code></pre>
+</section>
+<section id="séquence-combinée" class="level4">
+<h4 class="anchored" data-anchor-id="séquence-combinée">Séquence Combinée</h4>
+<pre><code>@ Se faufiler devant les gardes
+d: Discrétion 2≤4 -&gt; Échec
+=&gt; Mon pied heurte un tonneau. [E:HorlogeAlerte 2/6]
+
+? Me voient-ils ?
+-&gt; Non, mais... (d6=3)
+=&gt; Distraits, mais un garde s'attarde. [N:Garde|vigilant]</code></pre>
+</section>
+</section>
+</section>
+<section id="couches-optionnelles" class="level2">
+<h2 class="anchored" data-anchor-id="couches-optionnelles">4. Couches Optionnelles</h2>
+<p>Vous avez les bases — actions, jets et conséquences. C’est suffisant pour un jeu simple. Mais les campagnes plus longues nécessitent souvent plus : des PNJ qui réapparaissent, des fils d’intrigue qui se tissent à travers les sessions, une progression qui s’accumule avec le temps.</p>
+<p>Cette section couvre les <strong>éléments de suivi</strong> qui vous aident à gérer la complexité. Ils sont tous optionnels. Si vous jouez un mystère en une seule session, vous n’aurez peut-être besoin de rien de tout cela. Si vous menez une campagne tentaculaire avec des dizaines de PNJ et de multiples fils d’intrigue, vous voudrez probablement la plupart de ces éléments.</p>
+<p>Choisissez ce dont votre campagne a besoin.</p>
+<section id="éléments-persistants" class="level3">
+<h3 class="anchored" data-anchor-id="éléments-persistants">4.1 Éléments Persistants</h3>
+<p>Au fur et à mesure que votre campagne se développe, certaines choses restent : les PNJ qui réapparaissent, les lieux où vous retournez, les menaces en cours, les questions de l’histoire qui s’étendent sur plusieurs sessions. Ce sont vos <strong>éléments persistants</strong>.</p>
+<p>Les balises vous permettent de les suivre de manière cohérente à travers les scènes et les sessions. Le format est simple : des crochets, un préfixe de type, un nom et des détails facultatifs. Comme ceci : <code>[N:Jonah|amical|blessé]</code>.</p>
+<p><strong>Pourquoi utiliser des balises ?</strong></p>
+<ul>
+<li><strong>Recherche facile</strong> : Trouvez chaque scène où Jonah apparaît</li>
+<li><strong>Cohérence</strong> : Référencez les PNJ de la même manière à chaque fois</li>
+<li><strong>Suivi de statut</strong> : Voyez comment les éléments changent au fil du temps</li>
+<li><strong>Aide-mémoire</strong> : Rappelez-vous des détails des semaines plus tard</li>
+</ul>
+<p>Vous n’avez pas besoin de tout baliser — seulement ce qui compte pour votre campagne. Un marchand aléatoire que vous ne reverrez jamais ? Appelez-le simplement “le marchand” en prose. Un méchant récurrent ? Balisez-le absolument.</p>
+<p>Voici les principaux types d’éléments persistants que vous pourriez suivre :</p>
+<section id="pnj-personnages-non-joueurs" class="level4">
+<h4 class="anchored" data-anchor-id="pnj-personnages-non-joueurs">4.1.1 PNJ (Personnages Non-Joueurs)</h4>
+<pre><code>[N:Jonah|amical|blessé]
+[N:Garde|vigilant|armé]
+[N:Marchand|méfiant]</code></pre>
+<p><strong>Mise à jour des balises de PNJ :</strong></p>
+<p>Lorsque le statut d’un PNJ change, vous pouvez soit :</p>
+<ul>
+<li>Redéclarer avec de nouvelles balises : <code>[N:Jonah|capturé|blessé]</code></li>
+<li>Montrer juste le changement : <code>[N:Jonah|capturé]</code> (suppose que les autres balises persistent)</li>
+<li>Utiliser des mises à jour explicites : <code>[N:Jonah|amical→hostile]</code></li>
+<li>Ajouter <code>+</code> ou <code>-</code> : <code>[N:Jonah|+capturé]</code> ou <code>[N:Jonah|-blessé]</code></li>
+</ul>
+<p>Choisissez le style qui rend votre journal le plus clair.</p>
+</section>
+<section id="lieux" class="level4">
+<h4 class="anchored" data-anchor-id="lieux">4.1.2 Lieux</h4>
+<pre><code>[L:Phare|en ruine|orageux]
+[L:Bibliothèque|sombre|calme]
+[L:Taverne|bondée|bruyante]</code></pre>
+</section>
+<section id="événements-horloges" class="level4">
+<h4 class="anchored" data-anchor-id="événements-horloges">4.1.3 Événements &amp; Horloges</h4>
+<pre><code>[E:ComplotCultiste 2/6]
+[E:HorlogeAlerte 3/4]
+[E:ProgressionRituel 0/8]</code></pre>
+<p>Les événements suivent les éléments importants de l’intrigue. Le format <code>X/Y</code> indique la progression actuelle/totale.</p>
+</section>
+<section id="fils-conducteurs-de-lhistoire" class="level4">
+<h4 class="anchored" data-anchor-id="fils-conducteurs-de-lhistoire">4.1.4 Fils Conducteurs de L’histoire</h4>
+<pre><code>[Fil:Retrouver la sœur de Jonah|Ouvert]
+[Fil:Découvrir la conspiration|Ouvert]
+[Fil:S'échapper de la ville|Fermé]</code></pre>
+<p>Les fils conducteurs suivent les questions ou objectifs majeurs de l’histoire. États courants :</p>
+<ul>
+<li><code>Ouvert</code> — fil actif</li>
+<li><code>Fermé</code> — fil résolu</li>
+<li><code>Abandonné</code> — fil abandonné</li>
+<li>États personnalisés autorisés (par ex., <code>Urgent</code>, <code>En arrière-plan</code>)</li>
+</ul>
+</section>
+<section id="personnage-joueur" class="level4">
+<h4 class="anchored" data-anchor-id="personnage-joueur">4.1.5 Personnage Joueur</h4>
+<pre><code>[PJ:Alex|PV 8|Stress 0|Équipement:Lampe de poche,Carnet]
+[PJ:Elara|PV 15|Munitions 3|Statut:Blessée]</code></pre>
+<p><strong>Mise à jour des stats du PJ :</strong></p>
+<pre><code>[PJ:Alex|PV 8] (initial)
+[PJ:Alex|PV-2] (raccourci : a perdu 2 PV, maintenant à 6)
+[PJ:Alex|PV 6] (explicite : maintenant à 6 PV)
+[PJ:Alex|PV+3|Stress-1] (changements multiples)</code></pre>
+</section>
+<section id="balises-de-référence" class="level4">
+<h4 class="anchored" data-anchor-id="balises-de-référence">4.1.6 Balises de Référence</h4>
+<p>Pour faire référence à un élément précédemment établi sans répéter les balises, utilisez le préfixe <code>#</code> :</p>
+<pre><code>[N:Jonah|amical|blessé] (première mention — établit l'élément)
+
+... plus loin dans le journal ...
+
+[#N:Jonah] (référence — suppose les balises d'avant)</code></pre>
+<p>Le <code>#</code> vous indique que cet élément a été défini plus tôt. Utilisez-le pour :</p>
+<ul>
+<li>Garder les mentions ultérieures concises</li>
+<li>Signaler aux lecteurs qu’ils doivent chercher le contexte plus haut</li>
+<li>Maintenir la capacité de recherche (l’ID “Jonah” apparaît toujours)</li>
+</ul>
+<p><strong>Quand utiliser les balises de référence :</strong></p>
+<ul>
+<li>Première mention : Balise complète avec détails <code>[N:Nom|balises]</code></li>
+<li>Mentions ultérieures dans la même scène : Optionnel, à votre jugement</li>
+<li>Mentions ultérieures dans des scènes/sessions différentes : Utilisez <code>[#N:Nom]</code> pour signaler la référence</li>
+<li>Changements de statut : Laissez tomber le <code>#</code> et montrez les nouvelles balises <code>[N:Nom|nouvelles_balises]</code></li>
+</ul>
+</section>
+<section id="catégories-de-balises" class="level4">
+<h4 class="anchored" data-anchor-id="catégories-de-balises">4.1.7 Catégories de Balises</h4>
+<p>Lorsqu’une balise contient des valeurs de types distincts, groupez-les avec des préfixes de catégorie. Le nom de la catégorie est suivi de <code>:</code> puis d’une liste de valeurs séparées par des virgules :</p>
+<pre><code>[PJ:Jonah|trait:amical,curieux|statut:blessé|stat:PV 8]
+[N:Garde|rôle:vigilant|statut:armé,alerte]</code></pre>
+<p>Les catégories sont libres — utilisez les étiquettes fournies par le vocabulaire de votre jeu. C’est particulièrement utile pour les jeux où les balises ont des types explicites (comme les Power Tags et Weakness Tags dans City of Mist, ou les Aspects et compétences dans Fate). Les balises simples sans préfixe de catégorie fonctionnent exactement comme avant :</p>
+<pre><code>[N:Jonah|amical|blessé]                       (simple — fonctionne comme toujours)
+[N:Jonah|trait:amical|statut:blessé]          (catégorisé — même information, groupée)</code></pre>
+</section>
+<section id="balises-multilignes" class="level4">
+<h4 class="anchored" data-anchor-id="balises-multilignes">4.1.8 Balises Multilignes</h4>
+<p>Pour les personnages ayant de nombreuses balises, la forme sur une seule ligne peut devenir difficile à lire. Coupez une balise sur plusieurs lignes en utilisant le même séparateur <code>|</code>, avec le crochet de fermeture <code>]</code> sur sa propre ligne :</p>
+<pre><code>[PJ:Jonah
+  | trait: amical, curieux, téméraire
+  | faiblesse: naïf, facilement distrait
+  | statut: blessé
+  | stat: PV 8, Stress 2
+]</code></pre>
+<p>Les formes multilignes et sur une seule ligne sont équivalentes — utilisez celle qui est la plus lisible selon le niveau de complexité actuel. Les balises multilignes fonctionnent naturellement au début de la session (feuilles de personnage et blocs de statut) ou chaque fois que l’état d’un personnage devient assez complexe pour le justifier.</p>
+<p><strong>Format analogique :</strong> Indentez les lignes de continuation et dessinez un crochet de fermeture à la fin de la dernière ligne :</p>
+<pre><code>[PJ:Jonah
+  trait: amical, curieux | statut: blessé
+  stat: PV 8, Stress 2]</code></pre>
+</section>
+<section id="contexte-de-jet" class="level4">
+<h4 class="anchored" data-anchor-id="contexte-de-jet">4.1.9 Contexte de Jet</h4>
+<p>Lorsqu’un jet s’appuie sur des balises, traits ou modificateurs situationnels spécifiques — particulièrement dans les jeux riches en balises comme PbtA ou City of Mist — listez-les entre crochets à l’intérieur de la ligne <code>d:</code> :</p>
+<pre><code>d: Enquêter 2d6 [Être gentil avec les autres, Naïf] = 8 -&gt; Partiel
+d: Discrétion d6 [+couverture, -blessé] vs ND 4 -&gt; Échec
+d: Persuader 2d6 [pouvoir: beau parleur | contre: méfiant-2] = 9 -&gt; Succès Fort</code></pre>
+<p>Le <code>[...]</code> à l’intérieur de <code>d:</code> signifie “ces balises sont <strong>actives pour ce jet</strong>”. C’est distinct du raccourci de mise à jour de balise <code>+</code>/<code>-</code> sur les lignes de balises autonomes (§4.1.1). Le contexte de jet est temporaire — il enregistre quelles balises ont contribué au jet sans modifier l’état persistant du personnage.</p>
+<p>Utilisez des préfixes de catégorie à l’intérieur des crochets lorsque votre jeu distingue les types de modificateurs :</p>
+<pre><code>d: Enquêter 2d6 [pouvoir: Être gentil avec les autres, Naïf | contre: réticent-à-parler-1] = 8 -&gt; Partiel</code></pre>
+<p><strong>Quand l’utiliser :</strong> Uniquement lorsque les balises actives ne sont pas évidentes d’après la ligne d’action, ou lorsque votre système exige de suivre explicitement quelles balises ont contribué à un jet. Pour la plupart des jeux, la ligne d’action seule est suffisante.</p>
+</section>
+</section>
+<section id="suivi-de-la-progression" class="level3">
+<h3 class="anchored" data-anchor-id="suivi-de-la-progression">4.2 Suivi de la Progression</h3>
+<p>Certaines choses dans votre campagne ne se produisent pas d’un coup — elles se construisent avec le temps. Le rituel prend douze étapes à compléter. La méfiance des gardes grandit à chaque bruit que vous faites. Votre plan d’évasion avance petit à petit. La réserve d’air diminue.</p>
+<p>Le suivi de la progression vous donne un moyen visuel de voir ces forces s’accumuler. Trois formats gèrent différents types de progression :</p>
+<p><strong>Horloges</strong> (se remplissent jusqu’à l’achèvement) :</p>
+<pre><code>[Horloge:Rituel 5/12]
+[Horloge:Méfiance 3/6]</code></pre>
+<p><strong>Utiliser pour :</strong> Menaces qui montent, sorts en préparation, danger qui s’accumule. Quand l’horloge est pleine, quelque chose se passe (généralement mauvais pour vous).</p>
+<p><strong>Pistes</strong> (progression vers un objectif) :</p>
+<pre><code>[Piste:Évasion 3/8]
+[Piste:Enquête 6/10]</code></pre>
+<p><strong>Utiliser pour :</strong> Votre progression sur des projets, l’avancement d’un voyage, des objectifs à long terme. Quand la piste est pleine, vous réussissez quelque chose.</p>
+<p><strong>Compteurs</strong> (comptent à rebours jusqu’à zéro) :</p>
+<pre><code>[Compteur:Aube 3]
+[Compteur:RéserveAir 5]</code></pre>
+<p><strong>Utiliser pour :</strong> Échéances qui approchent, ressources qui s’épuisent, pression temporelle. Quand il atteint zéro, le temps est écoulé.</p>
+<p><strong>La différence ?</strong> Les horloges et les pistes augmentent toutes deux, mais les horloges sont des menaces (mauvaises quand elles sont pleines) et les pistes sont des progrès (bonnes quand elles sont pleines). Les compteurs diminuent et créent de l’urgence.</p>
+<p>Vous n’avez pas besoin de tout suivre numériquement. N’utilisez ces outils que lorsque l’accumulation est importante pour votre histoire et que vous voulez un moyen concret de la mesurer.</p>
+</section>
+<section id="tables-aléatoires-générateurs" class="level3">
+<h3 class="anchored" data-anchor-id="tables-aléatoires-générateurs">4.3 Tables Aléatoires &amp; Générateurs</h3>
+<p>Le jeu en solo se nourrit de la surprise. Parfois, vous lancez sur une table pour voir ce que vous trouvez, ou vous utilisez un générateur pour créer un PNJ à la volée. Lorsque vous le faites, il est utile d’enregistrer ce que vous avez lancé — à la fois pour la transparence et pour que vous puissiez recréer la logique plus tard.</p>
+<p><strong>Consultation simple d’une table :</strong></p>
+<pre><code>tbl: d100=42 -&gt; "Une épée brisée"
+tbl: d20=15 -&gt; "Le marchand est nerveux"</code></pre>
+<p>Utilisez <code>tbl:</code> lorsque vous piochez dans une table aléatoire simple — le genre où vous lancez une fois et obtenez un résultat.</p>
+<p><strong>Générateurs complexes :</strong></p>
+<pre><code>gen: Événement Mythic d100=78 + 11 -&gt; Action PNJ / Trahison
+gen: PNJ Stars Without Number d8=3,d10=7 -&gt; Bourru/Pilote</code></pre>
+<p>Utilisez <code>gen:</code> lorsque vous utilisez un générateur à plusieurs étapes qui combine plusieurs lancers ou produit des résultats composés.</p>
+<p><strong>Intégration avec les questions à l’oracle :</strong></p>
+<pre><code>? Que trouve-je dans le coffre ?
+tbl: d100=42 -&gt; "Une épée brisée"
+=&gt; Une ancienne lame, brisée en deux, avec d'étranges runes sur la garde.</code></pre>
+<p><strong>Pourquoi enregistrer les lancers ?</strong> Trois raisons :</p>
+<ol type="1">
+<li><strong>Transparence</strong> : Si vous partagez le journal, les autres voient votre processus</li>
+<li><strong>Reproductibilité</strong> : Vous pouvez retracer comment vous avez obtenu des résultats surprenants</li>
+<li><strong>Apprentissage</strong> : Au fil du temps, vous voyez quelles tables vous utilisez le plus</li>
+</ol>
+<p>Cela dit, si vous jouez vite et sans chichis, vous pouvez sauter les détails du lancer et simplement enregistrer le résultat : <code>=&gt; Je trouve une épée brisée [tbl]</code>. La partie importante est la fiction, pas les maths.</p>
+<section id="définitions-de-tables-en-ligne" class="level4">
+<h4 class="anchored" data-anchor-id="définitions-de-tables-en-ligne">4.3.1 Définitions de tables en ligne</h4>
+<p>Les exemples ci-dessus supposent que votre table réside ailleurs — un livre de règles, un supplément, un fichier séparé. Vous lancez les dés, vous enregistrez le résultat, et quiconque lit votre journal doit vous faire confiance (ou posséder le même livre) pour le vérifier.</p>
+<p>Mais que se passe-t-il si vous avez créé la table vous-même ? Si vous avez filtré les options d’un ensemble plus large pour l’adapter à votre campagne ? Si vous jouez à un jeu où la génération de contenu <em>est</em> le jeu — des systèmes comme Bivius Companion, des oracles maison, ou toute configuration où l’espace des possibles fait partie de l’acte créatif ?</p>
+<p>Dans ces cas, intégrer la table directement dans votre journal le rend <strong>autonome</strong>. Les lecteurs voient tout l’espace des options <em>et</em> le résultat. Pas de références externes, pas de “voir page 47”.</p>
+<p><strong>Format :</strong></p>
+<pre><code>tbl: NomTable (dé)
+  1: Résultat un
+  2: Résultat deux
+  3: Résultat trois
+  4: Résultat quatre
+  5: Résultat cinq
+  6: Résultat six</code></pre>
+<p>Le nom de la table et le type de dé vont sur la première ligne. Chaque entrée est indentée avec son numéro et son résultat. Ensuite, lancez les dés normalement contre elle :</p>
+<pre><code>tbl: NomTable d6=3 -&gt; Résultat trois</code></pre>
+<p><strong>Exemple complet :</strong></p>
+<pre><code>tbl: Rencontre en forêt (d6)
+  1-2: Rien — silence inquiétant
+  3: Traces d'animaux, fraîches
+  4: Campement abandonné
+  5: Voyageur sur la route
+  6: Quelque chose vous suit
+
+? Que rencontré-je sur le sentier forestier ?
+tbl: Rencontre en forêt d6=5 -&gt; Voyageur sur la route
+=&gt; Une silhouette encapuchonnée me fait signe. [N:Voyageur|inconnu|amical?]</code></pre>
+<p><strong>Quand définir en ligne vs référence externe :</strong></p>
+<ul>
+<li><strong>En ligne</strong> — lorsque vous avez créé la table, lorsque la table est courte (environ 10 entrées ou moins), lorsque le partage est important, ou lorsque la table n’existe que dans votre tête.</li>
+<li><strong>Externe</strong> — lorsque vous lancez sur une table publiée que les lecteurs peuvent consulter, ou lorsque la table est trop longue pour être incluse sans encombrer votre journal.</li>
+</ul>
+<p>Pour les tables plus longues, vous pouvez les définir une seule fois au début d’une session ou d’une campagne (un peu comme le bloc de statut des ressources), puis les référencer par leur nom tout au long du jeu :</p>
+<pre><code>tbl: Rencontre en forêt d6=5 -&gt; Voyageur sur la route</code></pre>
+<p>Si la table a été définie plus tôt dans le journal, les lecteurs peuvent revenir en arrière pour la trouver. S’il s’agit d’une table publiée, le nom et le type de dé fournissent suffisamment de contexte pour localiser la source.</p>
+</section>
+<section id="ensembles-doptions-filtrés" class="level4">
+<h4 class="anchored" data-anchor-id="ensembles-doptions-filtrés">4.3.2 Ensembles d’options filtrés</h4>
+<p>Certains jeux n’utilisent pas de tables numérotées — ils utilisent des listes curatées dans lesquelles vous choisissez ou tirez. Vous pouvez filtrer un ensemble plus large d’options pour ne garder que celles pertinentes pour votre scène, puis sélectionner de manière aléatoire ou intuitive.</p>
+<p><strong>Format :</strong></p>
+<pre><code>tbl: NomTable [Option A, Option B, Option C, Option D]</code></pre>
+<p>Les crochets signalent “ceci sont les options en jeu”. Pas de numéros, pas de dés — juste l’espace des possibles.</p>
+<p><strong>Lancer contre un ensemble filtré :</strong></p>
+<pre><code>tbl: Ambiance [Tendu, Mélancolique, Optimiste, Étrange]
+tbl: Ambiance -&gt; Étrange
+
+tbl: Météo [Clair, Brouillard, Pluie, Tempête]
+tbl: Météo d4=2 -&gt; Brouillard
+=&gt; Un brouillard épais arrive de la côte. La visibilité tombe à zéro.</code></pre>
+<p><strong>Construction d’un ensemble filtré à partir d’une source plus large :</strong></p>
+<pre><code>(note : filtrage des thèmes de Bivius Companion pour cet arc)
+tbl: Thème [Trahison, Rédemption, Sacrifice, Secrets]
+
+tbl: Thème -&gt; Sacrifice
+=&gt; La scène sera centrée sur ce que quelqu'un est prêt à abandonner.</code></pre>
+<p><strong>Filtrage dynamique en milieu de session :</strong></p>
+<pre><code>tbl: Pistes disponibles [Le tuyau du docker, La lettre déchirée, La pièce verrouillée]
+tbl: Pistes disponibles -&gt; La lettre déchirée
+=&gt; Je poursuis la piste de la lettre trouvée lors de la Session 2.
+[Fil:Lettre Déchirée|Ouvert]</code></pre>
+<p>La principale différence par rapport aux tables numérotées : les ensembles filtrés capturent <em>ce qui était disponible</em>, et pas seulement ce qui a été choisi. C’est particulièrement précieux lorsque vous partagez des journaux — les lecteurs voient les chemins non empruntés à côté de celui que vous avez choisi.</p>
+</section>
+<section id="blocs-de-résultats-multilignes" class="level4">
+<h4 class="anchored" data-anchor-id="blocs-de-résultats-multilignes">4.3.3 Blocs de résultats multilignes</h4>
+<p>Certains générateurs produisent des résultats composés — plusieurs axes de sens qui créent ensemble quelque chose de plus grand qu’un simple jet. Un PNJ peut avoir un rôle, un trait de personnalité et une motivation. Un lieu peut avoir une caractéristique, une ambiance et un secret. Enregistrer chaque axe rend la logique créative transparente.</p>
+<p><strong>Format :</strong></p>
+<pre><code>gen: NomGénérateur
+  Axe1: jet -&gt; résultat
+  Axe2: jet -&gt; résultat
+  Axe3: jet -&gt; résultat</code></pre>
+<p>Chaque axe est indenté sous le nom du générateur. Les détails du jet sont facultatifs — incluez-les lorsque la transparence est importante, passez-les lorsque la rapidité prime.</p>
+<p><strong>Exemple de générateur de PNJ :</strong></p>
+<pre><code>gen: PNJ (maison)
+  Rôle: d6=3 -&gt; Marchand
+  Trait: d6=5 -&gt; Secret
+  Envie: d6=1 -&gt; S'échapper
+=&gt; [N:Marchand anonyme|secret|veut fuir la ville]</code></pre>
+<p><strong>Exemple de générateur de lieu :</strong></p>
+<pre><code>gen: Ruine (tables d6 maison)
+  Caractéristique: d6=4 -&gt; Tour effondrée
+  Ambiance: d6=2 -&gt; Silence oppressant
+  Secret: d6=6 -&gt; Passage caché sous les décombres
+=&gt; [L:Vieille tour de guet|effondrée|inquiétante|passage caché]</code></pre>
+<p><strong>Avec des définitions de tables en ligne</strong> — vous pouvez combiner ces fonctionnalités. Définissez les axes, puis lancez les dés :</p>
+<pre><code>tbl: Rôle PNJ (d6) [Garde, Marchand, Érudit, Mendiant, Noble, Prêtre]
+tbl: Trait PNJ (d6) [Nerveux, Secret, Bruyant, Froid, Gentil, Obsessionnel]
+tbl: Envie PNJ (d6) [S'échapper, Vengeance, Richesse, Connaissance, Pouvoir, Paix]
+
+gen: PNJ
+  Rôle: d6=2 -&gt; Marchand
+  Trait: d6=6 -&gt; Obsessionnel
+  Envie: d6=4 -&gt; Connaissance
+=&gt; [N:Le Collectionneur|marchand|obsessionnel|cherche des textes interdits]</code></pre>
+<p><strong>Format minimal</strong> — lorsque vous avez juste besoin du résultat :</p>
+<pre><code>gen: PNJ -&gt; Marchand / Secret / S'échapper
+=&gt; [N:Marchand anonyme|secret|veut fuir]</code></pre>
+<p>Utilisez le format multiligne étendu lorsque vous souhaitez montrer votre travail — particulièrement utile dans les journaux partagés, pour les générateurs que vous avez créés vous-même, ou lorsque vous souhaitez retracer comment la fiction a émergé de la mécanique. Utilisez le format minimal sur une seule ligne lorsque la vitesse l’emporte sur le processus.</p>
+</section>
+</section>
+<section id="extraits-narratifs" class="level3">
+<h3 class="anchored" data-anchor-id="extraits-narratifs">4.4 Extraits Narratifs</h3>
+<p>Voici un secret : <strong>vous n’avez pas du tout besoin d’écrire de narration</strong>. Le raccourci capture tout mécaniquement. Mais parfois, la fiction exige plus — un dialogue trop parfait pour ne pas être enregistré, une description qui plante le décor, un document que votre personnage trouve.</p>
+<p>C’est à cela que servent les extraits narratifs : les moments où le raccourci ne suffit pas.</p>
+<p><strong>Prose en ligne</strong> (descriptions courtes) :</p>
+<pre><code>=&gt; La pièce empeste le moisi et la pourriture. Des papiers sont éparpillés partout.</code></pre>
+<p><strong>Utiliser pour :</strong> Détails atmosphériques rapides, informations sensorielles, touches émotionnelles. Soyez bref — une phrase ou deux.</p>
+<p><strong>Dialogue</strong> (conversations qui méritent d’être enregistrées) :</p>
+<pre><code>N (Garde) : "Qui est là ?"
+PJ : "Restez calme... restez juste calme."
+N (Garde) : "Montrez-vous !"
+PJ : [chuchote] "Ça n'arrivera pas."</code></pre>
+<p><strong>Utiliser pour :</strong> Échanges mémorables, voix du personnage, conversations importantes. Vous n’avez pas besoin d’enregistrer chaque mot — juste les échanges qui comptent.</p>
+<p><strong>Longs blocs narratifs</strong> (documents trouvés, descriptions importantes) :</p>
+<pre><code>\---
+Le journal intime dit :
+"Jour 47 : Les marées n'obéissent plus à la lune. Les poissons ont cessé
+de venir. Le gardien du phare dit qu'il voit des lumières sous les vagues.
+Je crains pour notre santé mentale."
+---</code></pre>
+<p><strong>Utiliser pour :</strong> Documents du monde du jeu, longues descriptions, révélations clés. Les marqueurs <code>\---</code> et <code>---</code> le séparent de votre journal, indiquant clairement qu’il s’agit de contenu fictionnel. Les délimiteurs asymétriques évitent les conflits avec les règles horizontales de Markdown.</p>
+<p><strong>Quelle quantité de narration devriez-vous écrire ?</strong> Seulement autant que cela vous sert. Si vous jouez pour vous-même et que le raccourci vous dit tout ce que vous devez vous rappeler, sautez la prose. Si vous partagez votre journal ou que vous aimez le processus d’écriture, ajoutez-en plus. Il n’y a pas de bonne quantité — juste ce qui rend votre journal utile et agréable pour vous.</p>
+</section>
+<section id="notes-méta" class="level3">
+<h3 class="anchored" data-anchor-id="notes-méta">4.5 Notes Méta</h3>
+<p>Parfois, vous avez besoin de sortir de la fiction et de vous laisser une note : un rappel sur une règle maison que vous testez, une réflexion sur la façon dont une scène a été ressentie, une question à revoir plus tard, ou une clarification sur votre interprétation d’une règle.</p>
+<p>C’est à cela que servent les notes méta — vos apartés hors personnage pour vous-même (ou pour les lecteurs, si vous partagez).</p>
+<p><strong>Format :</strong> Utilisez des parenthèses pour signaler “ceci est méta, pas de la fiction” :</p>
+<pre><code>(note : test de la règle alternative de discrétion où le bruit augmente l'horloge d'Alerte)
+(réflexion : cette scène était tendue ! le minuteur a vraiment fonctionné)
+(règle maison : donner un avantage sur un terrain familier)
+(rappel : revoir ce fil la prochaine session)
+(question : aurais-je dû faire un jet pour ça ? ça semblait évident)</code></pre>
+<p><strong>Quand utiliser les notes méta :</strong></p>
+<ul>
+<li><strong>Expériences</strong> : Suivez les variantes de règles ou les règles maison que vous testez</li>
+<li><strong>Réflexion</strong> : Capturez ce qui a fonctionné ou non émotionnellement</li>
+<li><strong>Rappels</strong> : Marquez les choses à suivre plus tard</li>
+<li><strong>Clarification</strong> : Expliquez les décisions inhabituelles ou les interprétations</li>
+<li><strong>Processus</strong> : Documentez votre pensée pour les journaux partagés</li>
+</ul>
+<p><strong>Quand NE PAS les utiliser :</strong> Ne laissez pas les notes méta submerger votre journal. Si vous vous arrêtez toutes les quelques lignes pour réfléchir, vous sur-analysez probablement. Le jeu est la chose la plus importante — les notes méta ne sont que des commentaires occasionnels en marge.</p>
+<p>Pensez-y comme le commentaire du réalisateur sur un film. La plupart du temps, vous regardez simplement le film. Occasionnellement, il y a une note intéressante en coulisses qui vaut la peine d’être partagée.</p>
+</section>
+</section>
+<section id="structure-optionnelle" class="level2">
+<h2 class="anchored" data-anchor-id="structure-optionnelle">5. Structure Optionnelle</h2>
+<p>Jusqu’à présent, nous avons parlé de <em>ce que</em> vous écrivez (actions, jets, balises). Parlons maintenant de <em>la façon dont vous l’organisez</em>.</p>
+<p>La structure aide de deux manières : elle rend vos notes plus faciles à naviguer et elle signale des limites (cette session s’est terminée, cette scène a commencé). Mais la structure ajoute une surcharge — plus d’en-têtes à écrire, plus de formatage à maintenir.</p>
+<p>Cette section présente les éléments d’organisation : les en-têtes de campagne (métadonnées sur l’ensemble de votre campagne), les en-têtes de session (marquant les sessions de jeu) et la structure de scène (l’unité de base du jeu). Utilisez ce qui vous aide à rester orienté sans vous ralentir.</p>
+<p>La différence clé ? <strong>Les formats numérique et analogique gèrent la structure différemment.</strong> Le markdown numérique utilise des titres et du YAML ; les carnets analogiques utilisent des en-têtes écrits et des marqueurs. Nous montrerons les deux.</p>
+<section id="en-tête-de-campagne" class="level3">
+<h3 class="anchored" data-anchor-id="en-tête-de-campagne">5.1 En-tête de Campagne</h3>
+<p>Avant de vous plonger dans le jeu, il est utile d’enregistrer quelques bases : À quoi jouez-vous ? Quel système ? Quand avez-vous commencé ? Pensez-y comme la “page de couverture” de votre journal de campagne.</p>
+<p>Ceci est particulièrement utile lorsque :</p>
+<ul>
+<li>Vous menez plusieurs campagnes (vous aide à vous rappeler laquelle est laquelle)</li>
+<li>Vous partagez des journaux avec d’autres (ils ont besoin de contexte)</li>
+<li>Vous revenez à une campagne après une pause (vous rappelle le ton/les thèmes)</li>
+</ul>
+<p>Si vous essayez simplement la notation avec un one-shot rapide, ignorez complètement ceci. Mais pour les campagnes que vous prévoyez de revisiter, un en-tête vaut les 30 secondes.</p>
+<p><strong>Les formats numérique et analogique diffèrent ici.</strong> Le markdown numérique utilise le YAML front matter (métadonnées structurées en haut du fichier). Les carnets analogiques utilisent un bloc d’en-tête écrit.</p>
+<p><strong>Pour les fichiers markdown numériques</strong>, utilisez le YAML front matter tout en haut :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Mystère de Clearview</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ruleset</span><span class="kw">:</span><span class="at"> Loner + Oracle Mythic</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">genre</span><span class="kw">:</span><span class="at"> Mystère adolescent / surnaturel</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">player</span><span class="kw">:</span><span class="at"> Roberto</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pcs</span><span class="kw">:</span><span class="at"> Alex [PJ:Alex|PV 8|Stress 0|Équipement:Lampe de poche,Carnet]</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">start_date</span><span class="kw">:</span><span class="at"> 2025-09-03</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="fu">last_update</span><span class="kw">:</span><span class="at"> 2025-10-28</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> Oracles - Mythic, tables d'événements aléatoires</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="fu">themes</span><span class="kw">:</span><span class="at"> Amitié, courage, secrets</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tone</span><span class="kw">:</span><span class="at"> Inquiétant mais ludique</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="fu">notes</span><span class="kw">:</span><span class="at"> Inspiré des séries de mystère pour adolescents des années 80</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Pour les carnets analogiques</strong>, écrivez un bloc d’en-tête de campagne :</p>
+<pre><code>=== Journal de campagne : Mystère de Clearview ===
+[Titre] Mystère de Clearview
+[Règles] Loner + Oracle Mythic
+[Genre] Mystère adolescent / surnaturel
+[Joueur] Roberto
+[PJs] Alex [PJ:Alex|PV 8|Stress 0|Équipement:Lampe de poche,Carnet]
+[Date de début] 2025-09-03
+[Dernière mise à jour] 2025-10-28
+[Outils] Oracles : Mythic, tables d'événements aléatoires
+[Thèmes] Amitié, courage, secrets
+[Ton] Inquiétant mais ludique
+[Notes] Inspiré des séries de mystère pour adolescents des années 80</code></pre>
+<p><strong>Champs optionnels</strong> (à ajouter au besoin) :</p>
+<ul>
+<li><code>[Cadre]</code> — Détails géographiques ou du monde</li>
+<li><code>[Inspiration]</code> — Médias qui ont inspiré la campagne</li>
+<li><code>[Outils de sécurité]</code> — Carte X, lignes/voiles, etc.</li>
+</ul>
+</section>
+<section id="en-tête-de-session" class="level3">
+<h3 class="anchored" data-anchor-id="en-tête-de-session">5.2 En-tête de Session</h3>
+<p>Un en-tête de session marque la frontière entre les sessions de jeu et fournit un contexte : quand avez-vous joué, combien de temps, que s’est-il passé ?</p>
+<p><strong>Pourquoi utiliser des en-têtes de session ?</strong></p>
+<ul>
+<li><strong>Navigation</strong> : Sautez rapidement à des sessions spécifiques</li>
+<li><strong>Contexte</strong> : Rappelez-vous quand vous avez joué et ce qui se passait</li>
+<li><strong>Réflexion</strong> : Suivez vos habitudes de jeu (à quelle fréquence ? combien de temps ?)</li>
+<li><strong>Continuité</strong> : Connectez les sessions avec des résumés et des objectifs</li>
+</ul>
+<p><strong>Quand les ignorer :</strong></p>
+<ul>
+<li>Parties uniques (pas de sessions multiples)</li>
+<li>Jeu continu (vous jouez quotidiennement sans pauses claires)</li>
+<li>Journaux purement en raccourci (vous voulez juste la fiction, pas la méta-structure)</li>
+</ul>
+<p>Comme les en-têtes de campagne, les formats numérique et analogique gèrent les sessions différemment. Choisissez le style qui correspond à votre support.</p>
+<section id="format-numérique-titre-markdown" class="level4">
+<h4 class="anchored" data-anchor-id="format-numérique-titre-markdown">5.2.1 Format Numérique (titre markdown)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session 1</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>*Date : 2025-09-03 | Durée : 1h30 | Scènes : S1-S2*</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>**Résumé :** Première session, présentation d'Alex et du mystère.</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>**Objectifs :** Mettre en place le mystère central, établir le phare comme lieu clé.</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="format-analogique-en-tête-écrit" class="level4">
+<h4 class="anchored" data-anchor-id="format-analogique-en-tête-écrit">5.2.2 Format Analogique (en-tête écrit)</h4>
+<pre><code>=== Session 1 ===
+[Date] 2025-09-03
+[Durée] 1h30
+[Scènes] S1-S2
+[Résumé] Première session, présentation d'Alex et du mystère.
+[Objectifs] Mettre en place le mystère central, établir le phare.</code></pre>
+<p><strong>Champs optionnels :</strong></p>
+<ul>
+<li><code>[Ambiance]</code> — Ton prévu ou réel pour la session</li>
+<li><code>[Notes]</code> — Variantes de règles, expériences ou conditions spéciales</li>
+<li><code>[Fils]</code> — Fils conducteurs actifs cette session</li>
+</ul>
+</section>
+</section>
+<section id="structure-de-scène" class="level3">
+<h3 class="anchored" data-anchor-id="structure-de-scène">5.3 Structure de Scène</h3>
+<p>Les scènes sont l’unité de base du jeu au sein d’une session. Au plus simple, une scène n’est qu’un marqueur numéroté avec un contexte.</p>
+<p><strong>Format numérique (titre markdown) :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### S1 *Bibliothèque de l'école après les cours*</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Format analogique :</strong></p>
+<pre><code>S1 *Bibliothèque de l'école après les cours*</code></pre>
+<p>Le numéro de scène vous aide à suivre la progression et à référencer les événements plus tard. Le contexte (en italique/astérisques) encadre où et quand la scène se déroule.</p>
+<section id="scènes-séquentielles-standard" class="level4">
+<h4 class="anchored" data-anchor-id="scènes-séquentielles-standard">5.3.1 Scènes Séquentielles (Standard)</h4>
+<p>La plupart des campagnes utilisent une numérotation séquentielle simple :</p>
+<pre><code>S1 *Taverne, soir*
+S2 *Place de la ville, minuit*
+S3 *Sentier forestier, aube*
+S4 *Ruines anciennes, midi*</code></pre>
+<p><strong>Quand utiliser :</strong> Par défaut pour un jeu linéaire. La scène 2 se passe après la scène 1, la scène 3 après la scène 2, etc.</p>
+<p><strong>Numérotation :</strong> Commencez à S1 à chaque session, ou continuez sur toute la campagne (S1-S100+).</p>
+<p><strong>Exemple en jeu :</strong></p>
+<pre><code>S1 *Salle commune de la taverne, soir*
+@ Demander au tavernier les rumeurs
+d: Charisme d6=5 vs ND 4 -&gt; Succès
+=&gt; Il se penche et me parle de lumières étranges à l'ancien moulin.
+[Fil:Lumières Étranges|Ouvert]
+
+S2 *Devant la taverne, nuit*
+@ Se diriger vers le moulin
+? Est-ce que je rencontre quelque chose en chemin ?
+-&gt; Oui, mais... (d6=3)
+=&gt; Je vois une silhouette sombre, mais elle ne semble pas hostile.
+[N:Inconnu|mystérieux|regarde]</code></pre>
+</section>
+<section id="flashbacks" class="level4">
+<h4 class="anchored" data-anchor-id="flashbacks">5.3.2 Flashbacks</h4>
+<p>Les flashbacks montrent des événements passés qui éclairent l’histoire actuelle. Utilisez des suffixes alphabétiques partant de la scène “présente”.</p>
+<p><strong>Format :</strong> <code>S#a</code>, <code>S#b</code>, <code>S#c</code></p>
+<p><strong>Quand utiliser :</strong></p>
+<ul>
+<li>Révéler une histoire de fond en milieu de session</li>
+<li>Déclencheurs de mémoire du personnage</li>
+<li>Montrer comment quelque chose s’est passé</li>
+<li>Expliquer des éléments mystérieux</li>
+</ul>
+<p><strong>Exemple de structure :</strong></p>
+<pre><code>S5 *Enquête au moulin*
+=&gt; Je trouve le vieux journal de mon père.
+
+S5a *Flashback : Atelier du père, il y a 10 ans*
+(Ceci s'est passé avant la campagne)
+=&gt; Père : "Promets-moi que tu n'iras jamais seul au moulin."
+
+S6 *Retour au moulin, présent*
+(Maintenant on continue à partir de S5)</code></pre>
+<p><strong>Exemple complet :</strong></p>
+<pre><code>S8 *Quartiers du gardien de phare*
+@ Fouiller le bureau pour des indices
+d: Investigation d6=6 vs ND 4 -&gt; Succès
+=&gt; Je trouve une photo délavée. C'est... ma mère ? Elle se tient devant ce phare !
+[Fil:Lien Maternel|Ouvert]
+
+S8a *Flashback : Maison, il y a 15 ans*
+(Souvenir déclenché par la photo)
+(Est-ce que je me souviens de quelque chose à propos de cet endroit ?)
+? Mère a-t-elle déjà mentionné un phare ?
+-&gt; Oui, mais... (d6=5)
+=&gt; Elle l'a mentionné une fois, brièvement, puis a rapidement changé de sujet.
+
+PJ (Moi, jeune) : "Maman, où est-ce ?"
+N (Mère) : [nerveuse] "Juste un vieil endroit. Rien d'important."
+
+S8b *Flashback : Bureau de mère, il y a 14 ans*
+(Suivant le fil de la mémoire)
+(Ai-je déjà vu des documents sur le phare ?)
+? Est-ce que je fouinais dans ses papiers ?
+-&gt; Oui, et... (d6=6)
+=&gt; J'ai trouvé un acte de propriété. Le phare appartenait à notre famille !
+[E:SecretPhare 1/4]
+
+S9 *Quartiers du gardien de phare, présent*
+(Retour à la chronologie actuelle)
+=&gt; Armé de ce souvenir, je cherche plus attentivement des registres familiaux.</code></pre>
+<p><strong>Conseils de numérotation :</strong></p>
+<ul>
+<li>Partez de la scène qui déclenche le flashback</li>
+<li>Revenez à la numérotation séquentielle après</li>
+<li>Gardez les flashbacks courts (1-3 scènes généralement)</li>
+<li>Notez dans le contexte en revenant : <code>*Présent*</code> ou <code>*Retour à…*</code></li>
+</ul>
+</section>
+<section id="fils-narratifs-parallèles" class="level4">
+<h4 class="anchored" data-anchor-id="fils-narratifs-parallèles">5.3.3 Fils Narratifs Parallèles</h4>
+<p>Lorsque vous suivez plusieurs scénarios qui se déroulent simultanément ou en alternance, utilisez des préfixes de fil.</p>
+<p><strong>Format :</strong> <code>T#-S#</code> où T# est le numéro du fil, S# est le numéro de la scène dans ce fil.</p>
+<p><strong>Quand utiliser :</strong></p>
+<ul>
+<li>Plusieurs personnages/points de vue</li>
+<li>Événements simultanés dans différents lieux</li>
+<li>Alternance entre les lignes de l’intrigue</li>
+<li>Arcs narratifs distincts mais liés</li>
+</ul>
+<p><strong>Exemple de structure :</strong></p>
+<pre><code>T1-S1 *Personnage principal au phare*
+T2-S1 *Pendant ce temps, un allié en ville*
+T1-S2 *Retour au phare*
+T2-S2 *Retour en ville*
+T1-S3 *Phare, suite*</code></pre>
+<p><strong>Exemple complet :</strong></p>
+<pre><code>=== Session 3 ===
+[Fils] Histoire principale (T1), Enquête en ville (T2)
+
+T1-S1 *Tour du phare, crépuscule*
+[PJ:Alex|enquête sur la tour]
+@ Grimper au sommet
+d: Athlétisme d6=4 vs ND 4 -&gt; Succès
+=&gt; J'atteins le sommet. Le mécanisme de la lumière est toujours fonctionnel !
+
+? Y a-t-il quelqu'un d'autre ici ?
+-&gt; Non, mais... (d6=3)
+=&gt; Des empreintes fraîches dans la poussière descendent.
+
+T2-S1 *Archives de la ville, même heure*
+[PJ:Jordan|recherche à la bibliothèque]
+@ Chercher des registres sur le phare
+d: Recherche d6=6 vs ND 4 -&gt; Succès
+=&gt; Je trouve des documents de construction de 1923. Il y a un sous-sol caché !
+[E:Sous-solSecret 1/4]
+
+T1-S2 *Escaliers du sous-sol du phare*
+[PJ:Alex]
+@ Suivre les empreintes en bas
+d: Discrétion d6=3 vs ND 5 -&gt; Échec
+=&gt; Une marche grince bruyamment.
+
+? Quelqu'un réagit-il ?
+-&gt; Oui, et... (d6=6)
+=&gt; Une voix d'en bas : "Qui est là ?" [N:Cultiste|hostile|armé]
+
+T2-S2 *Archives de la ville, quelques instants plus tard*
+[PJ:Jordan]
+@ Appeler Alex pour le prévenir du sous-sol
+? L'appel passe-t-il ?
+-&gt; Non, et... (d6=2)
+=&gt; Pas de signal. Le phare est dans une zone morte !
+[Horloge:Alex en Danger 2/6]
+
+T1-S3 *Sous-sol du phare*
+[PJ:Alex|ignorant le danger]
+@ Essayer de négocier
+d: Tromperie d6=2 vs ND 5 -&gt; Échec
+=&gt; Le cultiste ne me croit pas. Il avance avec un couteau !</code></pre>
+<p><strong>Quand les fils convergent :</strong></p>
+<p>Une fois que les fils parallèles se rejoignent, vous pouvez soit :</p>
+<ul>
+<li>Continuer avec les préfixes de fil : <code>T1+T2-S5</code></li>
+<li>Revenir au séquentiel : <code>S14</code> (note : fils fusionnés)</li>
+</ul>
+<pre><code>T1-S6 *Alex s'échappe du phare*
+T2-S4 *Jordan conduit vers le phare*
+
+S14 *Entrée du phare, tous deux réunis*
+(Fils fusionnés)
+[PJ:Alex|blessé] rencontre [PJ:Jordan|inquiet]</code></pre>
+</section>
+<section id="montages-et-ellipses-temporelles" class="level4">
+<h4 class="anchored" data-anchor-id="montages-et-ellipses-temporelles">5.3.4 Montages et Ellipses Temporelles</h4>
+<p>Pour les activités qui s’étendent dans le temps ou plusieurs vignettes rapides, utilisez la notation décimale.</p>
+<p><strong>Format :</strong> <code>S#.#</code> (par ex., <code>S5.1</code>, <code>S5.2</code>, <code>S5.3</code>)</p>
+<p><strong>Quand utiliser :</strong></p>
+<ul>
+<li>Voyager sur de longues distances</li>
+<li>Entraînement/recherche sur plusieurs semaines</li>
+<li>Rencontres rapides multiples</li>
+<li>Collecte de ressources</li>
+<li>Séquences en accéléré</li>
+</ul>
+<p><strong>Exemple de structure :</strong></p>
+<pre><code>S7 *Début du voyage*
+S7.1 *Jour 1 : Forêt*
+S7.2 *Jour 3 : Montagnes*
+S7.3 *Jour 5 : Désert*
+S8 *Arrivée à destination*</code></pre>
+<p><strong>Exemple complet :</strong></p>
+<pre><code>S12 *Préparation pour le rituel*
+=&gt; Je dois rassembler trois composants à travers la région.
+[Piste:ComposantsRituels 0/3]
+
+S12.1 *Herboristerie, matin*
+@ Acheter des herbes sacrées
+d: Persuasion d6=5 vs ND 4 -&gt; Succès
+=&gt; L'herboriste me fait une réduction.
+[Piste:ComposantsRituels 1/3]
+[PJ:Or-5]
+
+S12.2 *Forgeron, après-midi*
+@ Obtenir une dague en argent
+? Est-elle en stock ?
+-&gt; Non, mais... (d6=4)
+=&gt; Il peut en fabriquer une pour demain.
+[Compteur:ÉchéanceRituel 2]
+
+S12.3 *Cimetière, minuit*
+@ Collecter de la terre de cimetière
+? Suis-je interrompu ?
+-&gt; Oui, et... (d6=6)
+=&gt; Le gardien me surprend ET appelle la garde !
+[Horloge:Méfiance 3/6]
+
+@ Courir et se cacher
+d: Discrétion d6=6 vs ND 5 -&gt; Succès
+=&gt; Je m'échappe avec la terre.
+[Piste:ComposantsRituels 2/3]
+
+S13 *Forge du forgeron, le lendemain matin*
+(Montage terminé, retour au séquentiel)
+=&gt; Je récupère la dague en argent.
+[Piste:ComposantsRituels 3/3]</code></pre>
+<p><strong>Exemple de montage de voyage :</strong></p>
+<pre><code>S8 *Départ de Port Cendres*
+=&gt; Le voyage de trois semaines vers les Terres du Nord commence.
+
+S8.1 *Semaine 1 : Route côtière*
+? Rencontres sur la route ?
+tbl: d100=23 -&gt; "Caravane de marchands"
+=&gt; Je me joins à une caravane pour plus de sécurité. [N:Marchands|amicaux]
+
+S8.2 *Semaine 2 : Col de montagne*
+? Problèmes météorologiques ?
+-&gt; Oui, et... (d6=6)
+=&gt; Un blizzard frappe. Le col est bloqué !
+[Horloge:ProvisionsDiminuent 2/4]
+
+@ Trouver un abri
+d: Survie d6=5 vs ND 5 -&gt; Succès
+=&gt; Je trouve une grotte. [L:GrotteMontagne|abri|sombre]
+
+S8.3 *Semaine 3 : Descente vers les terres désolées*
+@ Naviguer sur le terrain gelé
+d: Survie d6=4 vs ND 6 -&gt; Échec
+=&gt; Je suis perdu pendant deux jours.
+[Horloge:ProvisionsDiminuent 4/4]
+[PJ:Rations épuisées]
+
+S9 *Arrivée dans les Terres du Nord*
+(Voyage terminé)
+=&gt; Épuisé et affamé, mais j'y suis arrivé.</code></pre>
+</section>
+<section id="choisir-votre-approche" class="level4">
+<h4 class="anchored" data-anchor-id="choisir-votre-approche">5.3.5 Choisir votre Approche</h4>
+<p><strong>Utilisez le séquentiel (S1, S2, S3) quand :</strong></p>
+<ul>
+<li>Vous jouez une histoire linéaire et simple</li>
+<li>Vous n’avez pas besoin de manipulation temporelle complexe</li>
+<li>Vous voulez de la simplicité</li>
+<li>Le choix le plus courant</li>
+</ul>
+<p><strong>Utilisez les flashbacks (S5a, S5b) quand :</strong></p>
+<ul>
+<li>Vous révélez une histoire de fond en cours de jeu</li>
+<li>Moments de développement de personnage</li>
+<li>Vous expliquez des mystères</li>
+<li>Courtes diversions de la chronologie principale</li>
+</ul>
+<p><strong>Utilisez les fils parallèles (T1-S1, T2-S1) quand :</strong></p>
+<ul>
+<li>Vous jouez plusieurs personnages</li>
+<li>Vous suivez des événements simultanés</li>
+<li>Vous alternez entre les lieux</li>
+<li>Intrigues complexes et entrelacées</li>
+</ul>
+<p><strong>Utilisez les montages (S7.1, S7.2) quand :</strong></p>
+<ul>
+<li>Vous couvrez de longues périodes de temps</li>
+<li>Séries de scènes rapides</li>
+<li>Séquences de voyage</li>
+<li>Collecte de ressources</li>
+<li>Périodes d’entraînement/recherche</li>
+</ul>
+</section>
+<section id="éléments-de-contexte-de-scène" class="level4">
+<h4 class="anchored" data-anchor-id="éléments-de-contexte-de-scène">5.3.6 Éléments de Contexte de Scène</h4>
+<p>Au-delà de la numérotation, enrichissez les scènes avec du contexte dans le cadre :</p>
+<p><strong>Lieu :</strong></p>
+<pre><code>S1 *Tour du phare*
+S1 [L:Phare] *Salle de la tour*</code></pre>
+<p><strong>Marqueurs temporels :</strong></p>
+<pre><code>S1 *Phare, minuit*
+S1 *Phare, Jour 3, crépuscule*
+S1 *Deux semaines plus tard : Phare*</code></pre>
+<p><strong>Ton émotionnel :</strong></p>
+<pre><code>S1 *Phare (tendu)*
+S1 *Phare - moment de calme*</code></pre>
+<p><strong>Éléments multiples :</strong></p>
+<pre><code>S1 *Tour du phare, minuit, Jour 3*
+S5a *Flashback : Atelier du père, il y a 10 ans*
+T2-S3 *Pendant ce temps en ville, même soirée*
+S7.2 *Jour 2 du voyage : Col de montagne*</code></pre>
+<p><strong>Minimal (juste le numéro) :</strong></p>
+<pre><code>S1
+(Ajoutez le contexte dans la première action ou conséquence)</code></pre>
+<p>Choisissez le niveau de détail qui vous aide à suivre votre histoire. Plus de détails aident à la référence future ; moins de détails gardent les notes plus propres.</p>
+</section>
+</section>
+</section>
+<section id="exemples-complets" class="level2">
+<h2 class="anchored" data-anchor-id="exemples-complets">6. Exemples Complets</h2>
+<p>La théorie est une chose, mais voir la notation en action est ce qui la fait comprendre. Cette section montre des exemples de jeu complets dans différents styles — du raccourci ultra-compact aux journaux narratifs riches — afin que vous puissiez trouver l’approche qui vous convient.</p>
+<p>Chaque exemple démontre le même système de notation, juste avec différents niveaux de détail. Choisissez le style qui correspond à vos préférences, ou mélangez et associez selon les besoins de votre session.</p>
+<section id="journal-minimaliste-en-raccourci" class="level3">
+<h3 class="anchored" data-anchor-id="journal-minimaliste-en-raccourci">6.1 Journal Minimaliste en Raccourci</h3>
+<p>Raccourci pur, sans formatage — parfait pour un jeu rapide :</p>
+<pre><code>S1 @SeFaufiler d:4≥5 F =&gt; bruit [E:Alerte 1/6] ?Vu? -&gt;Nn3 =&gt; distrait
+S2 @Fouiller d:6≥4 S =&gt; trouve clé [E:Indice 1/4] ?Piégé? -&gt;Oi6 =&gt; oui, piques !
+S3 @Esquiver d:3≤5 F =&gt; PV-2 [PJ:PV 6] =&gt; saigne, besoin de reculer</code></pre>
+</section>
+<section id="format-numérique-hybride" class="level3">
+<h3 class="anchored" data-anchor-id="format-numérique-hybride">6.2 Format Numérique Hybride</h3>
+<p>Combine le raccourci avec la narration, en utilisant la structure markdown :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### S7 *Ruelle sombre derrière la taverne, Minuit*</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="in">@ Se faufiler devant les gardes</span></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="in">d: Discrétion d6=2 vs ND 4 -&gt; Échec</span></span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Mon pied heurte un tonneau. [E:HorlogeAlerte 2/6]</span></span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="in">? Me voient-ils ?</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a><span class="in">-&gt; Non, mais... (d6=3)</span></span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Distraits, mais un garde s'attarde. [N:Garde|vigilant]</span></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>La lumière de la torche du garde balaie les murs de la ruelle. Je me plaque</span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>dans l'ombre, retenant à peine ma respiration.</span>
+<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb77-17"><a href="#cb77-17" aria-hidden="true" tabindex="-1"></a><span class="in">N (Garde) : "Qui est là ?"</span></span>
+<span id="cb77-18"><a href="#cb77-18" aria-hidden="true" tabindex="-1"></a><span class="in">PJ : "Reste calme... reste juste calme."</span></span>
+<span id="cb77-19"><a href="#cb77-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="format-carnet-analogique" class="level3">
+<h3 class="anchored" data-anchor-id="format-carnet-analogique">6.3 Format Carnet Analogique</h3>
+<p>Même contenu que 6.2, formaté pour des notes manuscrites :</p>
+<pre><code>S7 *Ruelle sombre derrière la taverne, Minuit*
+
+@ Se faufiler devant les gardes
+d: Discrétion d6=2 vs ND 4 -&gt; Échec
+=&gt; Mon pied heurte un tonneau. [E:HorlogeAlerte 2/6]
+
+? Me voient-ils ?
+-&gt; Non, mais... (d6=3)
+=&gt; Distraits, mais un garde s'attarde. [N:Garde|vigilant]
+
+La lumière de la torche du garde balaie la ruelle. Je me plaque dans l'ombre.
+
+N (Garde) : "Qui est là ?"
+PJ : "Reste calme... reste juste calme."</code></pre>
+</section>
+<section id="journal-de-campagne-complet-numérique" class="level3">
+<h3 class="anchored" data-anchor-id="journal-de-campagne-complet-numérique">6.4 Journal de Campagne Complet (Numérique)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Mystère de Clearview</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="an">ruleset:</span><span class="co"> Loner + Oracle Mythic</span></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="an">genre:</span><span class="co"> Mystère adolescent / surnaturel</span></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="an">player:</span><span class="co"> Roberto</span></span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="an">pcs:</span><span class="co"> Alex [PJ:Alex|PV 8|Stress 0]</span></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="an">start_date:</span><span class="co"> 2025-09-03</span></span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a><span class="an">last_update:</span><span class="co"> 2025-10-28</span></span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mystère de Clearview</span></span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session 1</span></span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>*Date : 2025-09-03 | Durée : 1h30*</span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a><span class="fu">### S1 *Bibliothèque de l'école après les cours*</span></span>
+<span id="cb79-17"><a href="#cb79-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-18"><a href="#cb79-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-19"><a href="#cb79-19" aria-hidden="true" tabindex="-1"></a><span class="in">@ Se faufiler à l'intérieur pour vérifier les archives</span></span>
+<span id="cb79-20"><a href="#cb79-20" aria-hidden="true" tabindex="-1"></a><span class="in">d: Discrétion d6=5 vs ND 4 -&gt; Succès</span></span>
+<span id="cb79-21"><a href="#cb79-21" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Je me glisse à l'intérieur sans être remarqué. [L:Bibliothèque|sombre|calme]</span></span>
+<span id="cb79-22"><a href="#cb79-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a><span class="in">? Y a-t-il un indice étrange qui attend ?</span></span>
+<span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a><span class="in">-&gt; Oui (d6=6)</span></span>
+<span id="cb79-25"><a href="#cb79-25" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Je trouve une page de journal déchirée sur le phare. [E:IndicePhare 1/6]</span></span>
+<span id="cb79-26"><a href="#cb79-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-27"><a href="#cb79-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-28"><a href="#cb79-28" aria-hidden="true" tabindex="-1"></a>La page est jaunie par le temps. L'écriture est tremblante : "La lumière</span>
+<span id="cb79-29"><a href="#cb79-29" aria-hidden="true" tabindex="-1"></a>nous appelle. Nous ne devons pas répondre."</span>
+<span id="cb79-30"><a href="#cb79-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-31"><a href="#cb79-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-32"><a href="#cb79-32" aria-hidden="true" tabindex="-1"></a><span class="in">[Fil:Mystère du Phare|Ouvert]</span></span>
+<span id="cb79-33"><a href="#cb79-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-34"><a href="#cb79-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-35"><a href="#cb79-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### S2 *Devant la bibliothèque, couloir vide*</span></span>
+<span id="cb79-36"><a href="#cb79-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-37"><a href="#cb79-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-38"><a href="#cb79-38" aria-hidden="true" tabindex="-1"></a><span class="in">? Est-ce que j'entends des pas ?</span></span>
+<span id="cb79-39"><a href="#cb79-39" aria-hidden="true" tabindex="-1"></a><span class="in">-&gt; Oui, mais... (d6=4)</span></span>
+<span id="cb79-40"><a href="#cb79-40" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Un concierge s'approche, mais il ne me remarque pas encore. [N:Concierge|fatigué|méfiant]</span></span>
+<span id="cb79-41"><a href="#cb79-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-42"><a href="#cb79-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-43"><a href="#cb79-43" aria-hidden="true" tabindex="-1"></a>Je me fige. Ses clés tintent alors qu'il passe devant la porte.</span>
+<span id="cb79-44"><a href="#cb79-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-45"><a href="#cb79-45" aria-hidden="true" tabindex="-1"></a>N (Concierge) : "J'ai cru entendre quelque chose..."</span>
+<span id="cb79-46"><a href="#cb79-46" aria-hidden="true" tabindex="-1"></a>PJ (Alex, chuchotant) : "Il faut que je sorte d'ici."</span>
+<span id="cb79-47"><a href="#cb79-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-48"><a href="#cb79-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-49"><a href="#cb79-49" aria-hidden="true" tabindex="-1"></a><span class="in">@ Sortir en douce pendant qu'il est distrait</span></span>
+<span id="cb79-50"><a href="#cb79-50" aria-hidden="true" tabindex="-1"></a><span class="in">d: Discrétion d6=6 vs ND 4 -&gt; Succès</span></span>
+<span id="cb79-51"><a href="#cb79-51" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Je m'échappe dans la nuit en toute sécurité.</span></span>
+<span id="cb79-52"><a href="#cb79-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-53"><a href="#cb79-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-54"><a href="#cb79-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session 2</span></span>
+<span id="cb79-55"><a href="#cb79-55" aria-hidden="true" tabindex="-1"></a>*Date : 2025-09-10 | Durée : 2h*</span>
+<span id="cb79-56"><a href="#cb79-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-57"><a href="#cb79-57" aria-hidden="true" tabindex="-1"></a>**Résumé :** Trouvé une page de journal faisant allusion au phare. Presque repéré dans la bibliothèque.</span>
+<span id="cb79-58"><a href="#cb79-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-59"><a href="#cb79-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### S3 *Chemin vers le vieux phare, Jour 2*</span></span>
+<span id="cb79-60"><a href="#cb79-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-61"><a href="#cb79-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-62"><a href="#cb79-62" aria-hidden="true" tabindex="-1"></a><span class="in">@ Approcher silencieusement au crépuscule</span></span>
+<span id="cb79-63"><a href="#cb79-63" aria-hidden="true" tabindex="-1"></a><span class="in">d: Discrétion d6=2 vs ND 4 -&gt; Échec</span></span>
+<span id="cb79-64"><a href="#cb79-64" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Je marche sur du verre brisé, ça craque bruyamment. [Horloge:Méfiance 1/6]</span></span>
+<span id="cb79-65"><a href="#cb79-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-66"><a href="#cb79-66" aria-hidden="true" tabindex="-1"></a><span class="in">? Quelqu'un répond-il de l'intérieur ?</span></span>
+<span id="cb79-67"><a href="#cb79-67" aria-hidden="true" tabindex="-1"></a><span class="in">-&gt; Non, mais... (d6=3)</span></span>
+<span id="cb79-68"><a href="#cb79-68" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; La lumière vacille brièvement dans la fenêtre de la tour. [L:Phare|en ruine|hanté]</span></span>
+<span id="cb79-69"><a href="#cb79-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-70"><a href="#cb79-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-71"><a href="#cb79-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### S4 *Hall d'entrée du phare*</span></span>
+<span id="cb79-72"><a href="#cb79-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-73"><a href="#cb79-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-74"><a href="#cb79-74" aria-hidden="true" tabindex="-1"></a><span class="in">@ Chercher des signes d'activité sur le sol</span></span>
+<span id="cb79-75"><a href="#cb79-75" aria-hidden="true" tabindex="-1"></a><span class="in">d: Investigation d6=6 vs ND 4 -&gt; Succès</span></span>
+<span id="cb79-76"><a href="#cb79-76" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Je trouve des empreintes fraîches dans la poussière. [Fil:Qui utilise le phare ?|Ouvert]</span></span>
+<span id="cb79-77"><a href="#cb79-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-78"><a href="#cb79-78" aria-hidden="true" tabindex="-1"></a><span class="in">tbl: d100=42 -&gt; "Une lanterne cassée"</span></span>
+<span id="cb79-79"><a href="#cb79-79" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Une lanterne fissurée gît près des escaliers. [E:IndicePhare 2/6]</span></span>
+<span id="cb79-80"><a href="#cb79-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb79-81"><a href="#cb79-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-82"><a href="#cb79-82" aria-hidden="true" tabindex="-1"></a>Quelqu'un est venu ici. Récemment.</span>
+<span id="cb79-83"><a href="#cb79-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-84"><a href="#cb79-84" aria-hidden="true" tabindex="-1"></a>PJ (Alex, pensant) : "Cet endroit n'est pas aussi abandonné que tout le monde le pense..."</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="journal-de-campagne-complet-analogique" class="level3">
+<h3 class="anchored" data-anchor-id="journal-de-campagne-complet-analogique">6.5 Journal de Campagne Complet (Analogique)</h3>
+<pre><code>=== Journal de campagne : Mystère de Clearview ===
+[Titre] Mystère de Clearview
+[Règles] Loner + Oracle Mythic
+[Genre] Mystère adolescent / surnaturel
+[Joueur] Roberto
+[PJs] Alex [PJ:Alex|PV 8|Stress 0]
+[Date de début] 2025-09-03
+[Dernière mise à jour] 2025-10-28
+
+=== Session 1 ===
+[Date] 2025-09-03
+[Durée] 1h30
+
+S1 *Bibliothèque de l'école après les cours*
+
+@ Se faufiler à l'intérieur pour vérifier les archives
+d: Discrétion d6=5 vs ND 4 -&gt; Succès
+=&gt; Je me glisse à l'intérieur sans être remarqué. [L:Bibliothèque|sombre|calme]
+
+? Y a-t-il un indice étrange qui attend ?
+-&gt; Oui (d6=6)
+=&gt; Je trouve une page de journal déchirée sur le phare. [E:IndicePhare 1/6]
+
+La page est jaunie. Écriture tremblante : "La lumière nous appelle."
+
+[Fil:Mystère du Phare|Ouvert]
+
+S2 *Devant la bibliothèque, couloir vide*
+
+? Est-ce que j'entends des pas ?
+-&gt; Oui, mais... (d6=4)
+=&gt; Un concierge s'approche, mais ne me remarque pas encore. [N:Concierge|fatigué|méfiant]
+
+N (Concierge) : "J'ai cru entendre quelque chose..."
+PJ (Alex) : "Il faut que je sorte d'ici."
+
+@ Sortir en douce pendant qu'il est distrait
+d: Discrétion d6=6 vs ND 4 -&gt; Succès
+=&gt; Je m'échappe dans la nuit en toute sécurité.
+
+=== Session 2 ===
+[Date] 2025-09-10
+[Durée] 2h
+[Résumé] Trouvé une page de journal, presque repéré dans la bibliothèque.
+
+S3 *Chemin vers le phare, Jour 2*
+
+@ Approcher silencieusement au crépuscule
+d: Discrétion d6=2 vs ND 4 -&gt; Échec
+=&gt; Je marche sur du verre brisé. [Horloge:Méfiance 1/6]
+
+? Quelqu'un répond-il ?
+-&gt; Non, mais... (d6=3)
+=&gt; La lumière vacille dans la fenêtre de la tour. [L:Phare|en ruine|hanté]
+
+S4 *Hall d'entrée du phare*
+
+@ Chercher des signes sur le sol
+d: Investigation d6=6 vs ND 4 -&gt; Succès
+=&gt; Empreintes fraîches dans la poussière. [Fil:Qui utilise le phare ?|Ouvert]
+
+tbl: d100=42 -&gt; "Une lanterne cassée"
+=&gt; Lanterne fissurée près des escaliers. [E:IndicePhare 2/6]
+
+PJ (Alex) : "Cet endroit n'est pas aussi abandonné que tout le monde le pense..."
+</code></pre>
+</section>
+</section>
+<section id="bonnes-pratiques" class="level2">
+<h2 class="anchored" data-anchor-id="bonnes-pratiques">7. Bonnes Pratiques</h2>
+<p>Vous avez appris la notation — parlons maintenant de son utilisation efficace. Cette section présente des modèles éprouvés qui rendent vos journaux plus clairs et plus utiles, ainsi que des erreurs courantes à éviter.</p>
+<p>Considérez-les comme des lignes directrices issues de l’expérience collective de la communauté solo. Ce ne sont pas des règles rigides, mais elles vous aideront à créer des journaux faciles à lire, à référencer et à partager.</p>
+<section id="bonnes-pratiques-1" class="level3">
+<h3 class="anchored" data-anchor-id="bonnes-pratiques-1">7.1 Bonnes Pratiques ✓</h3>
+<p>Ces modèles rendent vos journaux plus propres, plus faciles à rechercher et à référencer plus tard. Vous n’avez pas besoin de tous les suivre, mais ils représentent ce qui fonctionne bien pour la plupart des joueurs solo.</p>
+<p><strong>À faire : Garder les actions et les jets connectés</strong></p>
+<pre><code>@ Crocheter la serrure
+d: d20=15 vs DC 14 -&gt; Succès
+=&gt; La porte s'ouvre silencieusement.</code></pre>
+<p><strong>À faire : Utiliser des balises pour les éléments persistants</strong></p>
+<pre><code>[N:Jonah|amical|blessé]
+[L:Phare|en ruine]</code></pre>
+<p><strong>À faire : Enregistrer clairement les conséquences</strong></p>
+<pre><code>=&gt; Je trouve la clé. [E:Indice 2/4]
+=&gt; Mais le garde m'a entendu. [Horloge:Alerte 1/6]</code></pre>
+<p><strong>À faire : Utiliser des balises de référence dans les scènes ultérieures</strong></p>
+<pre><code>Première mention : [N:Jonah|amical]
+Plus tard : [#N:Jonah] s'approche prudemment</code></pre>
+<p><strong>À faire : Mélanger raccourci et narration au besoin</strong></p>
+<pre><code>@ Se faufiler devant le garde
+d: 5≥4 S -&gt; Succès
+=&gt; Je passe inaperçu, le cœur battant.</code></pre>
+</section>
+<section id="mauvaises-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="mauvaises-pratiques">7.2 Mauvaises Pratiques ✗</h3>
+<p>Ce sont des pièmes courants qui rendent les journaux plus difficiles à lire ou à analyser. Si vous vous surprenez à faire cela, ne vous inquiétez pas — ajustez simplement pour la prochaine fois. Nous sommes tous passés par là !</p>
+<p><strong>À ne pas faire : Enfouir la mécanique dans la prose</strong></p>
+<pre><code>❌ J'ai essayé de crocheter la serrure et j'ai fait un 15 qui a battu le DC donc je l'ai ouverte
+
+✔️ @ Crocheter la serrure
+  d: 15≥14 -&gt; Succès
+  =&gt; La porte s'ouvre silencieusement.</code></pre>
+<p><strong>À ne pas faire : Oublier d’enregistrer les conséquences</strong></p>
+<pre><code>❌ @ Attaquer le garde
+  d: 8≤10 -&gt; Échec
+
+✔️ @ Attaquer le garde
+  d: 8≤10 -&gt; Échec
+  =&gt; Ma lame ricoche sur son armure. Il contre-attaque !</code></pre>
+<p><strong>À ne pas faire : Perdre le fil des balises entre les scènes</strong></p>
+<pre><code>❌ [N:Garde|alerte] ... puis plus tard ... [N:Garde|endormi]
+   (Comment cela a-t-il changé ? Quand ?)
+
+✔️ [N:Garde|alerte] ... puis plus tard ...
+  @ L'assommer
+  d: 6≥5 S =&gt; [N:Garde|inconscient]</code></pre>
+<p><strong>À ne pas faire : Mélanger les symboles d’action et d’oracle</strong></p>
+<pre><code>❌ ? Se faufiler devant les gardes (C'est une action, pas une question)
+
+✔️ @ Se faufiler devant les gardes (Les actions utilisent @)
+  ? Me remarquent-ils ? (Les questions utilisent ?)</code></pre>
+<p><strong>À ne pas faire : Oublier le contexte de la scène</strong></p>
+<pre><code>❌ S7
+  @ Se faufiler devant les gardes
+  
+✔️ S7 *Ruelle sombre, minuit*
+  @ Se faufiler devant les gardes</code></pre>
+</section>
+</section>
+<section id="modèles" class="level2">
+<h2 class="anchored" data-anchor-id="modèles">8. Modèles</h2>
+<p>Partir d’une page blanche peut être intimidant. Ces modèles vous donnent un point de départ structuré — copiez-les, remplissez les blancs et commencez à jouer.</p>
+<p>Chaque modèle est disponible en formats <strong>markdown numérique</strong> et <strong>carnet analogique</strong>. Choisissez celui qui correspond à votre style de jeu, ou utilisez-les comme inspiration pour créer vos propres modèles.</p>
+<p>Ne les traitez pas comme des formulaires rigides. Ce sont des échafaudages. Une fois que vous serez à l’aise avec la notation, vous développerez probablement vos propres modèles qui répondront mieux à vos besoins spécifiques.</p>
+<section id="modèle-de-campagne-yaml-numérique" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-de-campagne-yaml-numérique">8.1 Modèle de Campagne (YAML numérique)</h3>
+<p>Pour les fichiers markdown numériques, utilisez le YAML front matter pour stocker les métadonnées de la campagne. Cela va tout en haut de votre fichier, avant tout autre contenu.</p>
+<p>Copiez ce modèle, remplissez vos détails, et vous êtes prêt à commencer votre première session.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ruleset</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">genre</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="fu">player</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pcs</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="fu">start_date</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="fu">last_update</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a><span class="fu">themes</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tone</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb91-11"><a href="#cb91-11" aria-hidden="true" tabindex="-1"></a><span class="fu">notes</span><span class="kw">:</span><span class="at"> </span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code># [Titre de la campagne]
+
+## Session 1
+*Date : | Durée : *
+
+### S1 *Scène de départ*
+
+Votre journal de jeu ici...</code></pre>
+</section>
+<section id="modèle-de-campagne-analogique" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-de-campagne-analogique">8.2 Modèle de Campagne (Analogique)</h3>
+<p>Pour les carnets papier, écrivez ce bloc d’en-tête au début de votre journal de campagne. Restez simple — vous pouvez toujours ajouter plus de détails plus tard si nécessaire.</p>
+<pre><code>=== Journal de campagne : [Titre] ===
+[Titre] 
+[Règles] 
+[Genre] 
+[Joueur] 
+[PJs] 
+[Date de début] 
+[Dernière mise à jour] 
+[Outils] 
+[Thèmes] 
+[Ton] 
+[Notes] 
+
+=== Session 1 ===
+[Date] 
+[Durée] 
+
+S1 *Scène de départ*
+
+Votre journal de jeu ici...</code></pre>
+</section>
+<section id="modèle-de-session" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-de-session">8.3 Modèle de Session</h3>
+<p>Utilisez ceci au début de chaque session de jeu pour marquer les limites et fournir un contexte. La version numérique utilise des titres markdown ; la version analogique utilise des en-têtes écrits.</p>
+<p>Remplissez ce qui est utile et sautez ce qui ne l’est pas. Le seul champ essentiel est la date — tout le reste est facultatif.</p>
+<p><strong>Numérique :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb94"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session X</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>*Date : | Durée : | Scènes : *</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>**Résumé :** </span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>**Objectifs :** </span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="fu">### S1 *Description de la scène*</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Analogique :</strong></p>
+<pre><code>=== Session X ===
+[Date] 
+[Durée] 
+[Résumé] 
+[Objectifs] 
+
+S1 *Description de la scène*</code></pre>
+</section>
+<section id="modèle-de-scène-rapide" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-de-scène-rapide">8.4 Modèle de Scène Rapide</h3>
+<p>C’est votre modèle de travail — la structure de base que vous utiliserez scène après scène. Il est intentionnellement minimal : juste assez de structure pour vous garder orienté sans vous ralentir.</p>
+<p>Utilisez-le comme point de départ par défaut pour chaque scène, que vous jouiez en numérique ou en analogique.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb96"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>S# *Lieu, heure*</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="in">@ Votre action</span></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="in">d: votre jet -&gt; résultat</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Ce qui se passe</span></span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="in">? Votre question</span></span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="in">-&gt; Réponse de l'oracle</span></span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="in">=&gt; Ce que cela signifie</span></span>
+<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="adaptation-à-votre-système" class="level2">
+<h2 class="anchored" data-anchor-id="adaptation-à-votre-système">9. Adaptation à votre Système</h2>
+<p>Voici la belle partie : cette notation fonctionne avec <em>n’importe quel</em> système de JDR solo. <em>Ironsworn</em>, <em>Mythic GME</em>, <em>Thousand Year Old Vampire</em>, votre propre système maison — peu importe. Les symboles de base restent les mêmes ; seuls les détails de la résolution changent.</p>
+<p>Cette section vous montre comment adapter la notation de jet <code>d:</code> et les formats d’oracle <code>-&gt;</code> pour correspondre à votre système de jeu spécifique. Nous couvrirons les systèmes courants (PbtA, FitD, Ironsworn, OSR) et les oracles (Mythic, CRGE, MUNE), mais les principes fonctionnent pour n’importe quoi.</p>
+<p><strong>L’idée clé :</strong> La notation sépare la <em>mécanique</em> de la <em>fiction</em>. Votre système détermine comment la mécanique fonctionne ; la notation ne fait que les enregistrer de manière cohérente.</p>
+<section id="notation-de-jet-spécifique-au-système" class="level3">
+<h3 class="anchored" data-anchor-id="notation-de-jet-spécifique-au-système">9.1 Notation de Jet Spécifique au Système</h3>
+<p>La notation <code>d:</code> fonctionne avec n’importe quel système — vous avez juste besoin de l’adapter à vos mécaniques de dés spécifiques. Voici à quoi ressemble la notation pour les systèmes de JDR solo populaires.</p>
+<p>Ces exemples montrent le modèle : enregistrez ce que vous avez lancé, comparez-le à ce dont vous aviez besoin, notez le résultat. Les détails changent selon le système, mais la structure reste la même.</p>
+<section id="powered-by-the-apocalypse-pbta" class="level4">
+<h4 class="anchored" data-anchor-id="powered-by-the-apocalypse-pbta">9.1.1 Powered by the Apocalypse (PbtA)</h4>
+<pre><code>d: 2d6=9 -&gt; Succès total (10+)
+d: 2d6=7 -&gt; Succès partiel (7-9)
+d: 2d6=4 -&gt; Échec (6-)</code></pre>
+</section>
+<section id="forged-in-the-dark-fitd" class="level4">
+<h4 class="anchored" data-anchor-id="forged-in-the-dark-fitd">9.1.2 Forged in the Dark (FitD)</h4>
+<pre><code>d: 4d6=6,5,4,2 (prendre le plus haut=6) -&gt; Succès critique
+d: 3d6=4,4,2 -&gt; Succès partiel (4-5)
+d: 2d6=3,2 -&gt; Échec (1-3)</code></pre>
+</section>
+<section id="ironsworn" class="level4">
+<h4 class="anchored" data-anchor-id="ironsworn">9.1.3 Ironsworn</h4>
+<pre><code>d: Action=7+Stat=2=9 vs Défi=4,8 -&gt; Succès faible
+d: Action=10+Stat=3=13 vs Défi=2,7 -&gt; Succès fort</code></pre>
+</section>
+<section id="fatefudge" class="level4">
+<h4 class="anchored" data-anchor-id="fatefudge">9.1.4 Fate/Fudge</h4>
+<pre><code>d: 4dF=+2 (++0-) +Compétence=3 = +5 -&gt; Succès avec style
+d: 4dF=-1 (-0--) +Compétence=2 = +1 -&gt; Égalité</code></pre>
+</section>
+<section id="osrdd-traditionnel" class="level4">
+<h4 class="anchored" data-anchor-id="osrdd-traditionnel">9.1.5 OSR/D&amp;D Traditionnel</h4>
+<pre><code>d: d20=15+Mod=2=17 vs CA 16 -&gt; Touche
+d: d20=8+Mod=-1=7 vs DC 10 -&gt; Échec</code></pre>
+</section>
+</section>
+<section id="adaptations-de-loracle" class="level3">
+<h3 class="anchored" data-anchor-id="adaptations-de-loracle">9.2 Adaptations de L’oracle</h3>
+<p>Différents systèmes d’oracle ont différents formats de sortie. Certains donnent des réponses oui/non, d’autres génèrent des résultats complexes. Voici comment enregistrer les résultats des systèmes d’oracle populaires.</p>
+<p>La clé est la cohérence : utilisez toujours <code>-&gt;</code> pour les résultats de l’oracle, puis capturez toutes les informations que votre oracle fournit.</p>
+<section id="mythic-gme" class="level4">
+<h4 class="anchored" data-anchor-id="mythic-gme">9.2.1 Mythic GME</h4>
+<pre><code>? Le garde me remarque-t-il ? (Probabilité : Improbable)
+-&gt; Non, mais... (FC=4)
+=&gt; Il ne me voit pas, mais il est méfiant.</code></pre>
+</section>
+<section id="crge-conjectural-roleplaying-game-engine" class="level4">
+<h4 class="anchored" data-anchor-id="crge-conjectural-roleplaying-game-engine">9.2.2 CRGE (Conjectural Roleplaying Game Engine)</h4>
+<pre><code>? Quelle est l'humeur du marchand ?
+-&gt; Afflux : Acteur + Foyer =&gt; En colère + Trahison
+=&gt; Le marchand est furieux d'avoir été trompé.</code></pre>
+</section>
+<section id="mune-madey-upy-number-engine" class="level4">
+<h4 class="anchored" data-anchor-id="mune-madey-upy-number-engine">9.2.3 MUNE (Madey Upy Number Engine)</h4>
+<pre><code>? Y a-t-il quelqu'un à la maison ?
+-&gt; Probable + jet 2,4 =&gt; Oui
+=&gt; Les lumières sont allumées, quelqu'un est certainement à l'intérieur.</code></pre>
+</section>
+<section id="une-universal-npc-emulator" class="level4">
+<h4 class="anchored" data-anchor-id="une-universal-npc-emulator">9.2.4 UNE (Universal NPC Emulator)</h4>
+<pre><code>gen: Motivation UNE -&gt; Pouvoir + Réputation
+=&gt; [N:Baron|ambitieux|cherche la reconnaissance]</code></pre>
+</section>
+</section>
+<section id="gestion-des-cas-particuliers" class="level3">
+<h3 class="anchored" data-anchor-id="gestion-des-cas-particuliers">9.3 Gestion des Cas Particuliers</h3>
+<p>Chaque système a ses bizarreries. Voici comment gérer les situations courantes qui ne correspondent pas aux modèles de notation de base.</p>
+<section id="jets-multiples-en-une-seule-action" class="level4">
+<h4 class="anchored" data-anchor-id="jets-multiples-en-une-seule-action">9.3.1 Jets Multiples en une Seule Action</h4>
+<p>Lorsque vous devez faire plusieurs jets pour une seule action :</p>
+<p><strong>Avantage/Désavantage :</strong></p>
+<pre><code>@ Attaquer avec avantage
+d: 2d20=15,8 (prendre le plus haut) vs ND 12 -&gt; 15≥12 Succès
+=&gt; Je frappe juste, la lame trouvant une faille dans l'armure.</code></pre>
+<p><strong>Plusieurs pools de dés :</strong></p>
+<pre><code>@ Effectuer un rituel complexe
+d: INT d6=4, VOL d6=5, vs ND 4 chacun -&gt; Les deux réussissent
+=&gt; Le sort prend effet, l'énergie crépitant entre mes doigts.</code></pre>
+<p><strong>Jets opposés :</strong></p>
+<pre><code>@ Bras de fer avec le marin
+d: FOR d20=12 vs marin d20=15 -&gt; 12≤15 Échec
+=&gt; Sa poigne se resserre. Mon bras claque sur la table.</code></pre>
+</section>
+<section id="résultats-doracle-ambigus" class="level4">
+<h4 class="anchored" data-anchor-id="résultats-doracle-ambigus">9.3.2 Résultats D’oracle Ambigus</h4>
+<p>Lorsque l’oracle donne des résultats flous ou contradictoires :</p>
+<pre><code>? Le marchand est-il digne de confiance ?
+-&gt; Oui, mais... (d6=4)
+(note : "mais" contredit "oui" — interprétation : digne de confiance mais cache quelque chose)
+=&gt; Il semble honnête, mais jette des regards nerveux vers la porte.</code></pre>
+<p>Ou relancez si vous êtes vraiment bloqué :</p>
+<pre><code>? Puis-je lui faire confiance ?
+-&gt; Résultat incertain (d6=3 sur oracle binaire)
+(note : je pose une question plus spécifique)
+? Essaie-t-il de m'aider ?
+-&gt; Non, et... (d6=2)
+=&gt; Il travaille activement contre moi.</code></pre>
+</section>
+<section id="conséquences-imbriquées" class="level4">
+<h4 class="anchored" data-anchor-id="conséquences-imbriquées">9.3.3 Conséquences Imbriquées</h4>
+<p>Parfois, une conséquence en entraîne une autre, créant une cascade :</p>
+<pre><code>d: Crochetage 5≥4 -&gt; Succès
+=&gt; La porte s'ouvre
+=&gt; Mais les gonds grincent bruyamment
+=&gt; Les gardes dans la pièce voisine l'entendent [E:HorlogeAlerte 1/6]
+=&gt; L'un d'eux commence à marcher dans cette direction [N:Garde|enquête]</code></pre>
+<p><strong>Quand utiliser :</strong> Succès ou échecs majeurs avec de multiples effets d’entraînement. N’en abusez pas — la plupart des actions ont une conséquence claire.</p>
+</section>
+<section id="questions-à-loracle-qui-échouent" class="level4">
+<h4 class="anchored" data-anchor-id="questions-à-loracle-qui-échouent">9.3.4 Questions à L’oracle qui Échouent</h4>
+<p>Et si l’oracle n’aide pas ?</p>
+<pre><code>? Qu'y a-t-il derrière la porte ?
+-&gt; [Résultat de jet flou/contradictoire]
+(note : je pose une question plus spécifique)
+? Y a-t-il un danger derrière la porte ?
+-&gt; Oui, et...
+=&gt; Danger, et c'est immédiat !</code></pre>
+<p><strong>Conseil de pro :</strong> Si un résultat d’oracle ne suscite pas de fiction, il est acceptable de reformuler la question ou de relancer. L’oracle sert votre histoire, pas l’inverse.</p>
+</section>
+</section>
+</section>
+<section id="add-ons" class="level2">
+<h2 class="anchored" data-anchor-id="add-ons">10. Add-ons</h2>
+<p>Les cinq symboles de base — <code>@</code>, <code>?</code>, <code>d:</code>, <code>-&gt;</code>, <code>=&gt;</code> — couvrent la grande majorité du jeu en solo. Mais certains jeux vont plus loin dans des directions spécifiques : combat tactique avec initiative et suivi des dégâts, exploration de donjons avec états de pièces et gestion de la lumière, systèmes de ressources où chaque torche compte. Ces besoins sont réels, mais ils ne sont pas universels.</p>
+<p>C’est là qu’interviennent les add-ons.</p>
+<section id="ce-que-sont-les-add-ons" class="level3">
+<h3 class="anchored" data-anchor-id="ce-que-sont-les-add-ons">10.1 Ce que sont les Add-ons</h3>
+<p>Un add-on est un <strong>document d’extension autonome</strong> qui approfondit la notation Lonelog pour un type de jeu spécifique. Chaque add-on :</p>
+<ul>
+<li>Fonctionne avec les cinq symboles de base — il les étend, ne les remplace jamais</li>
+<li>Introduit des conventions (balises, formats, blocs structurels) adaptées à son domaine</li>
+<li>Fonctionne de manière indépendante — vous ne lisez que l’add-on dont vous avez besoin, pas tout l’écosystème</li>
+<li>S’intègre proprement aux autres add-ons si vous en utilisez plusieurs</li>
+</ul>
+<p>Les add-ons vivent dans des fichiers séparés plutôt que dans ce document. C’est un choix délibéré : un explorateur de donjons qui ne combat jamais dans l’ordre d’initiative ne devrait pas avoir à faire défiler quatre pages de règles de combat. Le cœur de Lonelog doit rester léger. Les add-ons permettent au système de se développer sans alourdir le manuel que vous emportez à table.</p>
+<p>Pensez au cœur comme à une langue, et aux add-ons comme à des vocabulaires spécialisés. Un linguiste et un marin parlent tous deux français, mais le marin a des mots pour des choses dont le linguiste n’a pas besoin. Les mots ne sont pas en conflit — ils se complètent.</p>
+</section>
+<section id="pourquoi-des-fichiers-séparés" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-des-fichiers-séparés">10.2 Pourquoi des fichiers séparés</h3>
+<p>Trois raisons :</p>
+<p><strong>Ne téléchargez que ce dont vous avez besoin.</strong> Sur itch.io, dans un coffre Markdown ou imprimé et glissé dans un carnet — vous prenez les add-ons qui correspondent à votre campagne actuelle. Vous jouez à Ironsworn ? Prenez l’add-on de suivi des ressources. Vous explorez un donjon ? Ajoutez l’add-on de donjon. Rien que vous n’utilisiez pas.</p>
+<p><strong>Mise à jour indépendante.</strong> Si l’Add-on de Combat affine sa notation d’initiative, cette mise à jour ne touche pas à la spécification de base. Le cœur et les add-ons peuvent évoluer à leur propre rythme, rester synchronisés là où c’est nécessaire et diverger là où ils diffèrent légitimement.</p>
+<p><strong>Partage et remixage libres.</strong> La communauté peut écrire, publier et partager des add-ons sans modifier le document de base. Un joueur qui développe une notation brillante pour l’exploration d’hexagones peut la publier en tant qu’add-on Lonelog. Le cœur partagé garantit qu’il sera immédiatement lisible par quiconque connaît Lonelog.</p>
+</section>
+<section id="comment-utiliser-les-add-ons" class="level3">
+<h3 class="anchored" data-anchor-id="comment-utiliser-les-add-ons">10.3 Comment utiliser les Add-ons</h3>
+<p><strong>Commencez par le cœur.</strong> Si vous découvrez Lonelog, passez au moins une session ou deux avec seulement les cinq symboles de base avant d’ajouter quoi que ce soit. Le cœur gère plus de choses que vous ne pourriez le penser.</p>
+<p><strong>Ajoutez-en un à la fois.</strong> Si vous ajoutez une notation d’exploration de donjon et un système de suivi des ressources dans la même campagne, introduisez-les à une session d’intervalle. Cela vous donne le temps d’assimiler chacun d’eux avant de les combiner.</p>
+<p><strong>Mélangez et assortissez librement.</strong> Les add-ons sont conçus pour coexister. L’Add-on de Combat et l’Add-on d’Exploration de Donjon, par exemple, sont écrits pour fonctionner dans le même journal de session sans conflit de symboles.</p>
+<p><strong>En cas de doute, ne l’utilisez pas.</strong> Si un add-on ressemble plus à une contrainte qu’à une aide, ne l’utilisez pas. La notation de base est toujours suffisante. Les add-ons servent votre jeu ; votre jeu ne sert pas les add-ons.</p>
+</section>
+<section id="add-ons-disponibles" class="level3">
+<h3 class="anchored" data-anchor-id="add-ons-disponibles">10.4 Add-ons Disponibles</h3>
+<p>Les add-ons suivants font partie de l’écosystème officiel de Lonelog :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 32%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Add-on</th>
+<th>Fichier</th>
+<th>Idéal pour</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Combat Add-on</td>
+<td><code>addons/combat.md</code></td>
+<td>Combats tactiques, initiative, suivi des PV</td>
+</tr>
+<tr class="even">
+<td>Dungeon Crawling Add-on</td>
+<td><code>addons/dungeon.md</code></td>
+<td>Exploration de pièces, lumière, pièges, notes cartographiques</td>
+</tr>
+<tr class="odd">
+<td>Resource Tracking Add-on</td>
+<td><code>addons/resources.md</code></td>
+<td>Inventaire, dés d’usage, richesse, approvisionnement</td>
+</tr>
+</tbody>
+</table>
+<p>Les add-ons créés par la communauté suivent les mêmes conventions. Voir les <strong>Directives pour les Add-ons de la Communauté</strong> pour savoir comment en écrire un, et la page itch.io de Lonelog pour la bibliothèque de la communauté.</p>
+</section>
+<section id="une-note-pour-les-auteurs-dadd-ons" class="level3">
+<h3 class="anchored" data-anchor-id="une-note-pour-les-auteurs-dadd-ons">10.5 Une note pour les auteurs d’Add-ons</h3>
+<p>Si vous écrivez un add-on Lonelog — pour votre propre usage, pour le partager avec des amis ou pour le publier — les <strong>Directives pour les Add-ons de la Communauté</strong> et le <strong>Modèle d’Add-on</strong> sont votre point de départ. Ils couvrent les contraintes de conception qui maintiennent la compatibilité des add-ons avec le cœur, le format de métadonnées requis et la structure des exemples pour qu’ils se lisent naturellement aux côtés des journaux Lonelog classiques.</p>
+<p>Le principe directeur : <strong>étendre, ne pas remplacer.</strong> Un add-on Lonelog qui invente son propre symbole d’action n’est pas un add-on Lonelog — c’est un fork. La puissance de l’écosystème provient des conventions partagées au cœur, avec la créativité dans les extensions.</p>
+</section>
+</section>
+<section id="annexes" class="level2">
+<h2 class="anchored" data-anchor-id="annexes">Annexes</h2>
+<section id="a.-légende-de-la-notation-de-jdr-solo" class="level3">
+<h3 class="anchored" data-anchor-id="a.-légende-de-la-notation-de-jdr-solo">A. Légende de la Notation de JDR Solo</h3>
+<p>Ceci est votre référence rapide — l’aide-mémoire à garder à portée de main pendant que vous jouez. Vous avez oublié ce que signifie <code>=&gt;</code> ? Besoin de vous rappeler comment formater une horloge ? Cette section est là pour vous.</p>
+<p>Pensez-y comme la “liste de vocabulaire” de la notation. Tout ce qui est ici a été expliqué en détail plus tôt ; c’est juste la version condensée pour une recherche rapide.</p>
+<p>Mettez cette section en favori. Vous y reviendrez souvent lors de vos premières sessions, puis de moins en moins à mesure que la notation deviendra une seconde nature.</p>
+<section id="a.1-symboles-de-base" class="level4">
+<h4 class="anchored" data-anchor-id="a.1-symboles-de-base">A.1 Symboles de Base</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbole</th>
+<th>Signification</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>@</code></td>
+<td>Action du joueur (mécanique)</td>
+<td><code>@ Crocheter la serrure</code></td>
+</tr>
+<tr class="even">
+<td><code>?</code></td>
+<td>Question à l’oracle (monde/incertitude)</td>
+<td><code>? Y a-t-il quelqu'un à l'intérieur ?</code></td>
+</tr>
+<tr class="odd">
+<td><code>d:</code></td>
+<td>Jet de mécanique/résultat</td>
+<td><code>d: 2d6=8 vs ND 7 -&gt; Succès</code></td>
+</tr>
+<tr class="even">
+<td><code>-&gt;</code></td>
+<td>Résultat de l’oracle/des dés</td>
+<td><code>-&gt; Oui, mais…</code></td>
+</tr>
+<tr class="odd">
+<td><code>=&gt;</code></td>
+<td>Conséquence/résultat</td>
+<td><code>=&gt; La porte s'ouvre silencieusement</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="a.2-opérateurs-de-comparaison" class="level4">
+<h4 class="anchored" data-anchor-id="a.2-opérateurs-de-comparaison">A.2 Opérateurs de Comparaison</h4>
+<ul>
+<li><code>≥</code> ou <code>&gt;=</code> — Supérieur ou égal (atteint/bat le ND)</li>
+<li><code>≤</code> ou <code>&lt;=</code> — Inférieur ou égal (n’atteint pas le ND)</li>
+<li><code>vs</code> — Contre (comparaison explicite)</li>
+<li><code>S</code> — Indicateur de succès</li>
+<li><code>F</code> — Indicateur d’échec</li>
+</ul>
+</section>
+<section id="a.3-balises-de-suivi" class="level4">
+<h4 class="anchored" data-anchor-id="a.3-balises-de-suivi">A.3 Balises de Suivi</h4>
+<ul>
+<li><code>[N:Nom|balises]</code> — PNJ (première mention)</li>
+<li><code>[#N:Nom]</code> — PNJ (référence à une mention antérieure)</li>
+<li><code>[L:Nom|balises]</code> — Lieu</li>
+<li><code>[E:Nom X/Y]</code> — Événement/Horloge</li>
+<li><code>[Fil:Nom|état]</code> — Fil conducteur de l’histoire</li>
+<li><code>[PJ:Nom|stats]</code> — Personnage joueur</li>
+<li><code>[PJ:Nom|catégorie:balise,balise]</code> — Balise avec regroupement par catégorie (§4.1.7)</li>
+</ul>
+</section>
+<section id="a.4-suivi-de-la-progression" class="level4">
+<h4 class="anchored" data-anchor-id="a.4-suivi-de-la-progression">A.4 Suivi de la Progression</h4>
+<ul>
+<li><code>[Horloge:Nom X/Y]</code> — Horloge (se remplit)</li>
+<li><code>[Piste:Nom X/Y]</code> — Piste de progression</li>
+<li><code>[Compteur:Nom X]</code> — Compte à rebours</li>
+</ul>
+</section>
+<section id="a.5-génération-aléatoire" class="level4">
+<h4 class="anchored" data-anchor-id="a.5-génération-aléatoire">A.5 Génération Aléatoire</h4>
+<ul>
+<li><code>tbl: jet -&gt; résultat</code> — Consultation simple de table</li>
+<li><code>gen: système -&gt; résultat</code> — Générateur complexe</li>
+</ul>
+</section>
+<section id="a.6-structure" class="level4">
+<h4 class="anchored" data-anchor-id="a.6-structure">A.6 Structure</h4>
+<ul>
+<li><code>S#</code> ou <code>S#a</code> — Numéro de scène</li>
+<li><code>T#-S#</code> — Scène spécifique à un fil</li>
+</ul>
+</section>
+<section id="a.7-narration-optionnel" class="level4">
+<h4 class="anchored" data-anchor-id="a.7-narration-optionnel">A.7 Narration (Optionnel)</h4>
+<ul>
+<li>En ligne : <code>=&gt; Prose ici</code></li>
+<li>Dialogue : <code>N (Nom) : "Discours"</code></li>
+<li>Bloc : <code>--- texte ---</code></li>
+</ul>
+</section>
+<section id="a.8-méta" class="level4">
+<h4 class="anchored" data-anchor-id="a.8-méta">A.8 Méta</h4>
+<ul>
+<li><code>(note : …)</code> — Réflexion, rappel, règle maison</li>
+</ul>
+</section>
+<section id="a.9-exemple-de-ligne-complète" class="level4">
+<h4 class="anchored" data-anchor-id="a.9-exemple-de-ligne-complète">A.9 Exemple de Ligne Complète</h4>
+<pre><code>S3 @Crocheter serrure d:15≥14 S =&gt; porte s'ouvre silencieusement [N:Garde|alerte]</code></pre>
+</section>
+<section id="a.10-catégories-de-balises-multilignes-et-contexte-de-jet-v1.3" class="level4">
+<h4 class="anchored" data-anchor-id="a.10-catégories-de-balises-multilignes-et-contexte-de-jet-v1.3">A.10 Catégories de Balises, Multilignes et Contexte de Jet (v1.3)</h4>
+<p><strong>Syntaxe de catégorie :</strong></p>
+<pre><code>[PJ:Jonah|trait:amical,curieux|statut:blessé|stat:PV 8]</code></pre>
+<p><strong>Forme multiligne :</strong></p>
+<pre><code>[PJ:Jonah
+  | trait: amical, curieux
+  | statut: blessé
+  | stat: PV 8, Stress 2
+]</code></pre>
+<p><strong>Contexte de jet à l’intérieur de <code>d:</code> :</strong></p>
+<pre><code>d: Enquêter 2d6 [pouvoir: Être gentil avec les autres, Naïf | contre: réticent-à-parler-1] = 8 -&gt; Partiel</code></pre>
+</section>
+</section>
+<section id="b.-faq" class="level3">
+<h3 class="anchored" data-anchor-id="b.-faq">B. FAQ</h3>
+<p>Vous avez des questions ? Vous n’êtes pas seul. Voici les questions les plus courantes des personnes qui apprennent la notation, avec des réponses directes.</p>
+<p>Si votre question n’est pas ici, rappelez-vous : la notation est flexible. Si vous vous demandez si vous pouvez faire quelque chose différemment, la réponse est probablement “oui, si ça marche pour vous.”</p>
+<p><strong>Q : Dois-je utiliser tous les éléments ?</strong> R : Non ! Commencez avec juste <code>@</code>, <code>?</code>, <code>d:</code>, <code>-&gt;</code>, et <code>=&gt;</code>. N’ajoutez d’autres éléments que s’ils vous aident.</p>
+<p><strong>Q : Puis-je utiliser ceci avec des JDR traditionnels (avec un MJ) ?</strong> R : La notation de base fonctionne très bien pour toutes les notes de JDR. Les éléments de l’oracle (<code>?</code>, <code>-&gt;</code>) sont spécifiquement pour le jeu solo, mais la notation action/résolution fonctionne partout.</p>
+<p><strong>Q : Et si mon système n’utilise pas de dés ?</strong> R : Utilisez <code>d:</code> pour toute mécanique de résolution : <code>d: Tirer une carte -&gt; Dame de Pique</code>, <code>d: Dépenser un jeton -&gt; Succès</code></p>
+<p><strong>Q : Dois-je utiliser le format numérique ou analogique ?</strong> R : Celui que vous préférez ! Ils utilisent la même notation. Le numérique a une meilleure recherche/organisation ; l’analogique est immédiat et tactile.</p>
+<p><strong>Q : À quel point mes notes doivent-elles être détaillées ?</strong> R : Aussi détaillées que vous le souhaitez ! Le système fonctionne pour du raccourci pur (Exemple 6.1) ou une narration riche (Exemple 6.4).</p>
+<p><strong>Q : Puis-je partager mes journaux avec d’autres ?</strong> R : Oui ! C’est l’une des raisons d’une notation standardisée. D’autres personnes familières avec le système peuvent lire vos journaux facilement.</p>
+<p><strong>Q : Qu’en est-il des règles maison ou des symboles personnalisés ?</strong> R : Documentez-les dans des notes méta : <code>(note : utilisation de + pour l'avantage, - pour le désavantage)</code>. Le système est conçu pour être étendu.</p>
+<p><strong>Q : Les numéros de scène doivent-ils être séquentiels ?</strong> R : Non. Utilisez <code>S1</code>, <code>S2</code>, <code>S3</code> pour la simplicité, mais créez des branches (<code>S3a</code>, <code>S3b</code>) ou utilisez des préfixes de fil (<code>T1-S1</code>) si cela est utile.</p>
+<p><strong>Q : Dois-je mettre à jour les balises à chaque changement ?</strong> R : Montrez explicitement les changements significatifs : <code>[N:Garde|alerte]</code> → <code>[N:Garde|inconscient]</code>. Les changements mineurs peuvent être implicites par la narration.</p>
+<p><strong>Q : Si je publie un journal de session enregistré publiquement, doit-il être sous licence ShareAlike ?</strong> R : Non. La licence CC BY-SA 4.0 couvre le document de spécification Lonelog, pas le contenu créé à l’aide de la notation. Vos journaux de session sont votre propre travail créatif indépendant — publiez-les et licenciez-les comme vous le souhaitez. La clause ShareAlike ne s’appliquerait que si vous adaptiez ou redistribuiez la spécification elle-même, par exemple en créant un nouveau système de notation à partir de Lonelog.</p>
+<p><strong>Q : J’ai créé ma propre table aléatoire. Comment l’inclure dans mon journal ?</strong> R : Définissez-la en ligne avec <code>tbl: Nom (dé)</code> suivi des entrées indentées, ou utilisez <code>tbl: Nom [Option A, Option B, ...]</code> pour des ensembles d’options non numérotés. Voir §4.3.1 et §4.3.2. Cela rend votre journal autonome — les lecteurs voient toute la table et le résultat sans avoir besoin de références externes.</p>
+</section>
+<section id="c.-philosophie-de-conception-des-symboles" class="level3">
+<h3 class="anchored" data-anchor-id="c.-philosophie-de-conception-des-symboles">C. Philosophie de Conception des Symboles</h3>
+<p>Les symboles de Lonelog ont été choisis pour des raisons spécifiques :</p>
+<ul>
+<li><strong><code>@</code> (Action)</strong> : Représente “à ce moment” ou l’acteur qui agit. Changé de <code>&gt;</code> dans la v2.0 pour éviter le conflit avec les citations en bloc de Markdown.</li>
+<li><strong><code>?</code> (Question)</strong> : Symbole universel pour l’interrogation. Inchangé par rapport à la v2.0.</li>
+<li><strong><code>d:</code> (Dés/Résolution)</strong> : Abréviation claire pour les jets de dés. Inchangé par rapport à la v2.0.</li>
+<li><strong><code>-&gt;</code> (Résolution)</strong> : Conservé de la v2.0. Maintenant unifié pour TOUTES les résolutions (dés et oracle). La flèche montre visuellement “ceci mène au résultat”.</li>
+<li><strong><code>=&gt;</code> (Conséquence)</strong> : Conservé de la v2.0. La double flèche montre les effets en cascade. Utilisation clarifiée : conséquences uniquement (la v2.0 surchargeait ce symbole pour les résultats de dés également).</li>
+</ul>
+<p><strong>Compatibilité Markdown</strong> : Tous les symboles fonctionnent proprement dans les blocs de code et n’entrent pas en conflit avec le formatage markdown ou les opérateurs mathématiques. Enveloppez toujours la notation dans des blocs de code lorsque vous utilisez le markdown numérique pour éviter les conflots avec les extensions Markdown.</p>
+</section>
+</section>
+<section id="crédits-licence" class="level2">
+<h2 class="anchored" data-anchor-id="crédits-licence">Crédits &amp; Licence</h2>
+<p>© 2025-2026 Roberto Bisceglie</p>
+<p>Cette notation est inspirée de la <a href="https://alfredvalley.itch.io/the-valley-standard">Valley Standard</a>.</p>
+<p><strong>Remerciements à :</strong></p>
+<ul>
+<li>matita pour la méthode <code>+</code>/<code>-</code> pour suivre les changements dans les balises,</li>
+<li>flyincaveman pour la suggestion sur l’utilisation du symbole <code>@</code> pour les actions des personnages (dans la tradition des premiers JDR en ASCII),</li>
+<li>r/solorpgplay et r/Solo_Roleplaying pour l’accueil positif de cette notation et les retours utiles,</li>
+<li>Enrico Fasoli pour les tests et les retours,</li>
+<li>Eilir Mistwind pour la traduction française.</li>
+</ul>
+<p><strong>Historique des versions :</strong></p>
+<ul>
+<li>v 1.3.0 : Ajout de la syntaxe des catégories de balises (§4.1.7), de la forme de balise multiligne (§4.1.8) et des blocs de contexte de jet à l’intérieur de <code>d:</code> (§3.2.1).</li>
+<li>v 1.2.0 : Ajout de la Section 10 : Add-ons.</li>
+<li>v 1.1.0 : Clarification de l’utilisation de la licence. Ajout des spécifications pour les définitions en ligne, les ensembles d’options filtrés et les blocs de résultats multilignes dans la section 4.3.</li>
+<li>v 1.0.0 : Évolué à partir de Solo TTRPG Notation v2.0 par Roberto Bisceglie</li>
+</ul>
+<p>Ce travail est sous licence <strong>Creative Commons Attribution-ShareAlike 4.0 International</strong>.</p>
+<p><strong>Vous êtes libre de :</strong></p>
+<ul>
+<li>Partager — copier et redistribuer le matériel</li>
+<li>Adapter — remixer, transformer et construire sur le matériel</li>
+</ul>
+<p><strong>Sous ces conditions :</strong></p>
+<ul>
+<li>Attribution — Donner un crédit approprié</li>
+<li>Partage dans les mêmes conditions — Distribuer les adaptations sous la même licence</li>
+</ul>
+<p><em>Bonnes aventures, joueurs solo !</em></p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Réutilisation</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  var formats = document.querySelector(".quarto-alternate-formats");
+  if (sidebar && formats) {
+    sidebar.insertBefore(formats, sidebar.firstChild);
+  }
+
+  // Rename "Typst" label to "PDF"
+  document.querySelectorAll(".quarto-alternate-formats a").forEach(function (a) {
+    a.childNodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "Typst") {
+        node.textContent = "PDF";
+      }
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copié");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copié");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lonelog\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/fr.html" class="pagination-link" aria-label="Lonelog">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lonelog</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/fr/lonelog-addon-guidelines-fr.html" class="pagination-link" aria-label="Lonelog : Directives pour les Extensions de la Communauté">
+        <span class="nav-page-text">Lonelog : Directives pour les Extensions de la Communauté</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Lonelog by Roberto Bisceglie · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/fr/lonelog-fr.md" class="toc-action"><i class="bi bi-github"></i>Voir la source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Faire part d'un problème</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://zeruhur.itch.io/lonelog">itch.io</a> · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

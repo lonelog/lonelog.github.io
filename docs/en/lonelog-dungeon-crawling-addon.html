@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Bisceglie">
+
+<title>Lonelog: Dungeon Crawling Add-on – Lonelog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/en/lonelog-resource-tracking-addon.html" rel="next">
+<link href="../../docs/en/lonelog-combat-addon.html" rel="prev">
+<link href="../../assets/banner.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e5f5294698a128606ef5f4cfe63e5fe8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7e2f14f9a527615529190f7f63649c5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+
+
+<meta property="og:title" content="Lonelog: Dungeon Crawling Add-on – Lonelog">
+<meta property="og:description" content="Optional Room Tracking for Dungeon Exploration">
+<meta property="og:site_name" content="Lonelog">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lonelog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../docs/en.html" aria-current="page"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/lonelog.html"> 
+<span class="menu-text">Lonelog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-add-ons" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Add-ons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-add-ons">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-guidelines.html">
+ <span class="dropdown-text">Writing an add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-template.html">
+ <span class="dropdown-text">Add-on template</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-combat-addon.html">
+ <span class="dropdown-text">Lonelog: Combat Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dungeon-crawling-addon.html">
+ <span class="dropdown-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-resource-tracking-addon.html">
+ <span class="dropdown-text">Lonelog: Resource Tracking Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dice-notation-addon.html">
+ <span class="dropdown-text">Lonelog: Dice Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-cards-addon.html">
+ <span class="dropdown-text">Lonelog: Card Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-wargaming-addon.html">
+ <span class="dropdown-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/partylog.html"> 
+<span class="menu-text">Partylog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/it.html">
+ <span class="dropdown-text">Italiano</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.reddit.com/r/lonelog/"> <i class="bi bi-reddit" role="img" aria-label="Reddit">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/DBpgvvC2sG"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lonelog/lonelog"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss" role="img" aria-label="Blog feed">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/en/lonelog-addon-guidelines.html">Add-ons</a></li><li class="breadcrumb-item"><a href="../../docs/en/lonelog-dungeon-crawling-addon.html">Lonelog: Dungeon Crawling Add-on</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/partylog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Partylog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Add-ons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-addon-guidelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Community Add-on Guidelines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-addon-template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: [Add-on Name] Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-combat-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Combat Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-dungeon-crawling-addon.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-resource-tracking-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Resource Tracking Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-dice-notation-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Dice Notation Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-cards-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Card Notation Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-wargaming-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#dungeon-crawling-add-on" id="toc-dungeon-crawling-add-on" class="nav-link active" data-scroll-target="#dungeon-crawling-add-on">Dungeon Crawling Add-on</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#what-this-add-on-adds" id="toc-what-this-add-on-adds" class="nav-link" data-scroll-target="#what-this-add-on-adds">What This Add-on Adds</a></li>
+  <li><a href="#design-principles" id="toc-design-principles" class="nav-link" data-scroll-target="#design-principles">Design Principles</a></li>
+  </ul></li>
+  <li><a href="#the-room-tag" id="toc-the-room-tag" class="nav-link" data-scroll-target="#the-room-tag">1. The Room Tag</a></li>
+  <li><a href="#room-connections" id="toc-room-connections" class="nav-link" data-scroll-target="#room-connections">2. Room Connections</a></li>
+  <li><a href="#the-dungeon-status-block" id="toc-the-dungeon-status-block" class="nav-link" data-scroll-target="#the-dungeon-status-block">3. The Dungeon Status Block</a></li>
+  <li><a href="#room-tags-in-play" id="toc-room-tags-in-play" class="nav-link" data-scroll-target="#room-tags-in-play">4. Room Tags in Play</a></li>
+  <li><a href="#cross-add-on-interactions" id="toc-cross-add-on-interactions" class="nav-link" data-scroll-target="#cross-add-on-interactions">Cross-Add-on Interactions</a></li>
+  <li><a href="#system-adaptations" id="toc-system-adaptations" class="nav-link" data-scroll-target="#system-adaptations">System Adaptations</a>
+  <ul class="collapse">
+  <li><a href="#osr-systems-old-school-essentials-basicexpert-dd" id="toc-osr-systems-old-school-essentials-basicexpert-dd" class="nav-link" data-scroll-target="#osr-systems-old-school-essentials-basicexpert-dd">OSR Systems (Old School Essentials, Basic/Expert D&amp;D)</a></li>
+  <li><a href="#ironsworn-starforged" id="toc-ironsworn-starforged" class="nav-link" data-scroll-target="#ironsworn-starforged">Ironsworn / Starforged</a></li>
+  <li><a href="#dungeon-world-pbta" id="toc-dungeon-world-pbta" class="nav-link" data-scroll-target="#dungeon-world-pbta">Dungeon World (PbtA)</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference">Quick Reference</a>
+  <ul class="collapse">
+  <li><a href="#new-tags" id="toc-new-tags" class="nav-link" data-scroll-target="#new-tags">New Tags</a></li>
+  <li><a href="#status-terms" id="toc-status-terms" class="nav-link" data-scroll-target="#status-terms">Status Terms</a></li>
+  <li><a href="#structural-blocks" id="toc-structural-blocks" class="nav-link" data-scroll-target="#structural-blocks">Structural Blocks</a></li>
+  <li><a href="#directional-shortcuts" id="toc-directional-shortcuts" class="nav-link" data-scroll-target="#directional-shortcuts">Directional Shortcuts</a></li>
+  <li><a href="#complete-example" id="toc-complete-example" class="nav-link" data-scroll-target="#complete-example">Complete Example</a></li>
+  </ul></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
+  <li><a href="#credits-license" id="toc-credits-license" class="nav-link" data-scroll-target="#credits-license">Credits &amp; License</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/en/lonelog-dungeon-crawling-addon.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lonelog-dungeon-crawling-addon.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="lonelog-dungeon-crawling-addon.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="lonelog-dungeon-crawling-addon.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="lonelog-dungeon-crawling-addon-gfm.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/en/lonelog-addon-guidelines.html">Add-ons</a></li><li class="breadcrumb-item"><a href="../../docs/en/lonelog-dungeon-crawling-addon.html">Lonelog: Dungeon Crawling Add-on</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lonelog: Dungeon Crawling Add-on</h1>
+<p class="subtitle lead">Optional Room Tracking for Dungeon Exploration</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roberto Bisceglie </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="dungeon-crawling-add-on" class="level1">
+<h1>Dungeon Crawling Add-on</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Lonelog was built for narrative-driven solo play—the kind where you care more about <em>what happened and why</em> than <em>where am I and what do I have left</em>. Dungeon crawling pulls in a different direction: spatial relationships matter, rooms accumulate state, and you’re constantly asking “did I already loot that chest?”</p>
+<p>That tension is real. Text notation is never going to replace a good map. But it <em>can</em> help you track <strong>room state</strong>—what you found, what you cleared, what’s still waiting behind a locked door—alongside the narrative Lonelog already handles well.</p>
+<p>This add-on introduces one new persistent element: the Room tag <code>[R:]</code>. That’s it. Everything else—actions, rolls, oracle questions, consequences, threads, clocks—stays exactly the same. You’re adding rooms to the vocabulary of things Lonelog can track.</p>
+<p>If the dungeon is more narrative backdrop than mechanical challenge, or if you’re moving through spaces quickly without tracking state, stick with core Lonelog. The <code>[L:]</code> location tag handles simple spatial context fine. This add-on earns its keep when rooms have meaningful state that changes over time.</p>
+<hr>
+<section id="what-this-add-on-adds" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-add-on-adds">What This Add-on Adds</h3>
+<ul>
+<li><code>[R:ID|status:state]</code> — Track a room’s current exploration state. Example: <code>[R:3|status:cleared]</code></li>
+<li><code>[R:ID|status:state|desc]</code> — Room tag with optional description. Example: <code>[R:3|status:cleared|library]</code></li>
+<li><code>exits:DIR ID</code> — Record connections between rooms (optional). Example: <code>exits:N R2, E R3</code></li>
+<li><code>[#R:ID]</code> — Reference a previously established room. Example: <code>[#R:3]</code></li>
+<li><code>[DUNGEON STATUS]</code> / <code>[/DUNGEON STATUS]</code> — Session-opening snapshot of all room states. Example: Multiple <code>[R:]</code> tags grouped</li>
+</ul>
+<p><strong>No new core symbols.</strong> This add-on introduces no additions to <code>@</code>, <code>?</code>, <code>d:</code>, <code>-&gt;</code>, or <code>=&gt;</code>.</p>
+<hr>
+</section>
+<section id="design-principles" class="level3">
+<h3 class="anchored" data-anchor-id="design-principles">Design Principles</h3>
+<p><strong>State over space.</strong> A map handles spatial relationships better than text ever will. Room tags track what <em>changed</em>—cleared, looted, locked—not where rooms sit relative to each other. Use the right tool for each job.</p>
+<p><strong>Minimal vocabulary.</strong> One new tag covers the entire add-on. Every other element—scene headers, oracle questions, consequences, clocks—uses the core notation you already know. The cognitive overhead of adding dungeon crawling to a Lonelog session is one tag format.</p>
+<p><strong>Map-friendly by design.</strong> Room tags are built to work alongside a visual map, not replace one. Room IDs connect your log to your map. Mark them on graph paper; reference the same IDs in your tags. The two systems reinforce each other.</p>
+<p><strong>Block tags follow the core convention.</strong> Structural blocks use <code>[BLOCK]</code> / <code>[/BLOCK]</code> bracket syntax — identical to <code>[COMBAT]</code> / <code>[/COMBAT]</code> in the Combat Add-on. For analog notebooks, use <code>--- BLOCK ---</code> / <code>--- END BLOCK ---</code> dashed separators instead.</p>
+<hr>
+</section>
+</section>
+<section id="the-room-tag" class="level2">
+<h2 class="anchored" data-anchor-id="the-room-tag">1. The Room Tag</h2>
+<p>The Room tag <code>[R:]</code> tracks a room’s current state. It works like any other Lonelog persistent element: you tag it when something changes, update it as the situation evolves, and reference it later.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[R:ID|status:state|description|exits:DIR ID, DIR ID]</code></pre>
+<p><strong>Fields</strong> — the ID comes first; the rest can come in any order, because each one says what it is:</p>
+<ul>
+<li><code>ID</code> — unique identifier for the room, typically a number (<code>1</code>, <code>2</code>, <code>3</code>) matching your map. The tag’s <code>R</code> prefix is part of the name you say and write elsewhere: <code>[R:3]</code> is room <strong>R3</strong>, in exits, in prose and on a Maplog map.</li>
+<li><code>level:</code> — optional, for multi-level dungeons: <code>[R:8|level:2]</code></li>
+<li><code>status:</code> — current exploration state (see below)</li>
+<li>description — optional brief label to jog your memory, written as a plain value</li>
+<li><code>exits:</code> — optional connections to adjacent rooms</li>
+</ul>
+<p><code>status:</code> and <code>exits:</code> are categories (core §4.1): writing one again replaces what it held. That’s what lets a room go from unexplored to cleared without ending up both.</p>
+<section id="room-status" class="level4">
+<h4 class="anchored" data-anchor-id="room-status">1.1 Room Status</h4>
+<p>Status tells you the current state of a room at a glance. Use whatever terms fit your game:</p>
+<ul>
+<li><code>[R:1|status:unexplored]</code> — Haven’t entered yet</li>
+<li><code>[R:1|status:active]</code> — Currently exploring</li>
+<li><code>[R:1|status:cleared]</code> — Enemies defeated or threats resolved</li>
+<li><code>[R:1|status:cleared, looted]</code> — Cleared and treasure taken</li>
+<li><code>[R:1|status:locked]</code> — Can’t get in yet</li>
+<li><code>[R:1|status:trapped]</code> — Known hazard present</li>
+<li><code>[R:1|status:safe]</code> — Verified clear, usable as refuge</li>
+<li><code>[R:1|status:collapsed]</code> — No longer accessible</li>
+</ul>
+<p>Combine statuses when it makes sense: <code>cleared, looted</code> tells you both that the fight is over <em>and</em> there’s nothing left to grab.</p>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>[R:4|status:active]</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>S5 *North corridor*
+
+@ Open the door carefully
+? Is it locked?
+d: d6=5 -&gt; No
+=&gt; The door swings open easily.
+
+[R:4|status:active|storage room, dusty shelves|exits:S R2, E R5]
+
+@ Search the shelves
+d: Investigation d6=5 vs TN 4 -&gt; Success
+=&gt; I find a rusty key behind a loose brick.
+(note: might open R5?)
+
+? Are there enemies?
+d: d6=6 -&gt; No, and...
+=&gt; The room is completely undisturbed. Years of dust.
+
+[R:4|status:cleared, looted]</code></pre>
+</section>
+<section id="updating-room-status" class="level4">
+<h4 class="anchored" data-anchor-id="updating-room-status">1.2 Updating Room Status</h4>
+<p>When a room’s state changes, write the new status. It replaces the old one:</p>
+<pre><code>[R:1|status:unexplored]
+
+... you enter and fight ...
+
+[R:1|status:cleared]
+
+... you search ...
+
+[R:1|status:cleared, looted]</code></pre>
+<p>To add one state without rewriting the rest, put <code>+</code> inside the category; <code>-</code> takes one away:</p>
+<pre><code>[R:1|status:+looted]</code></pre>
+</section>
+<section id="room-descriptions" class="level4">
+<h4 class="anchored" data-anchor-id="room-descriptions">1.3 Room Descriptions</h4>
+<p>The description field is optional and brief—just enough to jog your memory:</p>
+<pre><code>[R:1|status:cleared|guard room]
+[R:2|status:active|library, candles still lit]
+[R:3|status:unexplored|sounds of water]</code></pre>
+<p>For richer descriptions, use regular Lonelog narrative after the tag:</p>
+<pre><code>[R:4|status:active|ritual chamber]
+=&gt; The air hums with energy. A circle of runes glows faintly on the floor.</code></pre>
+</section>
+<section id="reference-tags" class="level4">
+<h4 class="anchored" data-anchor-id="reference-tags">1.4 Reference Tags</h4>
+<p>Use <code>#</code> to reference a room you’ve already described, exactly as with NPCs and locations in core Lonelog:</p>
+<p>The first mention establishes the room:</p>
+<pre><code>[R:3|status:cleared|armory|exits:N R2, W R4]</code></pre>
+<p>Later, a reference points back to it:</p>
+<pre><code>[#R:3]</code></pre>
+<hr>
+</section>
+</section>
+<section id="room-connections" class="level2">
+<h2 class="anchored" data-anchor-id="room-connections">2. Room Connections</h2>
+<p>To record which rooms connect where, use the <code>exits:</code> category inside the tag. Each exit is a direction and a room, separated by a space:</p>
+<pre><code>[R:1|status:cleared|guard room|exits:N R2, E R3, S R4]</code></pre>
+<p>Read this as: “Room 1 is cleared, it’s a guard room, with exits north to Room 2, east to Room 3, and south to Room 4.”</p>
+<p><strong>Directional shortcuts:</strong> <code>N</code>, <code>S</code>, <code>E</code>, <code>W</code>, <code>NE</code>, <code>NW</code>, <code>SE</code>, <code>SW</code>, <code>U</code> (up), <code>D</code> (down).</p>
+<p>If direction doesn’t matter, just list the rooms:</p>
+<pre><code>[R:5|status:unexplored|exits:R4, R6, R7]</code></pre>
+<p><strong>You don’t have to record exits at all.</strong> If you’re keeping a visual map, the exits live there and you only need the Room tag for status. <code>exits:</code> is for when you want a fully text-based record, or when you discover a specific connection mid-play. Writing <code>exits:</code> again replaces the whole list, so add a single new exit with <code>+</code>:</p>
+<pre><code>=&gt; I find a hidden passage behind the bookshelf!
+[R:3|exits:+E R7 secret]</code></pre>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>[R:6|status:unexplored|exits:R5, R8]</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>@ Check the far wall for exits
+d: Perception d6=6 vs TN 4 -&gt; Success
+=&gt; A concealed door—well-disguised but not locked.
+[R:6|status:active|crypt|exits:W R5, N R8, E R9 secret]
+(note: update map with R9)</code></pre>
+<hr>
+</section>
+<section id="the-dungeon-status-block" class="level2">
+<h2 class="anchored" data-anchor-id="the-dungeon-status-block">3. The Dungeon Status Block</h2>
+<p>When you sit down for a new session mid-dungeon, you need a snapshot: which rooms are cleared, where haven’t you been, what’s still locked. The <strong>Dungeon Status Block</strong> gives you that at a glance.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[DUNGEON STATUS]
+[R:1|status:state|description]
+[R:2|status:state|description]
+...
+[/DUNGEON STATUS]</code></pre>
+<p><strong>When to open a block:</strong> At the top of a session when resuming a dungeon crawl, before your first scene.</p>
+<p><strong>When to update it:</strong> At session end, or at the start of the next session, to reflect what changed.</p>
+<p><strong>Example — digital:</strong></p>
+<pre><code>[DUNGEON STATUS]
+[R:1|status:cleared, looted|entry cave|exits:N R2, E R3]
+[R:2|status:cleared|guard room|exits:S R1, W R5]
+[R:3|status:active|library|exits:W R1]
+[R:4|status:unexplored]
+[R:5|status:locked|heavy door|exits:E R2]
+[/DUNGEON STATUS]</code></pre>
+<p><strong>Example — analog:</strong></p>
+<pre><code>=== Session 3: The Orc Warren ===
+[Date]        2025-10-15
+[Duration]    1h30
+[Recap]       Found the warren entrance. Need to recover the stolen relic.
+
+--- DUNGEON STATUS ---
+R1: cleared, looted (entry cave)
+R2: cleared (guard room)
+R3: active (library)
+R4: unexplored
+R5: locked (heavy door)
+--- END STATUS ---</code></pre>
+<p><strong>This is a convenience, not a requirement.</strong> If your dungeon has three rooms, you don’t need a status block—just tag rooms as you go. For larger dungeons, or when picking up a session after a break, it’s a quick way to orient yourself.</p>
+<hr>
+</section>
+<section id="room-tags-in-play" class="level2">
+<h2 class="anchored" data-anchor-id="room-tags-in-play">4. Room Tags in Play</h2>
+<section id="rooms-as-scene-headers" class="level4">
+<h4 class="anchored" data-anchor-id="rooms-as-scene-headers">4.1 Rooms as Scene Headers</h4>
+<p>Use a Room tag directly in your scene header for compact context:</p>
+<pre><code>S5 [R:4|status:active] *Storage room, dusty shelves*</code></pre>
+<p>This tells you exactly where the scene takes place without a separate tag line. Some players prefer this to separate scene descriptions and room tags.</p>
+</section>
+<section id="generated-dungeons" class="level4">
+<h4 class="anchored" data-anchor-id="generated-dungeons">4.2 Generated Dungeons</h4>
+<p>If you’re generating the dungeon as you go (using random tables or an oracle), record the generation alongside the Room tag:</p>
+<pre><code>@ Open the east door
+tbl: d20=14 -&gt; "Large room, two exits"
+
+? What's inside?
+tbl: d100=67 -&gt; "Library with a trapped chest"
+
+[R:6|status:active|library, trapped chest|exits:W R3, N R7]</code></pre>
+<p>The generation rolls tell you <em>how</em> you discovered the room. The Room tag tells you <em>what it is now</em>.</p>
+</section>
+<section id="maps-and-lonelog" class="level4">
+<h4 class="anchored" data-anchor-id="maps-and-lonelog">4.3 Maps and Lonelog</h4>
+<p>Let’s be direct: <strong>a visual map is almost always better than text for spatial relationships.</strong> Graph paper, a digital tool, a quick sketch on a napkin—whatever works. The Room tag’s job isn’t to replace your map. It’s to track state that a map handles poorly: whether a room is cleared, what you found there, how its status changed over play.</p>
+<p>The recommended split:</p>
+<ul>
+<li><strong>Map</strong> handles layout, spatial relationships, and navigation</li>
+<li><strong>Room tags</strong> handle state, status changes, and narrative context</li>
+<li><strong>Core Lonelog</strong> handles everything else (actions, rolls, consequences, story)</li>
+</ul>
+<p>Mark room numbers on your map. Use those same numbers in your Room tags. Your map and your log now reference each other seamlessly:</p>
+<pre><code>S7 [R:4] *Checking the altar*
+
+@ Search the altar
+d: Investigation d6=6 vs TN 4 -&gt; Success
+=&gt; Secret compartment! [Thread:Cult Ritual|Open]
+[R:4|status:cleared, looted]
+
+(note: add the altar to map)</code></pre>
+<p>If you want a <strong>fully text-based</strong> dungeon log with no separate map, <code>exits:</code> lets you reconstruct the layout from your notes. But this is the exception, not the recommendation.</p>
+<hr>
+</section>
+<section id="exploration-turns" class="level4">
+<h4 class="anchored" data-anchor-id="exploration-turns">4.4 Exploration Turns</h4>
+<p>Many dungeon games run on exploration turns: each turn uses up light, and every so often something wanders by. Core Lonelog covers all of it, with nothing new to learn:</p>
+<ul>
+<li><strong>The turn number</strong> goes in the scene context: <code>S4 *R3, crypt, turn 3*</code>.</li>
+<li><strong>Light</strong> is a timer: <code>[Timer:Torch 6]</code> when you light it, <code>[Timer:Torch-1]</code> each turn.</li>
+<li><strong>Wandering monster checks</strong> are verdicts: <code>d: Wandering d6=5 -&gt; No</code>.</li>
+<li><strong>Long counts</strong> that matter, such as turns until the dungeon reacts, are clocks: <code>[Clock:Alert+1]</code>.</li>
+</ul>
+<pre><code>S4 *R3, crypt, turn 3*
+[Timer:Torch-1]
+d: Wandering d6=1 -&gt; Yes
+tbl: Wandering Monster d8=4 -&gt; Giant rats</code></pre>
+<p>If you also use the Resource Tracking Add-on, a torch burning out is <code>[Inv:Torch|×-1]</code>.</p>
+</section>
+</section>
+<section id="cross-add-on-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="cross-add-on-interactions">Cross-Add-on Interactions</h2>
+<ul>
+<li>Combat breaks out in a room — Dungeon Crawling + Combat — <code>[R:]</code>, <code>[COMBAT]</code>, <code>[F:]</code></li>
+<li>Tracking torches and rations per room — Dungeon Crawling + Resource Tracking — <code>[R:]</code>, <code>[Inv:Name|#]</code></li>
+<li>Combat while tracking resources — All three add-ons — <code>[R:]</code>, <code>[COMBAT]</code>, <code>[Inv:]</code></li>
+</ul>
+<p><strong>Combined example — Dungeon Crawling + Combat:</strong></p>
+<pre><code>S6 *Approaching the barracks*
+
+@ Move quietly down the corridor
+d: Stealth d6=4 vs TN 4 -&gt; Success
+=&gt; I creep forward unseen.
+
+[R:5|status:active|barracks, stench of sweat|exits:S R3, W R6, N R7]
+
+? How many guards?
+tbl: d6=3 -&gt; "Three enemies"
+=&gt; Two eating, one sharpening a blade.
+
+[COMBAT]
+[PC:Alex|HP 12|pos:Engaged]
+[F:Guard 1|HP 5|pos:Close|eating]
+[F:Guard 2|HP 5|pos:Close|eating]
+[F:Guard 3|HP 5|pos:Close|alert]
+
+Rd1
+@ Ambush the alert guard first
+d: d20+4=18 vs AC 12 -&gt; Hit, 1d8=7
+=&gt; [F:Guard 3|dead]
+
+@(Guard 1) Grabs weapon and charges
+d: d20+3=11 vs AC 14 -&gt; Miss
+
+Rd2
+@ Sweep at both remaining guards
+d: d20+4=15 vs AC 12 -&gt; Hit, 1d8=5 =&gt; [F:Guard 1|dead]
+d: d20+4=12 vs AC 12 -&gt; Hit, 1d8=3 =&gt; [F:Guard 2|dead]
+
+[/COMBAT]
+=&gt; Room clear before they could raise an alarm.
+[R:5|status:cleared]
+
+@ Search the barracks
+tbl: d20=8 -&gt; "Rations and a crude map"
+=&gt; A rough map scratched on hide. Shows rooms to the west!
+[R:5|status:cleared, looted]
+[R:6|status:unexplored|marked on orc map]
+(note: update my map with R6)</code></pre>
+<hr>
+</section>
+<section id="system-adaptations" class="level2">
+<h2 class="anchored" data-anchor-id="system-adaptations">System Adaptations</h2>
+<section id="osr-systems-old-school-essentials-basicexpert-dd" class="level3">
+<h3 class="anchored" data-anchor-id="osr-systems-old-school-essentials-basicexpert-dd">OSR Systems (Old School Essentials, Basic/Expert D&amp;D)</h3>
+<p>Classic dungeon crawl procedures map naturally to this add-on. Turn-based exploration, wandering monster checks, and the six-minute turn structure all generate natural tag update points. Use Room tags at the end of each turn or when something significant changes.</p>
+<pre><code>[DUNGEON STATUS]
+[R:1|status:cleared, looted|entry hall|exits:N R2, E R3]
+[R:2|status:cleared|guard room|exits:S R1, W R5]
+[R:3|status:active|crypt|exits:W R1, D R8]
+[/DUNGEON STATUS]
+
+S4 *R3, crypt, turn 3*
+[Timer:Torch-1]
+
+@ Search the sarcophagi
+d: Secret door 1-in-6 d6=2 -&gt; None found
+d: Wandering d6=5 -&gt; No
+
+@ Light the wall sconces and examine the inscriptions
+d: INT check d20=8 vs DC 12 -&gt; Fail
+=&gt; The script is too archaic—I can't make sense of it.
+[R:3|status:cleared]</code></pre>
+</section>
+<section id="ironsworn-starforged" class="level3">
+<h3 class="anchored" data-anchor-id="ironsworn-starforged">Ironsworn / Starforged</h3>
+<p>Ironsworn’s Delve mechanic uses themed sectors rather than numbered rooms. Map sectors to Room IDs and use the <code>Delve the Depths</code> move result to determine what you find. Progress tracks work naturally alongside Room status.</p>
+<pre><code>[Track:Iron Barrow 2/10]
+
+[DUNGEON STATUS]
+[R:1|status:cleared|Threshold – rusted gate|exits:N R2]
+[R:2|status:active|Shadow – collapsed corridor]
+[/DUNGEON STATUS]
+
+@ Delve the Depths (Shadow theme)
+d: d6+2=7 vs d10=4, d10=9 -&gt; Weak Hit
+tbl: Shadow Feature d100=44 -&gt; "Symbols of a forsaken god"
+=&gt; I find ritual markings. Progress, but at a cost.
+[Track:Iron Barrow+2]
+[R:2|status:cleared|Shadow – forsaken markings|exits:N R3]
+[R:3|status:unexplored]
+[Thread:The Forsaken God|Open]</code></pre>
+</section>
+<section id="dungeon-world-pbta" class="level3">
+<h3 class="anchored" data-anchor-id="dungeon-world-pbta">Dungeon World (PbtA)</h3>
+<p>Dungeon World generates dungeon content through fictional framing and GM moves rather than room-by-room procedure. Use Room tags loosely—tag significant locations as you discover them, without worrying about exhaustive status tracking.</p>
+<pre><code>@ Discern Realities as I enter the chamber
+d: 2d6+1=10 -&gt; 10+ Hit: ask three questions
+
+? What here is useful or valuable?
+-&gt; A sealed chest on the altar dais.
+? What is about to happen?
+-&gt; The shadows in the corner are moving.
+? Who made this place?
+-&gt; Cult sigils everywhere—same as the ones on the road.
+
+[R:4|status:active|ritual chamber, living shadows]
+[Thread:The Cult's Purpose|Open]</code></pre>
+<hr>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<p><strong>Do: Use Room tags for state, your map for space</strong></p>
+<pre><code>✔ [R:4|status:cleared, looted|exits:N R7]
+  (note: add the door to R7 on map)</code></pre>
+<p><strong>Don’t: Try to replace your map with exit chains</strong></p>
+<p>A chain of exits is harder to navigate than a sketch:</p>
+<pre><code>✗ [R:1|status:cleared|exits:N R2, E R3]
+  [R:2|status:cleared|exits:S R1, N R4, E R5]
+  [R:3|status:active|exits:W R1, N R6, E R7, SE R8]
+
+✔ Draw the map. Use Room tags only for state.</code></pre>
+<p><strong>Do: Update status immediately when it changes</strong></p>
+<pre><code>✔ @ Search the room after the fight
+  d: Investigation d6=5 vs TN 4 -&gt; Success
+  =&gt; I find a key and some coin.
+  [R:3|status:cleared, looted]</code></pre>
+<p><strong>Don’t: Leave status ambiguous and reconstruct later</strong></p>
+<pre><code>✗ (Three scenes of exploration with no tag updates)
+  (note: I think R3 and R4 are cleared? need to check)
+
+✔ Tag each change as it happens.</code></pre>
+<p><strong>Do: Open a Dungeon Status Block when resuming a session</strong></p>
+<pre><code>✔ === Session 4 ===
+  [DUNGEON STATUS]
+  [R:1|status:cleared, looted|entry]
+  [R:2|status:cleared|barracks]
+  [R:3|status:unexplored]
+  [R:4|status:locked|iron door]
+  [/DUNGEON STATUS]</code></pre>
+<p><strong>Don’t: Reconstruct dungeon state by scanning the whole log</strong></p>
+<pre><code>✗ (Scrolling back through two sessions of notes to figure out
+   which rooms are cleared)
+
+✔ Write the status block at session end. Start the next session
+  with a current picture.</code></pre>
+<p><strong>Do: Keep descriptions brief in the tag, expand in prose</strong></p>
+<pre><code>✔ [R:7|status:active|throne room]
+  =&gt; The ceiling is forty feet high. A cracked obsidian throne
+  dominates the far wall. Something has nested in it recently.</code></pre>
+<p><strong>Don’t: Overload the tag with narrative detail</strong></p>
+<pre><code>✗ [R:7|active|massive vaulted throne room, cracked obsidian throne
+   on a raised dais, old nesting material and bones, forty-foot ceiling,
+   faded tapestries depicting a forgotten dynasty, cold draft from the north]</code></pre>
+<hr>
+</section>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick Reference</h2>
+<section id="new-tags" class="level3">
+<h3 class="anchored" data-anchor-id="new-tags">New Tags</h3>
+<ul>
+<li><code>[R:ID|status:state]</code> — Room with status only. Example: <code>[R:3|status:cleared]</code></li>
+<li><code>[R:ID|status:state|desc]</code> — Room with description. Example: <code>[R:3|status:cleared|library]</code></li>
+<li><code>[R:ID|status:state|desc|exits:DIR ID]</code> — Room with connections. Example: <code>[R:3|status:cleared|library|exits:W R1]</code></li>
+<li><code>[R:ID|status:+state]</code> — Add one status without replacing the others. Example: <code>[R:3|status:+looted]</code></li>
+<li><code>[#R:ID]</code> — Reference an established room. Example: <code>[#R:3]</code></li>
+</ul>
+</section>
+<section id="status-terms" class="level3">
+<h3 class="anchored" data-anchor-id="status-terms">Status Terms</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>unexplored</code></td>
+<td>Haven’t entered yet</td>
+</tr>
+<tr class="even">
+<td><code>active</code></td>
+<td>Currently exploring</td>
+</tr>
+<tr class="odd">
+<td><code>cleared</code></td>
+<td>Threats resolved</td>
+</tr>
+<tr class="even">
+<td><code>cleared, looted</code></td>
+<td>Cleared and searched</td>
+</tr>
+<tr class="odd">
+<td><code>locked</code></td>
+<td>Cannot enter yet</td>
+</tr>
+<tr class="even">
+<td><code>trapped</code></td>
+<td>Known hazard present</td>
+</tr>
+<tr class="odd">
+<td><code>safe</code></td>
+<td>Verified clear, usable as refuge</td>
+</tr>
+<tr class="even">
+<td><code>collapsed</code></td>
+<td>No longer accessible</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="structural-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="structural-blocks">Structural Blocks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 35%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block</th>
+<th>Opens When</th>
+<th>Closes When</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[DUNGEON STATUS]</code> / <code>[/DUNGEON STATUS]</code></td>
+<td>Session start when resuming a dungeon</td>
+<td><code>[/DUNGEON STATUS]</code> after the last room; write a fresh block next session</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="directional-shortcuts" class="level3">
+<h3 class="anchored" data-anchor-id="directional-shortcuts">Directional Shortcuts</h3>
+<p><code>N</code> <code>S</code> <code>E</code> <code>W</code> <code>NE</code> <code>NW</code> <code>SE</code> <code>SW</code> <code>U</code> (up) <code>D</code> (down)</p>
+</section>
+<section id="complete-example" class="level3">
+<h3 class="anchored" data-anchor-id="complete-example">Complete Example</h3>
+<pre><code>[DUNGEON STATUS]
+[R:1|status:cleared, looted|entry cave|exits:N R2, E R3]
+[R:2|status:unexplored] [R:3|status:unexplored]
+[/DUNGEON STATUS]
+
+S7 *North passage*
+
+@ Approach R2 quietly
+d: Stealth d6=4 vs TN 4 -&gt; Success
+
+[R:2|status:active|barracks|exits:S R1, W R4]
+? Enemies?
+d: d6=2 -&gt; Yes
+=&gt; Two guards, armed.
+...combat...
+[R:2|status:cleared, looted]
+[R:4|status:unexplored|marked on guard's map]</code></pre>
+<hr>
+</section>
+</section>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<p><strong>Q: Do I need a separate map, or can I use exits to track layout?</strong> A: A visual map is almost always better for layout and navigation. Use exits in your Room tags only when you want a fully text-based record, or when you discover a specific connection (like a secret door) that’s worth noting in the log. For everything else, draw the map.</p>
+<p><strong>Q: What Room ID system should I use?</strong> A: Numbers are simplest: <code>[R:1]</code>, <code>[R:2]</code>, <code>[R:3]</code> are rooms R1, R2, R3, matching a numbered map. Sub-rooms can take letters (<code>[R:1A]</code>, <code>[R:1B]</code>). For several levels, keep the numbers and add a <code>level:</code> category, <code>[R:8|level:2]</code>, which matches the level tags (<code>L2</code>) Maplog writes on a map. Use whatever helps you connect tags to your map at a glance.</p>
+<p><strong>Q: Can I use this alongside the Combat Add-on?</strong> A: Yes—they’re designed to work together. When combat breaks out in a room, open a <code>[COMBAT]</code> block inside the scene. When it ends, close it and update the Room tag status. The Cross-Add-on Interactions section has a full example.</p>
+<p><strong>Q: What if I’m using a published dungeon with its own room numbering?</strong> A: Use the published room numbers as your IDs. <code>[R:12|status:cleared|Goblin Warrens p.4]</code> works perfectly—the published map handles layout, the tag handles state.</p>
+<p><strong>Q: How does the Dungeon Status Block work in an analog notebook?</strong> A: Write it with dashed separators: <code>--- DUNGEON STATUS ---</code>. List one room per line with status and a brief label. Cross out or update entries as rooms change. At the start of each new session, write a fresh status block with current information rather than patching the old one.</p>
+<p><strong>Q: Do I need to tag every room I pass through?</strong> A: Only rooms where something worth tracking happens. If you walk through an empty corridor, you don’t need a tag—just describe it in prose. Tag rooms when their status has meaning: when you clear them, find something, lock them, or need to return later.</p>
+<p><strong>Q: What about dungeon features that aren’t rooms—corridors, traps, doors?</strong> A: Use core Lonelog notation. A trap that springs or a door that gives way is an event (<code>[E:Trap Sprung]</code>); otherwise, keep them as temporary context in prose. Corridors usually don’t need persistent tracking. The Room tag is specifically for spaces with ongoing state that matters across multiple scenes or sessions.</p>
+<hr>
+</section>
+<section id="credits-license" class="level2">
+<h2 class="anchored" data-anchor-id="credits-license">Credits &amp; License</h2>
+<p>© 2025 Roberto Bisceglie</p>
+<p>This add-on extends <a href="https://zeruhur.itch.io/lonelog">Lonelog</a> by Roberto Bisceglie.</p>
+<p>Written to address the <a href="https://www.reddit.com/r/Solo_Roleplaying/comments/1qxkee5/comment/o4v01rk/">request</a> of u/Jollto13 on r/Solo_Roleplaying.</p>
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v 1.2.0: <code>[R:3]</code> is room R3 everywhere; <code>level:</code> category for multi-level dungeons; new §4.4 on exploration turns with core notation (timers, wandering checks); Dungeon World answers use <code>-&gt;</code>. Aligned with Lonelog v1.7: <code>status:</code> and <code>exits:</code> are categories, so a new status replaces the old one and fields can come in any order; exits are written <code>exits:N R2, E R7 secret</code>; <code>[E:]</code> marks events that happened; table result format; standard <code>[Track:]</code> counters; explanations moved out of code blocks.</li>
+<li>v 1.1.1: Map reminders note what to draw, not room state; state stays in the Room tag</li>
+<li>v 1.1.0: Block tags unified with <code>[BLOCK]</code>/<code>[/BLOCK]</code> convention; design principles updated</li>
+<li>v 1.0.0: Rewritten as a compliant add-on (previously “Dungeon Crawling Module”)</li>
+</ul>
+<p>This work is licensed under the <strong>Creative Commons Attribution-ShareAlike 4.0 International License</strong>.</p>
+<p>You are free to share and adapt this material, provided you give appropriate credit and distribute adaptations under the same license. Session logs and play records created using this add-on’s notation are your own work and are not subject to this license.</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  var formats = document.querySelector(".quarto-alternate-formats");
+  if (sidebar && formats) {
+    sidebar.insertBefore(formats, sidebar.firstChild);
+  }
+
+  // Rename "Typst" label to "PDF"
+  document.querySelectorAll(".quarto-alternate-formats a").forEach(function (a) {
+    a.childNodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "Typst") {
+        node.textContent = "PDF";
+      }
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lonelog\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/en/lonelog-combat-addon.html" class="pagination-link" aria-label="Lonelog: Combat Add-on">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lonelog: Combat Add-on</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/en/lonelog-resource-tracking-addon.html" class="pagination-link" aria-label="Lonelog: Resource Tracking Add-on">
+        <span class="nav-page-text">Lonelog: Resource Tracking Add-on</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Lonelog by Roberto Bisceglie · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/en/lonelog-dungeon-crawling-addon.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://zeruhur.itch.io/lonelog">itch.io</a> · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

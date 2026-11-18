@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roberto Bisceglie">
+
+<title>Lonelog: Combat Add-on – Lonelog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/en/lonelog-dungeon-crawling-addon.html" rel="next">
+<link href="../../docs/en/lonelog-addon-template.html" rel="prev">
+<link href="../../assets/banner.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e5f5294698a128606ef5f4cfe63e5fe8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea0b9aefe447ee2f5e248c6ab3f9e2ea.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7e2f14f9a527615529190f7f63649c5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ce76c3f3d02af4f68b39fecc5032b354.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+
+
+<meta property="og:title" content="Lonelog: Combat Add-on – Lonelog">
+<meta property="og:description" content="Optional Notation for Tactical Encounters">
+<meta property="og:site_name" content="Lonelog">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lonelog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../docs/en.html" aria-current="page"> 
+<span class="menu-text">Docs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/lonelog.html"> 
+<span class="menu-text">Lonelog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-add-ons" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Add-ons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-add-ons">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-guidelines.html">
+ <span class="dropdown-text">Writing an add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-addon-template.html">
+ <span class="dropdown-text">Add-on template</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-combat-addon.html">
+ <span class="dropdown-text">Lonelog: Combat Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dungeon-crawling-addon.html">
+ <span class="dropdown-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-resource-tracking-addon.html">
+ <span class="dropdown-text">Lonelog: Resource Tracking Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-dice-notation-addon.html">
+ <span class="dropdown-text">Lonelog: Dice Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-cards-addon.html">
+ <span class="dropdown-text">Lonelog: Card Notation Add-on</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/en/lonelog-wargaming-addon.html">
+ <span class="dropdown-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/en/partylog.html"> 
+<span class="menu-text">Partylog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="../../docs/en.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/it.html">
+ <span class="dropdown-text">Italiano</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/fr.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.reddit.com/r/lonelog/"> <i class="bi bi-reddit" role="img" aria-label="Reddit">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/DBpgvvC2sG"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lonelog/lonelog"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss" role="img" aria-label="Blog feed">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/en/lonelog-addon-guidelines.html">Add-ons</a></li><li class="breadcrumb-item"><a href="../../docs/en/lonelog-combat-addon.html">Lonelog: Combat Add-on</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/partylog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Partylog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Add-ons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-addon-guidelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Community Add-on Guidelines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-addon-template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: [Add-on Name] Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-combat-addon.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lonelog: Combat Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-dungeon-crawling-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Dungeon Crawling Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-resource-tracking-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Resource Tracking Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-dice-notation-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Dice Notation Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-cards-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Card Notation Add-on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/en/lonelog-wargaming-addon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lonelog: Solo Wargaming Add-on</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#combat-add-on" id="toc-combat-add-on" class="nav-link active" data-scroll-target="#combat-add-on">Combat Add-on</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#what-this-add-on-adds" id="toc-what-this-add-on-adds" class="nav-link" data-scroll-target="#what-this-add-on-adds">What This Add-on Adds</a></li>
+  <li><a href="#design-principles" id="toc-design-principles" class="nav-link" data-scroll-target="#design-principles">Design Principles</a></li>
+  </ul></li>
+  <li><a href="#combat-blocks" id="toc-combat-blocks" class="nav-link" data-scroll-target="#combat-blocks">1. Combat Blocks</a></li>
+  <li><a href="#round-tracking" id="toc-round-tracking" class="nav-link" data-scroll-target="#round-tracking">2. Round Tracking</a></li>
+  <li><a href="#tracking-combatants" id="toc-tracking-combatants" class="nav-link" data-scroll-target="#tracking-combatants">3. Tracking Combatants</a></li>
+  <li><a href="#actor-actions" id="toc-actor-actions" class="nav-link" data-scroll-target="#actor-actions">4. Actor Actions</a></li>
+  <li><a href="#complex-encounters" id="toc-complex-encounters" class="nav-link" data-scroll-target="#complex-encounters">5. Complex Encounters</a></li>
+  <li><a href="#combat-aftermath" id="toc-combat-aftermath" class="nav-link" data-scroll-target="#combat-aftermath">6. Combat Aftermath</a></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">7. Putting It All Together</a></li>
+  <li><a href="#cross-add-on-interactions" id="toc-cross-add-on-interactions" class="nav-link" data-scroll-target="#cross-add-on-interactions">Cross-Add-on Interactions</a></li>
+  <li><a href="#system-adaptations" id="toc-system-adaptations" class="nav-link" data-scroll-target="#system-adaptations">System Adaptations</a>
+  <ul class="collapse">
+  <li><a href="#dd-5e-osr-systems" id="toc-dd-5e-osr-systems" class="nav-link" data-scroll-target="#dd-5e-osr-systems">D&amp;D 5e / OSR Systems</a></li>
+  <li><a href="#ironsworn-starforged" id="toc-ironsworn-starforged" class="nav-link" data-scroll-target="#ironsworn-starforged">Ironsworn / Starforged</a></li>
+  <li><a href="#powered-by-the-apocalypse-pbta" id="toc-powered-by-the-apocalypse-pbta" class="nav-link" data-scroll-target="#powered-by-the-apocalypse-pbta">Powered by the Apocalypse (PbtA)</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference">Quick Reference</a>
+  <ul class="collapse">
+  <li><a href="#new-tags" id="toc-new-tags" class="nav-link" data-scroll-target="#new-tags">New Tags</a></li>
+  <li><a href="#structural-blocks" id="toc-structural-blocks" class="nav-link" data-scroll-target="#structural-blocks">Structural Blocks</a></li>
+  <li><a href="#conventions" id="toc-conventions" class="nav-link" data-scroll-target="#conventions">Conventions</a></li>
+  <li><a href="#complete-example" id="toc-complete-example" class="nav-link" data-scroll-target="#complete-example">Complete Example</a></li>
+  </ul></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
+  <li><a href="#credits-license" id="toc-credits-license" class="nav-link" data-scroll-target="#credits-license">Credits &amp; License</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/en/lonelog-combat-addon.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lonelog-combat-addon.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li><li><a href="lonelog-combat-addon.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="lonelog-combat-addon.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="lonelog-combat-addon-gfm.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/en/lonelog-addon-guidelines.html">Add-ons</a></li><li class="breadcrumb-item"><a href="../../docs/en/lonelog-combat-addon.html">Lonelog: Combat Add-on</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lonelog: Combat Add-on</h1>
+<p class="subtitle lead">Optional Notation for Tactical Encounters</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roberto Bisceglie </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="combat-add-on" class="level1">
+<h1>Combat Add-on</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Combat is where solo play gets dense. Dice fly, hit points drop, positions shift—and you’re running both sides. Without structure, your log turns into a wall of text where you can’t tell who hit whom or when things went wrong.</p>
+<p>This add-on gives you optional notation for tactical encounters. It layers on top of core Lonelog—using the same <code>@</code>, <code>d:</code>, <code>-&gt;</code>, <code>=&gt;</code> symbols—and adds just enough structure to keep fights readable without turning your session into a spreadsheet.</p>
+<p>Not every solo game has tactical combat. <em>Thousand Year Old Vampire</em> doesn’t need round tracking. A <em>Mythic GME</em>-driven investigation might resolve a bar fight in a single oracle question. If your system resolves combat with a single roll, core notation handles it fine:</p>
+<pre><code>@ Fight the bandits
+d: Combat 2d6=9 -&gt; Strong Hit
+=&gt; I cut through them and escape into the alley.</code></pre>
+<p>This add-on is for everything more involved than that—games where you’re tracking rounds, multiple combatants, ranges, and changing hit points.</p>
+<hr>
+<section id="what-this-add-on-adds" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-add-on-adds">What This Add-on Adds</h3>
+<ul>
+<li><code>[F:Name|stats]</code> — Track combatant stats and status. Example: <code>[F:Thug|HP 6|pos:Close]</code></li>
+<li><code>[COMBAT]</code> / <code>[/COMBAT]</code> — Delimit a tactical encounter within a scene. Example: <code>[COMBAT] ... [/COMBAT]</code></li>
+<li><code>Rd#</code> round markers — Separate initiative rounds within a combat block. Example: <code>Rd1</code>, <code>Rd2</code>, <code>Rd3</code></li>
+<li><code>@(Name) Action</code> — Attribute actions to non-PC actors. Example: <code>@(Thug A) Lunges at me</code></li>
+<li><code>Rd# Roster: [tags]</code> — Snapshot all combatant states at a round boundary. Example: <code>Rd3 Roster: [PC:Alex|HP 3] [F:Boss|HP 4]</code></li>
+</ul>
+<p><strong>No new core symbols.</strong> This add-on introduces no additions to <code>@</code>, <code>?</code>, <code>d:</code>, <code>-&gt;</code>, or <code>=&gt;</code>.</p>
+<hr>
+</section>
+<section id="design-principles" class="level3">
+<h3 class="anchored" data-anchor-id="design-principles">Design Principles</h3>
+<p><strong>No new core symbols.</strong> Combat uses <code>@</code>, <code>d:</code>, <code>-&gt;</code>, <code>=&gt;</code> exactly as defined in core Lonelog. New elements are structural markers and formatting conventions only—not symbolic shortcuts.</p>
+<p><strong>Scale to complexity.</strong> A quick skirmish needs less notation than a five-round battle with six combatants. Use only as much structure as the encounter demands. The add-on supports both extremes.</p>
+<p><strong>Actor clarity first.</strong> The central problem of combat logging is knowing who is doing what. Every addition here serves that goal—round markers separate turns, the <code>@(Name)</code> prefix identifies non-PC actors, foe tags track changing states.</p>
+<hr>
+</section>
+</section>
+<section id="combat-blocks" class="level2">
+<h2 class="anchored" data-anchor-id="combat-blocks">1. Combat Blocks</h2>
+<p>Some encounters benefit from a structural boundary that signals a change in mode—denser notation, round-by-round tracking, mechanical state changes. The <code>[COMBAT]</code> block provides that boundary.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[COMBAT]
+...combat notation...
+[/COMBAT]</code></pre>
+<section id="in-scene-headers" class="level4">
+<h4 class="anchored" data-anchor-id="in-scene-headers">1.1 In Scene Headers</h4>
+<p>When the entire scene is a fight, place <code>[COMBAT]</code> in the scene header:</p>
+<pre><code>S5 *Warehouse ambush* [COMBAT]</code></pre>
+<p>Close it with <code>[/COMBAT]</code> when the fight ends, like any block, even if the scene ends at the same moment. An explicit close tells you, and any tool reading the log, exactly where the dense notation stops.</p>
+</section>
+<section id="inline-during-a-scene" class="level4">
+<h4 class="anchored" data-anchor-id="inline-during-a-scene">1.2 Inline During a Scene</h4>
+<p>When combat starts mid-scene, open and close the block around the tactical section:</p>
+<pre><code>S5 *Warehouse, midnight*
+@ Search the crates for evidence
+d: Investigation d6=5 vs TN 4 -&gt; Success
+=&gt; I find shipping manifests—but hear footsteps behind me.
+
+[COMBAT]
+...combat notation here...
+[/COMBAT]
+
+=&gt; With the thugs unconscious, I grab the manifests and run.</code></pre>
+<p>The <code>[COMBAT]</code> / <code>[/COMBAT]</code> delimiters let you visually separate the tactical section from the narrative, find combat encounters when scanning a log, and signal to future-you that denser notation follows.</p>
+</section>
+<section id="analog-format" class="level4">
+<h4 class="anchored" data-anchor-id="analog-format">1.3 Analog Format</h4>
+<p>For paper notebooks, use dashed separators:</p>
+<pre><code>--- COMBAT ---
+...combat notation...
+--- END COMBAT ---</code></pre>
+<p>Or skip delimiters entirely—the round markers below already signal combat.</p>
+<p><strong>When to skip the block:</strong> If combat resolves in one or two rolls, core notation handles it without any block structure.</p>
+<hr>
+</section>
+</section>
+<section id="round-tracking" class="level2">
+<h2 class="anchored" data-anchor-id="round-tracking">2. Round Tracking</h2>
+<p>Discrete combat rounds get <code>Rd#</code> markers. Think of them as mini-scenes within the fight.</p>
+<p><strong>Format:</strong></p>
+<pre><code>Rd1
+...actions...
+
+Rd2
+...actions...</code></pre>
+<p><strong>Numbering:</strong> Start at <code>Rd1</code> each combat. Rounds are local to the encounter, not the session.</p>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>Rd1 @ Slash d:17≥12 -&gt;Hit =&gt; [F:Thug|HP-5] @(Thug) d:9&lt;15 -&gt;Miss
+Rd2 @ Finish him d:20≥12 -&gt;Hit =&gt; [F:Thug|dead]</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>Rd1
+@ Draw sword and attack Thug A
+d: d20+5=17 vs AC 12 -&gt; Hit
+d: Damage 1d8=5
+=&gt; [F:Thug A|HP-5|staggered]
+
+@(Thug A) Wild swing back
+d: d20+3=9 vs AC 15 -&gt; Miss
+=&gt; He's off-balance—I press the advantage.
+
+Rd2
+@ Strike again
+d: d20+5=14 vs AC 12 -&gt; Hit
+d: Damage 1d8=6
+=&gt; [F:Thug A|dead]</code></pre>
+<p><strong>Damage</strong> gets its own <code>d:</code> line, with the label first: <code>d: Damage 1d8=5</code>. In compact form, chain it after the hit: <code>@Slash Thug d:17≥12 -&gt;Hit d:Damage 1d8=5 =&gt;[F:Thug|HP-5]</code>. During play, record the change (<code>HP-5</code>); keep the total (<code>HP 1</code>) for snapshots and round rosters, and don’t write both in one tag.</p>
+<p><strong>In compact form, the target goes in the action text</strong>: <code>@Slash Thug</code> is me attacking the thug; <code>@(Thug)Slash</code> is the thug acting. A bare name after <code>@</code> is never used.</p>
+<p><strong>When to skip round markers:</strong> If combat is fast (one or two rolls) or your system doesn’t use discrete rounds, log actions sequentially without markers.</p>
+<hr>
+</section>
+<section id="tracking-combatants" class="level2">
+<h2 class="anchored" data-anchor-id="tracking-combatants">3. Tracking Combatants</h2>
+<p>Core Lonelog tracks NPCs with <code>[N:Name|tags]</code>. In combat, you often need tighter tracking—hit points, position, status effects that change every round. The <strong>foe tag</strong> <code>[F:Name|stats]</code> is a combat-specific variant designed for this.</p>
+<p><strong>Format:</strong></p>
+<pre><code>[F:Name|stats|pos:range|conditions]</code></pre>
+<p><strong>Fields</strong> — in any order after the name, because each one says what it is:</p>
+<ul>
+<li><code>Name</code> — combatant identifier; use A/B suffixes to distinguish individuals of the same type</li>
+<li>stats — labelled numbers: <code>HP 6</code>, <code>AC 12</code>, <code>ATK +3</code>; a group’s size is a count, <code>×4</code></li>
+<li><code>pos:</code> — range band: <code>pos:Close</code>, <code>pos:Medium</code>, <code>pos:Far</code>, <code>pos:Engaged</code>; or <code>zone:</code> for zone-based systems, <code>zone:Alley</code></li>
+<li>conditions — plain values that can stack: <code>wounded</code>, <code>staggered</code>, <code>dead</code>, <code>fled</code></li>
+</ul>
+<p><code>pos:</code> and <code>zone:</code> are categories (core §4.1), so a new position replaces the old one. Conditions accumulate; remove one with <code>-</code>: <code>[F:Thug A|-staggered]</code>.</p>
+<section id="individual-foes" class="level4">
+<h4 class="anchored" data-anchor-id="individual-foes">3.1 Individual Foes</h4>
+<pre><code>[F:Thug A|HP 6|pos:Close|armed]
+[F:Cultist Leader|HP 12|pos:Far|spellcaster]</code></pre>
+<p>Update foe tags as stats change—either on a new line or inline:</p>
+<pre><code>[F:Thug A|HP 6|pos:Close]
+...Thug A takes 3 damage...
+[F:Thug A|HP 3|pos:Close|wounded]
+
+...or shorthand:
+[F:Thug A|HP-3]</code></pre>
+</section>
+<section id="grouped-foes" class="level4">
+<h4 class="anchored" data-anchor-id="grouped-foes">3.2 Grouped Foes</h4>
+<p>When individuals don’t need separate tracking, group them. Put the count in a <code>×N</code> value, not in the name, so the group stays the same element as it shrinks (core §4.1):</p>
+<pre><code>[F:Goblins|×4|HP 3 each|pos:Close]
+...one dies...
+[F:Goblins|×3]</code></pre>
+<p>Split groups when they diverge in position or status:</p>
+<pre><code>[F:Pirate 1|pos:Close|wounded]
+[F:Pirate 2|pos:Medium|crossbow]</code></pre>
+</section>
+<section id="position-and-movement" class="level4">
+<h4 class="anchored" data-anchor-id="position-and-movement">3.3 Position and Movement</h4>
+<p>Track range with the <code>pos:</code> category. Common range bands:</p>
+<pre><code>[F:Archer|HP 5|pos:Far]
+[F:Thug|HP 6|pos:Close]
+[F:Wolf|HP 4|pos:Engaged]</code></pre>
+<p>Show movement with <code>from&gt;to</code>, the same form core Lonelog uses for any changed value (<code>→</code> works too):</p>
+<pre><code>@(Thug A) Rushes in [Far&gt;Close]
+[F:Thug A|pos:Close]</code></pre>
+<p>For grid or zone-based systems:</p>
+<pre><code>[F:Thug A|HP 6|zone:Alley]
+[F:Thug B|HP 4|zone:Rooftop]
+[PC:Alex|zone:Street]</code></pre>
+<p><strong>Why <code>[F:]</code> instead of <code>[N:]</code>?</strong> <code>[N:]</code> is for persistent NPCs who matter to your story. <code>[F:]</code> is for combatants—often disposable, defined by mechanical stats rather than narrative tags. The distinction keeps your NPC index clean. A recurring villain might be <code>[N:Viktor|ambitious|ruthless]</code> in narrative scenes and gain a <code>[F:Viktor|HP 15|pos:Far|armored]</code> when the swords come out.</p>
+<p><strong>When to skip foe tags:</strong> For simple fights (one enemy, no position tracking), <code>[N:]</code> or naming the enemy in prose works fine. Foe tags earn their keep when you need to track multiple combatants with changing stats.</p>
+<hr>
+</section>
+</section>
+<section id="actor-actions" class="level2">
+<h2 class="anchored" data-anchor-id="actor-actions">4. Actor Actions</h2>
+<p>In normal play, <code>@</code> always means “I, the player character, do something.” In combat, enemies and allies act too. <strong><code>@</code> stays as the PC action. For other actors, prefix the action with the actor’s name in parentheses.</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Actor</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PC (default)</td>
+<td><code>@ Action</code></td>
+<td><code>@ Swing at Thug A</code></td>
+</tr>
+<tr class="even">
+<td>Named foe</td>
+<td><code>@(Name) Action</code></td>
+<td><code>@(Thug A) Slash at PC</code></td>
+</tr>
+<tr class="odd">
+<td>Group</td>
+<td><code>@(Group) Action</code></td>
+<td><code>@(Goblins) Swarm attack</code></td>
+</tr>
+<tr class="even">
+<td>Ally NPC</td>
+<td><code>@(Name) Action</code></td>
+<td><code>@(Jordan) Cover fire</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example — minimal:</strong></p>
+<pre><code>Rd1
+@ Slash d:18≥12 -&gt;Hit =&gt; [F:Thug A|HP-6|dead]
+@(Thug B) Stab d:14&lt;15 -&gt;Miss</code></pre>
+<p><strong>Example — expanded:</strong></p>
+<pre><code>Rd1
+@ Draw sword and attack Thug A
+d: d20+5=18 vs AC 12 -&gt; Hit
+d: Damage 1d8=6
+=&gt; [F:Thug A|HP-6|dead]
+
+@(Thug B) Lunges at me with a knife
+d: d20+3=14 vs AC 15 -&gt; Miss
+=&gt; The knife whistles past my ear.</code></pre>
+<p><strong>Why not a new symbol for foe actions?</strong> Because <code>@</code> already means “action taken.” The parenthetical prefix identifies who—that’s all the disambiguation needed. Adding a symbol (like <code>&gt;&gt;</code>) would break the Lonelog principle of minimal core symbols and add one more thing to remember mid-fight. (<code>!</code> already exists in Partylog, for GM and world events in group play; it isn’t a foe-action symbol either.)</p>
+<p><strong>Reactions and interrupts:</strong> Log them where they happen, and say so in the action:</p>
+<pre><code>@(Alex) Riposte as a reaction
+@ Opportunity attack as he breaks away</code></pre>
+<p><strong>Shorthand for fast combats:</strong> When speed matters more than readability, go chronological within each round and let the foe tags provide context:</p>
+<pre><code>Rd1
+[F:Thug A|pos:Close] @(A) Slash d:14&lt;15 -&gt;Miss
+@ Riposte d:18≥12 -&gt;Hit =&gt; [F:Thug A|HP-6|dead]
+[F:Thug B|pos:Close] @(B) Stab d:11&lt;15 -&gt;Miss</code></pre>
+<p><strong>Roll context:</strong> When a combatant’s tags or status directly affect the mechanics of a roll, list them before the dice using roll context (core Lonelog §4.1.9): <code>+[…]</code> for what helps, <code>-[…]</code> for what hinders.</p>
+<pre><code>@(Pirate Captain) Presses the attack
+d: -[staggered] d20+6=11 vs AC 14 -&gt; Miss
+
+@ Strike at the weakened Captain
+d: +[flanking, high ground] d20+5=18 vs AC 13 -&gt; Hit</code></pre>
+<p>This is most useful in tag-heavy systems (City of Mist, Fate) where named tags mechanically modify rolls. In traditional d20 systems, the roll line alone is usually sufficient.</p>
+<hr>
+</section>
+<section id="complex-encounters" class="level2">
+<h2 class="anchored" data-anchor-id="complex-encounters">5. Complex Encounters</h2>
+<p>When more than two sides clash, structure matters most.</p>
+<section id="encounter-setup" class="level4">
+<h4 class="anchored" data-anchor-id="encounter-setup">5.1 Encounter Setup</h4>
+<p>Before Rd1, establish the battlefield with a combat snapshot listing all combatants with initial positions and key stats:</p>
+<pre><code>S9 *Dockside ambush* [COMBAT]
+[PC:Alex|HP 12|pos:Engaged]
+[N:Jordan|ally|HP 8|pos:Close]
+[F:Pirate Captain|HP 10|pos:Close|armed|sword]
+[F:Pirates|×2|HP 4 each|pos:Medium|armed|crossbow]
+[F:Dock Rat|HP 2|pos:Engaged|knife]</code></pre>
+<p>This is your combat snapshot—the state of the field when initiative starts.</p>
+</section>
+<section id="round-rosters" class="level4">
+<h4 class="anchored" data-anchor-id="round-rosters">5.2 Round Rosters</h4>
+<p>For fights with many combatants and fast-changing stats, open each round with a roster line:</p>
+<pre><code>Rd3 Roster: [PC:Alex|HP 3] [N:Jordan|HP 4] [F:Pirate Captain|HP 4] [F:Pirates|×1|HP 4]</code></pre>
+<p>This gives you a snapshot at each round without hunting back through the log.</p>
+<p><strong>Scaling tips:</strong></p>
+<ul>
+<li><strong>Group identical foes.</strong> <code>[F:Pirates|×2]</code> beats tracking Pirate A and Pirate B separately—unless they’re in different positions or have different status.</li>
+<li><strong>Split groups when needed.</strong> If one pirate moves and the other doesn’t: <code>[F:Pirate 1|pos:Close]</code> <code>[F:Pirate 2|pos:Medium]</code>.</li>
+<li><strong>Kill the tags, keep the story.</strong> Don’t track HP for mooks if one hit kills them. Just note <code>[F:Dock Rat|dead]</code>.</li>
+<li><strong>Use rosters</strong> when you have 5+ combatants or stats are changing fast enough that you’d lose track without a summary.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="combat-aftermath" class="level2">
+<h2 class="anchored" data-anchor-id="combat-aftermath">6. Combat Aftermath</h2>
+<p>When combat ends, bridge back to the narrative with <code>=&gt;</code>, update persistent tags, and open any new threads:</p>
+<pre><code>[/COMBAT]
+=&gt; Two pirates dead, the captain fled into the fog. Jordan is wounded.
+[N:Jordan|wounded|HP 4]
+[Thread:Pirate Captain's Revenge|Open]
+[PC:Alex|HP 5|Stress+1]</code></pre>
+<p>This reconnects the mechanical combat to your ongoing story.</p>
+<p><strong>Loot and rewards:</strong></p>
+<pre><code>=&gt; I search the bodies.
+tbl: Pirate Loot d100=67 -&gt; Captain's sea chart
+=&gt; A map showing a hidden cove. [Track:Pirate Cove 1/4]
+[PC:Alex|gear:+Sea Chart]</code></pre>
+<hr>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">7. Putting It All Together</h2>
+<p>Here’s the same encounter at three levels of detail—find your comfort zone.</p>
+<section id="ultra-compact" class="level4">
+<h4 class="anchored" data-anchor-id="ultra-compact">Ultra-compact</h4>
+<pre><code>S9 *Dock ambush* [COMBAT]
+[PC:Alex|HP 12] [F:Pirate Captain|HP 10] [F:Pirates|×2|HP 4] [F:Dock Rat|HP 2]
+Rd1 @Slash Dock Rat d:17≥10 -&gt;Hit =&gt;[F:Dock Rat|dead] @(Pirate Captain)Cutlass d:19≥14 -&gt;Hit d:Damage 1d8+2=7 =&gt;[PC:Alex|HP-7] @(Pirates)Volley d:15,9 vs 11 -&gt;1 Hit d:Damage 1d6=4 =&gt;[N:Jordan|HP-4]
+Rd2 @Hit Pirate Captain d:20≥13 -&gt;Hit d:Damage 1d8=6 =&gt;[F:Pirate Captain|HP-6] @(Pirates)Shoot d:8&lt;14 -&gt;Miss @(Jordan)Shoot d:16≥11 -&gt;Hit =&gt;[F:Pirates|×1]
+Rd3 @Hit Pirate Captain d:15≥13 -&gt;Hit d:Damage 1d8=2 =&gt;[F:Pirate Captain|HP-2|fled]
+[/COMBAT] =&gt;Captain escapes</code></pre>
+</section>
+<section id="standard" class="level4">
+<h4 class="anchored" data-anchor-id="standard">Standard</h4>
+<pre><code>S9 *Dockside ambush* [COMBAT]
+[PC:Alex|HP 12] [N:Jordan|ally|HP 8]
+[F:Pirate Captain|HP 10|pos:Close] [F:Pirates|×2|HP 4|pos:Medium] [F:Dock Rat|HP 2|pos:Engaged]
+
+Rd1
+@ Slash at Dock Rat
+d: d20+4=17 vs AC 10 -&gt; Hit =&gt; [F:Dock Rat|dead]
+
+@(Pirate Captain) Charges, swings cutlass [Close&gt;Engaged]
+d: d20+6=19 vs AC 14 -&gt; Hit
+d: Damage 1d8+2=7 =&gt; [PC:Alex|HP-7]
+
+@(Jordan) Crossbow at the Pirate Captain
+d: d20+3=12 vs AC 13 -&gt; Miss
+
+@(Pirates) Crossbows at Jordan
+d: d20+2=15,9 vs AC 11 -&gt; 1 Hit
+d: Damage 1d6=4 =&gt; [N:Jordan|HP-4]
+
+Rd2
+@ Power attack on the Pirate Captain
+d: d20+4=20 vs AC 13 -&gt; Hit
+d: Damage 1d8=8 =&gt; [F:Pirate Captain|HP-8|wounded]
+
+@(Pirate Captain) Desperate slash
+d: d20+6=11 vs AC 14 -&gt; Miss
+
+@(Jordan) Second shot at remaining Pirate
+d: d20+3=16 vs AC 11 -&gt; Hit =&gt; [F:Pirates|×1]
+
+@(Pirates) The last one drops his crossbow and flees =&gt; [F:Pirates|×0|fled]
+
+Rd3
+@ Chase the Pirate Captain
+d: Athletics d6=3 vs TN 5 -&gt; Fail
+=&gt; He leaps off the dock into a rowboat and vanishes into the fog.
+
+[/COMBAT]
+=&gt; Two pirates dead, one fled, Captain escaped by sea.
+[N:Jordan|wounded] [PC:Alex|HP 5|Stress+1]
+[Thread:Pirate Captain's Revenge|Open]</code></pre>
+</section>
+<section id="narrative-rich" class="level4">
+<h4 class="anchored" data-anchor-id="narrative-rich">Narrative-rich</h4>
+<pre><code>S9 *Dockside, fog rolling in off the harbor*
+
+The crates provide cover, but not for long. A rat-faced man with a
+knife lunges from behind a barrel. Behind him, the Pirate Captain
+draws his cutlass with a grin. Two crossbowmen take position on the
+cargo stack.
+
+[COMBAT]
+[PC:Alex|HP 12|pos:Engaged] [N:Jordan|ally|HP 8|pos:Close]
+[F:Pirate Captain|HP 10|pos:Close|cutlass]
+[F:Pirates|×2|HP 4 each|pos:Medium|crossbow]
+[F:Dock Rat|HP 2|pos:Engaged|knife]
+
+Rd1
+@ Sidestep the Dock Rat and slash
+d: d20+4=17 vs AC 10 -&gt; Hit
+d: Damage 1d8=5
+=&gt; The rat-faced man crumples. [F:Dock Rat|dead]
+
+But I've left my flank open.
+
+@(Pirate Captain) Charges across the dock, cutlass high [Close&gt;Engaged]
+d: d20+6=19 vs AC 14 -&gt; Hit
+d: Damage 1d8+2=7
+=&gt; His blade bites deep across my ribs. I stagger back. [PC:Alex|HP-7|wounded]
+
+PC: "Jordan—the crossbows!"
+
+@(Jordan) Snaps off a shot at the Pirate Captain
+d: d20+3=12 vs AC 13 -&gt; Miss
+=&gt; The bolt sparks off a mooring chain.
+
+@(Pirates) Fire at Jordan from the cargo stack
+d: d20+2=15, d20+2=9 vs AC 11 -&gt; 1 Hit, 1 Miss
+d: Damage 1d6=4
+=&gt; A bolt punches through Jordan's shoulder. [N:Jordan|HP-4|wounded]
+
+N (Jordan): "I'm hit—still in it!"
+
+Rd2
+The Captain is close, bleeding confidence. I press the advantage.
+
+@ Power attack on the Pirate Captain
+d: d20+4=20 vs AC 13 -&gt; Critical Hit
+d: Damage 2d8=8
+=&gt; My sword catches him across the chest. He stumbles. [F:Pirate Captain|HP-8|staggered]
+
+@(Pirate Captain) Wild swing in desperation
+d: d20+6=11 vs AC 14 -&gt; Miss
+=&gt; His cutlass sweeps wide—I duck under it.
+
+@(Jordan) Pivots and fires at the crossbowmen
+d: d20+3=16 vs AC 11 -&gt; Hit
+d: Damage 1d6=5
+=&gt; One pirate tumbles off the cargo stack. [F:Pirates|×1]
+
+The surviving pirate drops his crossbow and bolts into the fog.
+[F:Pirates|×0|fled]
+
+Rd3
+@ Chase the Pirate Captain before he escapes
+d: Athletics d6=3 vs TN 5 -&gt; Fail
+=&gt; He's too fast—vaults the dock railing and drops into a hidden
+rowboat. The fog swallows him in seconds.
+
+[/COMBAT]
+
+I press a hand to my ribs, breathing hard. Jordan limps over,
+shoulder dark with blood. The dock is quiet except for lapping water
+and the creak of ropes.
+
+PC (Alex): "He'll be back."
+N (Jordan): "Then we'd better be ready."
+
+=&gt; Two pirates dead, one fled, Captain escaped by sea.
+[N:Jordan|wounded|HP 4] [PC:Alex|HP 5|Stress+1]
+[Thread:Pirate Captain's Revenge|Open]</code></pre>
+<hr>
+</section>
+</section>
+<section id="cross-add-on-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="cross-add-on-interactions">Cross-Add-on Interactions</h2>
+<ul>
+<li>Tracking consumables used during combat — Combat + Resource Tracking — <code>[F:]</code>, <code>[Inv:Name|×N]</code></li>
+<li>Combat in an explored dungeon room — Combat + Dungeon Crawling — <code>[COMBAT]</code>, <code>[R:Room|status:state]</code></li>
+</ul>
+<p><strong>Combined example — Combat + Resource Tracking:</strong></p>
+<pre><code>S7 *Guard room* [COMBAT]
+[PC:Alex|HP 10|pos:Engaged] [Inv:Health Potion|×2]
+[F:Guards|×2|HP 5 each|pos:Close|armed]
+
+Rd1
+@ Strike Guard 1
+d: d20+4=19 vs AC 12 -&gt; Hit
+d: Damage 1d8=7
+=&gt; [F:Guard 1|dead]
+
+@(Guard 2) Counterattack
+d: d20+3=16 vs AC 14 -&gt; Hit
+d: Damage 1d6=4
+=&gt; [PC:Alex|HP-4]
+
+Rd2
+@ Drink healing potion, using my action
+=&gt; [PC:Alex|HP+4] [Inv:Health Potion|×-1]
+
+@(Guard 2) Retreats and raises alarm
+=&gt; [F:Guard 2|fled]
+
+[/COMBAT]
+=&gt; Guard room clear, one potion used, alarm raised.
+[Thread:Alarm Raised|Open]</code></pre>
+<hr>
+</section>
+<section id="system-adaptations" class="level2">
+<h2 class="anchored" data-anchor-id="system-adaptations">System Adaptations</h2>
+<section id="dd-5e-osr-systems" class="level3">
+<h3 class="anchored" data-anchor-id="dd-5e-osr-systems">D&amp;D 5e / OSR Systems</h3>
+<p>These systems use AC, d20 attack rolls, and explicit damage dice—the combat add-on maps naturally. Use the <code>vs AC #</code> convention in <code>d:</code> lines and record damage on its own line: <code>d: Damage 1d6+2=7</code>.</p>
+<pre><code>[F:Skeleton|HP 13|AC 13|pos:Close]
+
+Rd1
+@ Attack with shortsword
+d: d20+4=17 vs AC 13 -&gt; Hit
+d: Damage 1d6+2=7
+=&gt; [F:Skeleton|HP-7|damaged]
+
+@(Skeleton) Claw swipe
+d: d20+4=11 vs AC 15 -&gt; Miss</code></pre>
+</section>
+<section id="ironsworn-starforged" class="level3">
+<h3 class="anchored" data-anchor-id="ironsworn-starforged">Ironsworn / Starforged</h3>
+<p>These systems use move-based resolution without traditional initiative. Round markers are optional—each move generates its own outcome. Focus on move names as action labels and use foe tags for tracking enemy harm and threat state.</p>
+<pre><code>[COMBAT]
+[F:Broken|Formidable|pos:Engaged]
+[Track:Broken 0/10]
+
+@ Enter the Fray, facing off
+d: Enter the Fray d6+2=5 vs 6,8 -&gt; Miss
+=&gt; Broken strikes first. Pay the Price. Foe has initiative.
+
+@ Face Danger, trying to deflect the incoming strike
+d: Face Danger d6+3=4 vs 7,8 -&gt; Miss
+=&gt; Pay the Price: -3 health. Foe retains initiative.
+
+@ Endure Harm
+d: Endure Harm d6+3=5 vs 4,8 -&gt; Weak Hit
+=&gt; Press on.
+[PC:Alex|health-3]
+
+@ Clash, foe has initiative, close quarters
+d: Clash d6+3=7 vs 5,9 -&gt; Miss
+=&gt; I burn momentum 10 to cancel both challenge dice: Strong Hit.
+=&gt; +1 harm: 3 harm with a deadly weapon marks 3 progress. I gain the initiative.
+[Track:Broken+3]
+[PC:Alex|momentum 2]
+
+@ Strike, I have initiative, close quarters
+d: Strike d6+3=9 vs 2,4 -&gt; Strong Hit
+=&gt; +1 harm: 3 more progress. I retain initiative.
+[Track:Broken 6/10]
+
+@ End the Fight
+d: End the Fight 6 vs 3,5 -&gt; Strong Hit
+=&gt; Broken is no longer in the fight.
+[F:Broken|dead]
+[/COMBAT]</code></pre>
+</section>
+<section id="powered-by-the-apocalypse-pbta" class="level3">
+<h3 class="anchored" data-anchor-id="powered-by-the-apocalypse-pbta">Powered by the Apocalypse (PbtA)</h3>
+<p>PbtA games rarely use discrete rounds—moves resolve fiction, not turns. Use <code>[COMBAT]</code> only for extended conflicts where tracking harm or threat levels adds value. Log moves with their names and results as normal.</p>
+<pre><code>[COMBAT]
+[F:Gang|×6|Threat 3|pos:Close]
+
+@ Seize by Force — throw myself into them
+d: 2d6+2=9 -&gt; 7–9 Weak Hit
+=&gt; I take definite harm: choose one of their tags.
+[PC:Alex|harm-1] [F:Gang|Threat-1]
+
+[/COMBAT]</code></pre>
+<hr>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<p><strong>Do: Scale notation to encounter complexity</strong></p>
+<pre><code>✔ Simple fight:
+@ Slash at the guard
+d: d20+4=15 vs AC 12 -&gt; Hit
+d: Damage 1d8=5
+=&gt; He drops. Clear.
+
+✔ Complex fight:
+S5 *Warehouse ambush* [COMBAT]
+[F:Captain|HP 10|pos:Close] [F:Guards|×2|HP 4 each|pos:Medium]
+Rd1
+@ Charge at Captain...</code></pre>
+<p><strong>Don’t: Over-engineer simple encounters</strong></p>
+<pre><code>✗ [COMBAT]
+  Rd1 Roster: [PC:Alex|HP 10] [F:Guard|HP 4|pos:Close|armed|alert]
+  @ Attack Guard
+  d: d20+4=15 vs AC 10 -&gt; Hit
+  =&gt; [F:Guard|HP-6|dead]
+  [/COMBAT]
+
+✔ @ Cut down the lone guard before he can shout.
+  d: d20+4=15 -&gt; Hit
+  d: Damage 1d8=6
+  =&gt; Dead.</code></pre>
+<p><strong>Do: Use <code>@(Name)</code> for all non-PC actors</strong></p>
+<pre><code>✔ @(Thug B) Flanks me
+  d: d20+3=17 vs AC 15 -&gt; Hit
+  d: Damage 1d6=4
+  =&gt; [PC:Alex|HP-4]
+
+✔ @(Jordan) Returns fire
+  d: d20+3=14 vs AC 11 -&gt; Hit
+  =&gt; [F:Pirate 1|dead]</code></pre>
+<p><strong>Don’t: Invent new symbols for enemy actions</strong></p>
+<p>In solo play, enemies act through <code>@(Name)</code> like every other actor. (<code>!</code> is Partylog’s symbol for GM and world events in group play; it doesn’t stand in for a foe’s action.)</p>
+<pre><code>✗ ! Thug attacks: d20+3=17 -&gt; Hit =&gt; PC HP-4
+✗ &gt;&gt; Guard lunges: d20+2=12 -&gt; Miss
+
+✔ @(Thug) Attacks
+  d: d20+3=17 -&gt; Hit =&gt; [PC:Alex|HP-4]</code></pre>
+<p><strong>Do: Update foe tags as stats change mid-encounter</strong></p>
+<pre><code>✔ [F:Captain|HP 10|pos:Close]
+  ...after 7 damage...
+  [F:Captain|HP-7|staggered]</code></pre>
+<p><strong>Don’t: Reconstruct state retroactively</strong></p>
+<pre><code>✗ [F:Captain|HP 10]
+  ...five rounds, no updates...
+  =&gt; Captain is at HP 3 somehow.
+
+✔ Track changes in-round: [F:Captain|HP-7|staggered]</code></pre>
+<p><strong>Do: Write aftermath as narrative, not just tags</strong></p>
+<pre><code>✔ [/COMBAT]
+  =&gt; Two pirates dead, one fled, the captain escaped by sea.
+  Jordan is wounded but walking. I have questions about that ship.
+  [N:Jordan|wounded|HP 4] [Thread:Pirate Captain's Revenge|Open]</code></pre>
+<p><strong>Don’t: End combat with only tag updates</strong></p>
+<pre><code>✗ [/COMBAT]
+  [N:Jordan|wounded|HP 4]
+  [PC:Alex|HP 5]</code></pre>
+<hr>
+</section>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick Reference</h2>
+<section id="new-tags" class="level3">
+<h3 class="anchored" data-anchor-id="new-tags">New Tags</h3>
+<ul>
+<li><code>[F:Name|stats]</code> — Track individual combatant state. Example: <code>[F:Thug A|HP 6|pos:Close|armed]</code></li>
+<li><code>[F:Name|×#|stats]</code> — Track a group of identical combatants. Example: <code>[F:Goblins|×3|HP 3 each|pos:Close]</code></li>
+<li><code>[F:Name|HP-#]</code> — Inline damage shorthand. Example: <code>[F:Thug A|HP-3]</code></li>
+<li><code>[F:Name|dead]</code> — Mark a combatant as eliminated. Example: <code>[F:Thug A|dead]</code></li>
+<li><code>[F:Name|fled]</code> — Mark a combatant as escaped. Example: <code>[F:Captain|fled]</code></li>
+</ul>
+</section>
+<section id="structural-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="structural-blocks">Structural Blocks</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 35%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block</th>
+<th>Opens When</th>
+<th>Closes When</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>[COMBAT]</code></td>
+<td>Initiative is declared or combat begins</td>
+<td>All combatants are resolved or combat ends</td>
+</tr>
+<tr class="even">
+<td><code>[/COMBAT]</code></td>
+<td>—</td>
+<td>Closes the open <code>[COMBAT]</code> block</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conventions" class="level3">
+<h3 class="anchored" data-anchor-id="conventions">Conventions</h3>
+<ul>
+<li>Round marker — <code>Rd#</code>. Example: <code>Rd1</code>, <code>Rd2</code>, <code>Rd3</code></li>
+<li>Actor prefix — <code>@(Name) Action</code>. Example: <code>@(Thug A) Slash at PC</code></li>
+<li>Movement — <code>[Range&gt;Range]</code>. Example: <code>[Far&gt;Close]</code></li>
+<li>Round roster — <code>Rd# Roster: [tags]</code>. Example: <code>Rd3 Roster: [PC:Alex|HP 3] [F:Boss|HP 4]</code></li>
+<li>Initiative note — <code>Rd1 (init: Name #, …)</code>. Example: <code>Rd1 (init: Captain 18, Alex 15)</code></li>
+</ul>
+</section>
+<section id="complete-example" class="level3">
+<h3 class="anchored" data-anchor-id="complete-example">Complete Example</h3>
+<pre><code>S9 *Dockside ambush* [COMBAT]
+[PC:Alex|HP 12] [N:Jordan|ally|HP 8] [F:Pirate Captain|HP 10|pos:Close] [F:Pirates|×2|HP 4|pos:Medium]
+
+Rd1
+@ Slash Pirate Captain d:19≥13 -&gt;Hit d:Damage 1d8+2=7 =&gt; [F:Pirate Captain|HP-7|staggered]
+@(Pirate Captain) Desperate swing d:11&lt;14 -&gt;Miss
+@(Jordan) Fires at Pirate d:16≥11 -&gt;Hit =&gt; [F:Pirates|×1]
+@(Pirates) Last one flees =&gt; [F:Pirates|×0|fled]
+
+[/COMBAT]
+=&gt; Captain fled by sea. Jordan wounded. Two pirates down.
+[N:Jordan|wounded|HP 4] [Thread:Pirate Captain's Revenge|Open]</code></pre>
+<hr>
+</section>
+</section>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<p><strong>Q: When should I use this add-on instead of core notation?</strong> A: When combat lasts three or more rounds, when multiple combatants act each round, or when turn order and position matter to the story. For single-roll fights, core notation is sufficient.</p>
+<p><strong>Q: Should I track initiative order?</strong> A: Only if your system uses it and it matters. Most solo players go in logical order (threats first, then PC, then allies) or follow their system’s rules. To note it, use a meta note with the <code>init:</code> label: <code>Rd1 (init: Captain 18, Alex 15, Jordan 12, Pirates 8)</code>.</p>
+<p><strong>Q: Do I need <code>[F:]</code> tags, or can I just use <code>[N:]</code>?</strong> A: Either works. <code>[F:]</code> is a convenience for separating combat stats from narrative NPC tags—it keeps your NPC index cleaner in long campaigns. For simple fights, <code>[N:]</code> is fine.</p>
+<p><strong>Q: What about reactions, interrupts, or out-of-turn actions?</strong> A: Log them where they happen and say so in the action: <code>@(Alex) Riposte as a reaction</code> or <code>@ Opportunity attack as he breaks away</code>.</p>
+<p><strong>Q: How do I handle area effects or multi-target attacks?</strong> A: List the targets and roll for each, or roll once and apply to all:</p>
+<pre><code>@ Fireball targeting the three goblins
+d: Fireball 8d6=28
+d: Goblin 1 save 12&lt;14 -&gt; Fail
+d: Goblin 2 save 17≥14 -&gt; Success
+d: Goblin 3 save 8&lt;14 -&gt; Fail
+=&gt; Two goblins incinerated. One dodged, half damage. [F:Goblins|×1|HP 2|singed]</code></pre>
+<p><strong>Q: What about vehicle combat, chase scenes, or mass battles?</strong> A: This add-on covers personal-scale combat. Those scenarios may warrant their own add-ons—but the principles here (round markers, actor prefixes, position tracking) will apply.</p>
+<p><strong>Q: How does this work in an analog notebook?</strong> A: Use <code>--- COMBAT ---</code> and <code>--- END COMBAT ---</code> as delimiters. Round markers (<code>Rd1</code>, <code>Rd2</code>) work as-is. For foe tags, write them in the margin or in a column beside the round text. Update HP with strikethroughs: <del>HP 6</del> HP 3.</p>
+<p><strong>Q: When should I use round rosters?</strong> A: When you have five or more combatants and stats are changing fast enough that you’d lose track without a summary. For smaller fights, tracking changes inline with foe tags is sufficient.</p>
+<hr>
+</section>
+<section id="credits-license" class="level2">
+<h2 class="anchored" data-anchor-id="credits-license">Credits &amp; License</h2>
+<p>© 2026 Roberto Bisceglie</p>
+<p>This add-on extends <a href="https://zeruhur.itch.io/lonelog">Lonelog</a> by Roberto Bisceglie.</p>
+<p>Written to address clarifications raised by u/Electorcountdonut, built upon examples contributed by u/AvernusIsAFurnace.</p>
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v 1.2.0: Damage gets its own <code>d: Damage</code> line; tags record HP changes, totals only in snapshots; in compact form the target is in the action text; <code>[COMBAT]</code> always closes; one name per foe. Aligned with Lonelog v1.7: range is a <code>pos:</code> category (or <code>zone:</code>), so movement replaces the old position; roll context before the dice, truthful comparisons with outcomes after <code>-&gt;</code>, named <code>[PC:]</code> tags, <code>[Track:]</code> instead of a counted <code>[E:]</code>, movement written <code>[Far&gt;Close]</code> to match core’s <code>old&gt;new</code>. Group sizes are <code>×N</code> values instead of part of the name. Ironsworn example uses the standard <code>d:</code> line. <code>!</code> is Partylog’s GM-event symbol, not a foe-action symbol.</li>
+<li>v 1.1.0: Round markers changed from <code>R#</code> to <code>Rd#</code> to avoid collision with <code>[R:]</code> room tags in the Dungeon Crawling Add-on</li>
+<li>v 1.0.0: First version</li>
+</ul>
+<p>This work is licensed under the <strong>Creative Commons Attribution-ShareAlike 4.0 International License</strong>.</p>
+<p>You are free to share and adapt this material, provided you give appropriate credit and distribute adaptations under the same license. Session logs and play records created using this add-on’s notation are your own work and are not subject to this license.</p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  var formats = document.querySelector(".quarto-alternate-formats");
+  if (sidebar && formats) {
+    sidebar.insertBefore(formats, sidebar.firstChild);
+  }
+
+  // Rename "Typst" label to "PDF"
+  document.querySelectorAll(".quarto-alternate-formats a").forEach(function (a) {
+    a.childNodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "Typst") {
+        node.textContent = "PDF";
+      }
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lonelog\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/en/lonelog-addon-template.html" class="pagination-link" aria-label="Lonelog: [Add-on Name] Add-on">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lonelog: [Add-on Name] Add-on</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/en/lonelog-dungeon-crawling-addon.html" class="pagination-link" aria-label="Lonelog: Dungeon Crawling Add-on">
+        <span class="nav-page-text">Lonelog: Dungeon Crawling Add-on</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Lonelog by Roberto Bisceglie · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lonelog/lonelog/blob/main/docs/en/lonelog-combat-addon.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/lonelog/lonelog/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://zeruhur.itch.io/lonelog">itch.io</a> · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
